@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>เล่น M3U8 ทันที</title>
+  <title>TV</title>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -64,6 +64,32 @@
   
   <script>
     const video = document.getElementById('video');
+
+    function toggleBorder() {
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
+      video.style.border = 'none';  // ลบ border เมื่อเต็มจอ
+    } else {
+      video.style.border = '4px solid #fff';  // เพิ่ม border เมื่อออกจากโหมดเต็มจอ
+    }
+  }
+
+  // การตรวจจับเมื่อเข้าสู่/ออกจากโหมดเต็มจอ
+  document.addEventListener('fullscreenchange', toggleBorder);
+  document.addEventListener('webkitfullscreenchange', toggleBorder);
+  document.addEventListener('mozfullscreenchange', toggleBorder);
+
+  // ในกรณีที่เป็นเบราว์เซอร์ที่ไม่รองรับ fullscreenchange
+  video.addEventListener('dblclick', function() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      }
+    }
+  });
     const channelsDiv = document.getElementById('channels');
     let selectedIndex = 0;
 
