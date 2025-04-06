@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playlist</title>
+  
 </head>
 <body bgcolor="FFFFFF">
   <!-- <h2>กำลังโหลด...</h2> -->
@@ -37,8 +38,8 @@
 
     // แสดงผลลัพธ์แบบ playlist
     function renderPlaylist(clearUrl) {
-        const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
-      const output = `
+  const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+  const output = `
 #EXTM3U
 
 ########################################
@@ -48,9 +49,13 @@
 #EXTINF:-1 group-title="กีฬา" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",EPL-1
 ${fixedUrl}
 `;
-      document.getElementById('playlistOutput').textContent = output.trim();
-      document.querySelector('h2').textContent = "โหลดเสร็จแล้ว ✅";
-    }
+  document.getElementById('playlistOutput').textContent = output.trim();
+
+  // 👉 redirect หลังจากแสดงผล
+    window.location.href = 'https://www.google.com';
+
+}
+
 
     // Main
     (async () => {
