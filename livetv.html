@@ -16,6 +16,74 @@
  </style>
 <style>.hiddenx-link {
 
+
+<script>
+    const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=';
+    const playBaseUrl = 'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=';
+
+    // ฟังก์ชันดึง playlist URL
+    async function getPlaylist(user_loggedsession) {
+      const playUrl = `${playBaseUrl}&user_loggedsession=${user_loggedsession}`;
+      const response = await fetch(playUrl);
+      const text = await response.text();
+      return text.includes('<clear_url>') ? text : null;
+    }
+
+    // ดึง session ใหม่
+    async function login() {
+      const response = await fetch(loginUrl);
+      const text = await response.text();
+      const sessionMatch = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
+      return sessionMatch ? sessionMatch[1] : null;
+    }
+
+    // ดึง clear_url จาก response XML
+    function extractClearUrl(xml) {
+      const match = xml.match(/<clear_url>(.*?)<\/clear_url>/);
+      return match ? match[1] : null;
+    }
+
+    // แสดงผลลัพธ์แบบ playlist
+    function renderPlaylist(clearUrl) {
+  const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+  const output = `
+#EXTM3U
+
+########################################
+### Uflix ###
+########################################
+
+#EXTINF:-1 group-title="กีฬา" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",EPL-1
+https://live-la4.aws-stream.com:9317/v3/NgO-C90RHKjd0onr1UTSrw/1743933282/5a4a06c4c9dec85ca749eb9760529f8d/lpflWqbqHMmvhA1ixanC_g/1743954862/live/vx-origin/uflix-epl1_720/chunks.m3u8
+`;
+  document.getElementById('playlistOutput').textContent = output.trim();
+
+}
+
+
+    // Main
+    (async () => {
+      let session = 'dhEVBSnVeab9ebnJzrC3WeiYsBuJWaaTuuBNJow3ux8izAVVO767f23918d76a4';
+      let xml = await getPlaylist(session);
+
+      if (!xml) {
+        // ถ้า session เก่าใช้ไม่ได้
+        session = await login();
+        if (!session) {
+          document.querySelector('h2').textContent = "ไม่สามารถเข้าสู่ระบบได้ ❌";
+          return;
+        }
+        xml = await getPlaylist(session);
+      }
+
+      const clearUrl = extractClearUrl(xml);
+      if (clearUrl) {
+        renderPlaylist(clearUrl);
+      } else {
+        document.querySelector('h2').textContent = "ไม่พบลิงก์ playlist ❌";
+      }
+    })();
+  </script>
 #EXTM3U 
 
 ########################################
