@@ -1,33 +1,222 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic M3U Playlist</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>เล่น M3U8 ทันที</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      padding: 20px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: auto;
+      font-family: 'Prompt', sans-serif;
+    }
+    video {
+      width: 90%;
+      max-width: 1000px;
+      border: 4px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .channels {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .channel-button {
+      background-color: #222;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #fff;
+      cursor: pointer;
+      text-align: center;
+      width: 120px;
+      font-family: 'Prompt', sans-serif;
+      outline: none;
+    }
+    .channel-button img {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+    .channel-button:hover,
+    .channel-button:focus {
+      background-color: #444;
+    }
+  </style>
 </head>
 <body>
 
-  <h2>🔗 Playlist Output</h2>
-  <textarea id="playlistOutput" rows="15" cols="100" style="white-space: pre;"></textarea>
+    <video id="video" controls autoplay muted></video>
 
+  <div class="channels" id="channels"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  
   <script>
-    const url = "https://live-la5.aws-stream.com:9318/v3/H0bftUpGStugQb75y_LnbA/1743948992/5a4a06c4c9dec85ca749eb9760529f8d/dv8sn5kmPQIIUWk59lsZZQ/1743970572/live/vx-origin/uflix-epl1_720/chunks.m3u8";
+    const video = document.getElementById('video');
+    const channelsDiv = document.getElementById('channels');
+    let selectedIndex = 0;
 
-    const playlist = `
-#EXTM3U
+    const channelNames = [
+      'ช่อง EPL 1', 'ช่อง EPL 1 Backup', 'ช่อง EPL 2', 'ช่อง EPL 2 Backup',
+      'ช่อง EPL 3', 'ช่อง EPL 3 Backup', 'ช่อง EPL 4', 'ช่อง EPL 4 Backup',
+      'ช่อง EPL 5', 'ช่อง EPL 5 Backup'
+    ];
 
-#EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 0555
-#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
-#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
-#EXTVLCOPT:http-accept=*/*
-#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
-#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
-${url}
-    `.trim();
+    const channelLogos = [
+      'https://rentapi.blackboxsys.net/images/png/epl-1.png', 'https://rentapi.blackboxsys.net/images/png/epl-1bkp.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-2.png', 'https://rentapi.blackboxsys.net/images/png/epl-2bkp.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-3.png', 'https://rentapi.blackboxsys.net/images/png/epl-3bkp.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-4.png', 'https://rentapi.blackboxsys.net/images/png/epl-4bkp.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-5.png', 'https://rentapi.blackboxsys.net/images/png/epl-5bkp.png'
+    ];
 
-    document.getElementById("playlistOutput").value = playlist;
+    // กำหนด playBaseUrls เอง
+    const playBaseUrls = [
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1bkp&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl2&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl2bkp&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl3&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl3bkp&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl4&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl4bkp&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl5&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl5bkp&kauth='
+    ];
+
+    // ฟังก์ชันดึง playlist URL
+    async function getPlaylist(user_loggedsession, playBaseUrl) {
+      const playUrl = `${playBaseUrl}&user_loggedsession=${user_loggedsession}`;
+      const response = await fetch(playUrl);
+      const text = await response.text();
+      return text.includes('<clear_url>') ? text : null;
+    }
+
+    // ดึง session ใหม่
+    async function login() {
+      const response = await fetch('https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=');
+      const text = await response.text();
+      const sessionMatch = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
+      return sessionMatch ? sessionMatch[1] : null;
+    }
+
+    // ดึง clear_url จาก response XML
+    function extractClearUrl(xml) {
+      const match = xml.match(/<clear_url>(.*?)<\/clear_url>/);
+      return match ? match[1] : null;
+    }
+
+    // แสดงผลลัพธ์แบบ playlist
+    function renderPlaylist(channel, clearUrl, index) {
+      const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+      const button = document.createElement('div');
+      button.classList.add('channel-button');
+      button.tabIndex = 0;  // ทำให้ปุ่มสามารถรับโฟกัสได้
+      button.innerHTML = ` 
+        <img src="${channelLogos[index]}" alt="${channelNames[index]}">
+        <div>${channelNames[index]}</div>
+      `;
+      button.onclick = () => loadChannel(fixedUrl);
+      button.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+          loadChannel(fixedUrl);
+        }
+      };
+      channelsDiv.appendChild(button);
+    }
+
+    // ฟังก์ชันในการโหลดช่องที่เลือก
+    function loadChannel(url) {
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+      } else {
+        alert('เบราว์เซอร์ของคุณไม่รองรับ HLS 😥');
+      }
+    }
+
+    // Main
+    (async () => {
+      let session = 'dhEVBSnVeab9ebnJzrC3WeiYsBuJWaaTuuBNJow3ux8izAVVO767f23918d76a4';
+      let xml = await getPlaylist(session, playBaseUrls[0]);
+      if (!xml) {
+        session = await login();
+        if (!session) {
+          document.querySelector('h2').textContent = "ไม่สามารถเข้าสู่ระบบได้ ❌";
+          return;
+        }
+        xml = await getPlaylist(session, playBaseUrls[0]);
+      }
+
+      const clearUrl = extractClearUrl(xml);
+      if (clearUrl) {
+        const channel = { name: 'EPL 1', logo: channelLogos[0], url: clearUrl };
+        renderPlaylist(channel, clearUrl, 0);
+        loadChannel(clearUrl);
+      } else {
+        document.querySelector('h2').textContent = "ไม่พบลิงก์ playlist ❌";
+      }
+
+      // หลังจากโหลดช่อง EPL 1 แล้ว ให้แสดงช่องอื่นๆ
+      for (let i = 1; i < playBaseUrls.length; i++) {
+        xml = await getPlaylist(session, playBaseUrls[i]);
+        const clearUrl = extractClearUrl(xml);
+        if (clearUrl) {
+          const channel = { name: `EPL ${i + 1}`, logo: channelLogos[i], url: clearUrl };
+          renderPlaylist(channel, clearUrl, i);
+        } else {
+          document.querySelector('h2').textContent = "ไม่พบลิงก์ playlist ❌";
+        }
+      }
+    })();
+
+    // การควบคุมโดยใช้ปุ่มลูกศร
+    document.addEventListener('keydown', (e) => {
+      const buttons = document.querySelectorAll('.channel-button');
+      if (e.key === 'ArrowDown') {
+        selectedIndex = (selectedIndex + 3) % buttons.length; // เลื่อนลง 3 ช่อง
+        buttons[selectedIndex].focus();
+      } else if (e.key === 'ArrowUp') {
+        selectedIndex = (selectedIndex - 3 + buttons.length) % buttons.length; // เลื่อนขึ้น 3 ช่อง
+        buttons[selectedIndex].focus();
+      } else if (e.key === 'ArrowLeft') {
+        selectedIndex = (selectedIndex - 1 + buttons.length) % buttons.length; // เลื่อนซ้าย 1 ช่อง
+        buttons[selectedIndex].focus();
+      } else if (e.key === 'ArrowRight') {
+        selectedIndex = (selectedIndex + 1) % buttons.length; // เลื่อนขวา 1 ช่อง
+        buttons[selectedIndex].focus();
+      }
+    });
+
+    // เพิ่มการเข้าสู่โหมด fullscreen เมื่อ video เริ่มเล่น
+    video.addEventListener('play', () => {
+  // ตรวจสอบว่าเป็นอุปกรณ์มือถือหรือไม่
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) { // Firefox
+      video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) { // Chrome, Safari and Opera
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) { // IE/Edge
+      video.msRequestFullscreen();
+    }
+  }
+});
   </script>
-
 </body>
 </html>
