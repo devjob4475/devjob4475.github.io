@@ -407,6 +407,7 @@ function showChannelsInCategory(catIndex) {
 
   channelsDiv.appendChild(button);
 }
+
     // ฟังก์ชันในการโหลดช่องที่เลือก
     function loadChannel(url) {
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
@@ -415,6 +416,16 @@ function showChannelsInCategory(catIndex) {
     video.src = url;
     video.load();
     video.play();
+
+    video.onplay = function() {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { /* Safari */
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { /* IE11 */
+        video.msRequestFullscreen();
+      }
+    };
   } else if (Hls.isSupported()) {
     const hls = new Hls();
     hls.loadSource(url);
