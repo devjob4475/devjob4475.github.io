@@ -363,30 +363,12 @@ function showChannelsInCategory(catIndex) {
   backBtn.classList.add('channel-button');
   backBtn.innerHTML = '🔙 ย้อนกลับ';
   backBtn.tabIndex = 0;
-
-  // ฟังก์ชันการย้อนกลับเมื่อคลิก
   backBtn.onclick = renderCategories;
-
-  // รองรับการกด Enter
   backBtn.onkeydown = (e) => {
     if (e.key === 'Enter') renderCategories();
   };
-
-  // รองรับการแตะบนมือถือ
-  backBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();  // ป้องกันไม่ให้เกิดการกระทำอื่นๆ
-    renderCategories();
-  });
-
-  // รองรับการคลิกเมาส์ขวา (context menu)
-  backBtn.addEventListener('contextmenu', (e) => {
-    e.preventDefault();  // ป้องกันไม่ให้เมนูคลิกขวาแสดง
-    renderCategories();
-  });
-
   channelsDiv.appendChild(backBtn);
 }
-
 
 
 
