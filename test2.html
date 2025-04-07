@@ -413,9 +413,9 @@ function showChannelsInCategory(catIndex) {
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
   if (isMobile) {
-    video.src = url;
-    video.load();
-    video.play();
+    const hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
   } else if (Hls.isSupported()) {
     const hls = new Hls();
     hls.loadSource(url);
