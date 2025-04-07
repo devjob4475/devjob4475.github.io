@@ -68,7 +68,7 @@
 </head>
 <body>
 
-    <video id="video" controls autoplay muted></video>
+    <video id="video" controls autoplay></video>
     
     <div id="categories" class="channels"></div>
   <div class="channels" id="channels"></div>
@@ -416,16 +416,6 @@ function showChannelsInCategory(catIndex) {
     video.src = url;
     video.load();
     video.play();
-
-    video.onplay = function() {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) { /* Safari */
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) { /* IE11 */
-        video.msRequestFullscreen();
-      }
-    };
   } else if (Hls.isSupported()) {
     const hls = new Hls();
     hls.loadSource(url);
