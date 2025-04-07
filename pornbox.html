@@ -4,21 +4,10 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>playlist</title>
-	</head>
-	
-    <style>
-        .hidden-link {
-            display: none;
-            }
-        .invisible-link {
-            visibility: hidden;
-        }
- </style>
-<body bgcolor="FFFFFF">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-#EXTM3U 
+    <script>
+      const test = `
+      #EXTM3U 
 
 ########################################
 ช่องกีฬาทั่วไป
@@ -35,7 +24,21 @@ https://cdn2.aws-live-streaming.com/lsmscore/epl1_sd/chunks.m3u8
 #EXTVLCOPT:http-accept=*/*
 #EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
 #EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
-<p>https://live-sg2.aws-stream.com:9318/v3/MuUeRQlX8FNNXwKILcBqkA/1744042639/5a4a06c4c9dec85ca749eb9760529f8d/OvgGPo3waq2XZY7fuXjVRQ/1744064219/live/vx-origin/uflix-epl1_720/chunks.m3u8</p>
+https://live-sg2.aws-stream.com:9318/v3/MuUeRQlX8FNNXwKILcBqkA/1744042639/5a4a06c4c9dec85ca749eb9760529f8d/OvgGPo3waq2XZY7fuXjVRQ/1744064219/live/vx-origin/uflix-epl1_720/chunks.m3u8
+      
+      
+      `;
+      window.onload = function() {
+        // แสดงค่า test โดยตรงใน body หรือที่ตำแหน่งที่ต้องการ
+        document.body.innerHTML = test;
+      };
+    </script>
+</head>
+
+<body bgcolor="FFFFFF">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 </body>
 </html>
