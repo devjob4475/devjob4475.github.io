@@ -4,82 +4,42 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>playlist</title>
+	</head>
+	
+    <style>
+        .hidden-link {
+            display: none;
+            }
+        .invisible-link {
+            visibility: hidden;
+        }
+ </style>
+<style>.hiddenx-link {
 
-    <script>
-      const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=';
-      const playBaseUrl = 'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=';
+#EXTM3U 
 
-      // ฟังก์ชันดึง playlist URL
-      async function getPlaylist(user_loggedsession) {
-          const playUrl = `${playBaseUrl}&user_loggedsession=${user_loggedsession}`;
-          const response = await fetch(playUrl);
-          const text = await response.text();
-          return text.includes('<clear_url>') ? text : null;
-      }
+########################################
+ช่องกีฬาทั่วไป
+########################################
 
-      // ดึง session ใหม่
-      async function login() {
-          const response = await fetch(loginUrl);
-          const text = await response.text();
-          const sessionMatch = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
-          return sessionMatch ? sessionMatch[1] : null;
-      }
+#EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
+#EXTVLCOPT:http-referrer=https://99dooball.com/
+https://cdn2.aws-live-streaming.com/lsmscore/epl1_sd/chunks.m3u8
 
-      // ดึง clear_url จาก response XML
-      function extractClearUrl(xml) {
-          const match = xml.match(/<clear_url>(.*?)<\/clear_url>/);
-          return match ? match[1] : null;
-      }
+#EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 02
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9318/v3/H0bftUpGStugQb75y_LnbA/1743948992/5a4a06c4c9dec85ca749eb9760529f8d/dv8sn5kmPQIIUWk59lsZZQ/1743970572/live/vx-origin/uflix-epl1_720/chunks.m3u8
 
-      // แสดงผลลัพธ์แบบ playlist
-      async function renderPlaylist() {
-          const session = await login();
-          if (session) {
-              const xmlData = await getPlaylist(session);
-              const clearUrl = extractClearUrl(xmlData);
-              if (clearUrl) {
-                  // ใช้ clear_url มาแทนที่ {url} ในตัวแปร test
-                  const test = `
-                    #EXTM3U 
 
-                    ########################################
-                    ช่องกีฬาทั่วไป
-                    ########################################
-
-                    #EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
-                    #EXTVLCOPT:http-referrer=https://99dooball.com/
-                    https://cdn2.aws-live-streaming.com/lsmscore/epl1_sd/chunks.m3u8
-
-                    #EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 02
-                    #EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
-                    #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
-                    #EXTVLCOPT:http-origin=https://cloud.ufxtv.com
-                    #EXTVLCOPT:http-accept=*/*
-                    #EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
-                    #EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
-                    https://live-la4.aws-stream.com:9317/v3/NgO-C90RHKjd0onr1UTSrw/1743933282/5a4a06c4c9dec85ca749eb9760529f8d/lpflWqbqHMmvhA1ixanC_g/1743954862/live/vx-origin/uflix-epl1_720/chunks.m3u8
-
-                  `;
-
-                  // แสดงผลบนหน้าเว็บ
-                  document.body.innerHTML = test;
-              } else {
-                  console.error("ไม่พบ clear_url ในข้อมูลที่ได้รับ");
-              }
-          } else {
-              console.error("ไม่สามารถเข้าสู่ระบบได้");
-          }
-      }
-
-      window.onload = function() {
-          renderPlaylist();
-      };
-    </script>
-</head>
+}</style>
 
 <body bgcolor="FFFFFF">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </body>
 </html>
