@@ -205,71 +205,82 @@
     }
 
     // แสดงผลลัพธ์แบบ playlist
-    function renderPlaylist(channel, clearUrl, index) {
-      const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
-      const button = document.createElement('div');
-      button.classList.add('channel-button');
-      button.tabIndex = 0;  // ทำให้ปุ่มสามารถรับโฟกัสได้
-      button.innerHTML = ` 
-        <img src="${channelLogos[index]}" alt="${channelNames[index]}">
-        <div>${`${index+1}. `+channelNames[index]}</div>
-      `;
-      button.onclick = () => loadChannel(fixedUrl);
-      button.onkeydown = (e) => {
-        if (e.key === 'Enter') {
-          loadChannel(fixedUrl);
-        }
-      };
-      channelsDiv.appendChild(button);
-    }
+    function renderPlaylist(index) {
+  const button = document.createElement('div');
+  button.classList.add('channel-button');
+  button.tabIndex = 0;
+  button.innerHTML = ` 
+    <img src="${channelLogos[index]}" alt="${channelNames[index]}">
+    <div>${index + 1}. ${channelNames[index]}</div>
+  `;
 
+  // โหลด playlist เมื่อผู้ใช้คลิก
+  button.onclick = () => loadChannelByIndex(index);
+  button.onkeydown = (e) => {
+    if (e.key === 'Enter') {
+      loadChannelByIndex(index);
+    }
+  };
+
+  channelsDiv.appendChild(button);
+}
     // ฟังก์ชันในการโหลดช่องที่เลือก
     function loadChannel(url) {
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(video);
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-      } else {
-        alert('เบราว์เซอร์ของคุณไม่รองรับ HLS 😥');
-      }
-    }
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    video.src = url;
+    video.load();
+    video.play();
+  } else if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = url;
+  } else {
+    alert('เบราว์เซอร์ของคุณไม่รองรับ HLS 😥');
+  }
+}
+
 
     // Main
-    (async () => {
-      let session = 'dhEVBSnVeab9ebnJzrC3WeiYsBuJWaaTuuBNJow3ux8izAVVO767f23918d76a4';
-      let xml = await getPlaylist(session, playBaseUrls[0]);
-      if (!xml) {
-        session = await login();
-        if (!session) {
-          document.querySelector('h2').textContent = "ไม่สามารถเข้าสู่ระบบได้ ❌";
-          return;
-        }
-        xml = await getPlaylist(session, playBaseUrls[0]);
-      }
+    async function loadChannelByIndex(index) {
+  if (!session) {
+    session = await login();
+    if (!session) {
+      alert("ไม่สามารถเข้าสู่ระบบได้ ❌");
+      return;
+    }
+  }
 
-      const clearUrl = extractClearUrl(xml);
-      if (clearUrl) {
-        const channel = { name: 'EPL 1', logo: channelLogos[0], url: clearUrl };
-        renderPlaylist(channel, clearUrl, 0);
-        loadChannel(clearUrl);
-      } else {
-        document.querySelector('h2').textContent = "ไม่พบลิงก์ playlist ❌";
-      }
+  const xml = await getPlaylist(session, playBaseUrls[index]);
+  const clearUrl = extractClearUrl(xml);
+  if (clearUrl) {
+    const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+    loadChannel(fixedUrl);
+  } else {
+    alert('ไม่พบลิงก์ playlist ❌');
+  }
+}
 
-      // หลังจากโหลดช่อง EPL 1 แล้ว ให้แสดงช่องอื่นๆ
-      for (let i = 1; i < playBaseUrls.length; i++) {
-        xml = await getPlaylist(session, playBaseUrls[i]);
-        const clearUrl = extractClearUrl(xml);
-        if (clearUrl) {
-          const channel = { name: `EPL ${i + 1}`, logo: channelLogos[i], url: clearUrl };
-          renderPlaylist(channel, clearUrl, i);
-        } else {
-          document.querySelector('h2').textContent = "ไม่พบลิงก์ playlist ❌";
-        }
-      }
-    })();
+// ฟังก์ชันหลัก
+let session = null;
+(async () => {
+  session = await login();
+  if (!session) {
+    alert("ไม่สามารถเข้าสู่ระบบได้ ❌");
+    return;
+  }
+
+  // แสดงปุ่มทุกช่องล่วงหน้า (ยังไม่โหลด video)
+  for (let i = 0; i < playBaseUrls.length; i++) {
+    renderPlaylist(i);
+  }
+
+  // เล่นช่องแรกทันที
+  loadChannelByIndex(0);
+})();
 
     // การควบคุมโดยใช้ปุ่มลูกศร
     let currentKey = ''
