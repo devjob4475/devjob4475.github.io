@@ -2,7 +2,7 @@ name: Simple Cron Test
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # รันทุก 5 นาที
+    - cron: '*/30 * * * *'  # Run every 30 minutes
   workflow_dispatch:
 
 jobs:
@@ -25,88 +25,64 @@ jobs:
           node <<'EOF'
           const fetch = require('node-fetch');
           const { parseStringPromise } = require('xml2js');
+          const fs = require('fs');  // Required for writing to index.html
 
           const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=';
           const playBaseUrl = 'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=';
 
-          async function getSession() {
-              const res = await fetch(loginUrl);
-              const text = await res.text();
-              const match = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
-              return text;
+          // Function to get playlist URL
+          async function getPlaylist(user_loggedsession) {
+              const playUrl = `${playBaseUrl}&user_loggedsession=${user_loggedsession}`;
+              const response = await fetch(playUrl);
+              const text = await response.text();
+              return text.includes('<clear_url>') ? text : null;
           }
 
-          async function getClearUrl(session) {
-              const url = `${playBaseUrl}&user_loggedsession=${session}`;
-              const res = await fetch(url);
-              const text = await res.text();
-              const match = text.match(/<clear_url>(.*?)<\/clear_url>/);
+          // Login to get session
+          async function login() {
+              const response = await fetch(loginUrl);
+              const text = await response.text();
+              const sessionMatch = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
+              return sessionMatch ? sessionMatch[1] : null;
+          }
+
+          // Extract clear_url from XML response
+          function extractClearUrl(xml) {
+              const match = xml.match(/<clear_url>(.*?)<\/clear_url>/);
               return match ? match[1] : null;
           }
 
-          (async () => {
-              const session = await getSession();
-              if (!session) {
-                  console.error("❌ ไม่สามารถเข้าสู่ระบบได้");
-                  process.exit(1);
-              }
-
-              const clearUrl = await getClearUrl(session);
-              if (!clearUrl) {
-                  console.error("❌ ไม่พบลิงก์ clear_url");
-                  process.exit(1);
-              }
-
-
+          // Generate and render playlist
+          function renderPlaylist(clearUrl) {
+              const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
               const output = `
-              <!DOCTYPE html>
-              <html lang="th">
-              <head>
-              <meta charset="UTF-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <title>playlist</title>
-              	</head>
-              	
-                  <style>
-                      .hidden-link {
-                          display: none;
-                          }
-                      .invisible-link {
-                          visibility: hidden;
-                      }
-               </style>
-              <style>.hiddenx-link {
-              
-              #EXTM3U 
+              #EXTM3U
               
               ########################################
-              ช่องกีฬาทั่วไป
+              ### Uflix ### 
               ########################################
               
-              #EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
-              #EXTVLCOPT:http-referrer=https://99dooball.com/
-              https://cdn2.aws-live-streaming.com/lsmscore/epl1_sd/chunks.m3u8
-              
-              #EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 02
-              #EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
-              #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
-              #EXTVLCOPT:http-origin=https://cloud.ufxtv.com
-              #EXTVLCOPT:http-accept=*/*
-              #EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
-              #EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
-              ${clearUrl}
-              
-              
-              }</style>
-              
-              <body bgcolor="FFFFFF">
-              
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              </body>
-              </html>
+              #EXTINF:-1 group-title="กีฬา" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",EPL-1
+              ${fixedUrl}
               `;
-              require('fs').writeFileSync('index.html', output);
-              console.log("✅ Updated index.html with clear_url");
+              return output;  // Return the rendered playlist
+          }
+
+          // Start the process
+          (async function() {
+              const session = await login();
+              if (session) {
+                  const xmlData = await getPlaylist(session);
+                  const clearUrl = extractClearUrl(xmlData);
+                  if (clearUrl) {
+                      const playlist = renderPlaylist(clearUrl);
+                      fs.writeFileSync('index.html', playlist);  // Write the playlist to index.html
+                  } else {
+                      console.error("No clear_url found in the response");
+                  }
+              } else {
+                  console.error("Login failed");
+              }
           })();
           EOF
 
