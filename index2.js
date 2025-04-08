@@ -89,14 +89,20 @@ ${fixedUrl}
     },
   };
 
-  try {
-    const chunkResponse = await axios.request(config);
-    console.log("✔️ Successfully fetched m3u8 with headers");
-    // คุณสามารถบันทึก chunkResponse.data ถ้าต้องการ เช่น:
-    // fs.writeFileSync("chunks.m3u8", chunkResponse.data);
-  } catch (error) {
-    console.error("❌ Error requesting .m3u8 with headers:", error);
-  }
+    try {
+      // 👇 เช็ค IP ก่อน
+      const publicIp = await axios.get("https://api.ipify.org?format=json");
+      console.log("🌐 Current Public IP:", publicIp.data.ip);
+
+      const chunkResponse = await axios.request(config);
+      console.log("✔️ Successfully fetched m3u8 with headers");
+    } catch (error) {
+      console.error(
+        "❌ Error requesting .m3u8 with headers:",
+        error.response?.status || error.message
+      );
+    }
+
 
   // บันทึก playlist ลงไฟล์
   fs.writeFileSync("index2.html", output);
