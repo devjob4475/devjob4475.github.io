@@ -29,45 +29,37 @@ jobs:
           const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=';
           const playBaseUrl = 'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=';
 
-          async function getPlaylist(user_loggedsession) {
-                  const playUrl = `${playBaseUrl}&user_loggedsession=${user_loggedsession}`;
-                  const response = await fetch(playUrl);
-                  const text = await response.text();
-                  return text.includes('<clear_url>') ? text : null;
-              }
-          
-              // ดึง session ใหม่
-              async function login() {
-                  const response = await fetch(loginUrl);
-                  const text = await response.text();
-                  const sessionMatch = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
-                  return sessionMatch ? sessionMatch[1] : null;
-              }
-          
-              // ดึง clear_url จาก response XML
-              function extractClearUrl(xml) {
-                  const match = xml.match(/<clear_url>(.*?)<\/clear_url>/);
-                  return match ? match[1] : null;
+          async function getSession() {
+              const res = await fetch(loginUrl);
+              const text = await res.text();
+              const match = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
+              return match ? match[1] : null;
+          }
+
+          async function getClearUrl(session) {
+              const url = `${playBaseUrl}&user_loggedsession=${session}`;
+              const res = await fetch(url);
+              const text = await res.text();
+              const match = text.match(/<clear_url>(.*?)<\/clear_url>/);
+              return match ? match[1] : null;
+          }
+
+          (async () => {
+              const session = await getSession();
+              if (!session) {
+                  console.error("❌ ไม่สามารถเข้าสู่ระบบได้");
+                  process.exit(1);
               }
 
-              (async function() {
-                const session = await login();
-                if (session) {
-                    const xmlData = await getPlaylist(session);
-                    const clearUrl = extractClearUrl(xmlData);
-                    if (clearUrl) {
-                        renderPlaylist(clearUrl);
-                    } else {
-                        console.error("ไม่พบ clear_url ในข้อมูลที่ได้รับ");
-                    }
-                } else {
-                    console.error("ไม่สามารถเข้าสู่ระบบได้");
-                }
-          
-              // แสดงผลลัพธ์แบบ playlist
-              function renderPlaylist(clearUrl) {
-                  const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
-                  const output = `
+              const clearUrl = await getClearUrl(session);
+              if (!clearUrl) {
+                  console.error("❌ ไม่พบลิงก์ clear_url");
+                  process.exit(1);
+              }
+
+              const chunksUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+
+              const output = `
               <!DOCTYPE html>
               <html lang="th">
               <head>
@@ -103,7 +95,7 @@ jobs:
               #EXTVLCOPT:http-accept=*/*
               #EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
               #EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
-              ${fixedUrl}
+              ${chunksUrl}
               
               
               }</style>
