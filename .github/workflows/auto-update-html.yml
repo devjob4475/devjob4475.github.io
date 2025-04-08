@@ -57,7 +57,19 @@ jobs:
                   process.exit(1);
               }
 
-              const output = `<html><body><h1>Play URL:</h1><p>${clearUrl}</p></body></html>`;
+              const output = `
+              <html>
+              <body>
+              #EXTM3U
+
+              ########################################
+              ### Uflix ###
+              ########################################
+
+              #EXTINF:-1 group-title="กีฬา" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",EPL-1
+              ${clearUrl}
+              </body>
+              </html>`;
               require('fs').writeFileSync('index.html', output);
               console.log("✅ Updated index.html with clear_url");
           })();
