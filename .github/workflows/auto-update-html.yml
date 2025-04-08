@@ -33,7 +33,7 @@ jobs:
               const res = await fetch(loginUrl);
               const text = await res.text();
               const match = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
-              return text : null;
+              return text;
           }
 
           async function getClearUrl(session) {
