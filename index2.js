@@ -62,7 +62,7 @@ function renderPlaylist(clearUrl) {
     const clearUrl = extractClearUrl(xmlData);
     if (clearUrl) {
       const playlist = renderPlaylist(clearUrl);
-      fs.writeFileSync("index.html", playlist); // Write the playlist to index.html
+      fs.writeFileSync("index2.html", playlist); // Write the playlist to index.html
     } else {
       console.error("No clear_url found in the response");
     }
