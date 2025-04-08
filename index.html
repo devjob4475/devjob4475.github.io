@@ -1,13 +1,47 @@
 
-    <html>
-    <body>
-    #EXTM3U
-
+    <!DOCTYPE html>
+    <html lang="th">
+    <head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>playlist</title>
+    	</head>
+    	
+        <style>
+            .hidden-link {
+                display: none;
+                }
+            .invisible-link {
+                visibility: hidden;
+            }
+     </style>
+    <style>.hiddenx-link {
+    
+    #EXTM3U 
+    
     ########################################
-    ### Uflix ###
+    ช่องกีฬาทั่วไป
     ########################################
-
-    #EXTINF:-1 group-title="กีฬา" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",EPL-1
-    https://live-la2.aws-stream.com:9317/v3/af9juMoTReYLBXorAOa-XQ/1744085885/5a4a06c4c9dec85ca749eb9760529f8d/N0qDdl-Ws2Sp9d1pKCSpog/1744107465/live/vx-origin/uflix-epl1_720/chunks.m3u8
+    
+    #EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
+    #EXTVLCOPT:http-referrer=https://99dooball.com/
+    https://cdn2.aws-live-streaming.com/lsmscore/epl1_sd/chunks.m3u8
+    
+    #EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 02
+    #EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+    #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+    #EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+    #EXTVLCOPT:http-accept=*/*
+    #EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+    #EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+    {chunksUrl}
+    
+    
+    }</style>
+    
+    <body bgcolor="FFFFFF">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </body>
     </html>
+    
