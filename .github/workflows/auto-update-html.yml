@@ -96,6 +96,7 @@ jobs:
               #EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
               #EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
               ${chunksUrl}
+              ${clearUrl}
               
               
               }</style>
