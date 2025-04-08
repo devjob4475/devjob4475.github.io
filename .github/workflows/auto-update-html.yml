@@ -2,7 +2,8 @@ name: Auto Update HTML
 
 on:
   schedule:
-    - cron: '* * * * *' # ทุก 1 นาที
+    - cron: '* * * * *' 
+  workflow_dispatch:      
 
 jobs:
   update-html:
