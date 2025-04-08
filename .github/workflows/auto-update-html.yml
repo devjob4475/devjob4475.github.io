@@ -1,16 +1,40 @@
-name: Open and Show Website Output
+name: Render Page with JavaScript
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/30 * * * *'
-  workflow_dispatch:
 
 jobs:
-  open-link:
+  run-js:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Fetch and Display Website Output
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Run puppeteer script
         run: |
-          echo "Fetching https://devjob4475.github.io/pornbox.html ..."
-          curl -L https://devjob4475.github.io/pornbox.html
+          node <<'EOF'
+          const puppeteer = require('puppeteer');
+
+          (async () => {
+            const browser = await puppeteer.launch({ headless: true });
+            const page = await browser.newPage();
+            await page.goto('https://devjob4475.github.io/pornbox.html', { waitUntil: 'networkidle0' });
+
+            const content = await page.$eval('#playlistOutput', el => el.textContent.trim());
+            console.log("🎉 Playlist Output:");
+            console.log(content);
+
+            await browser.close();
+          })();
+          EOF
