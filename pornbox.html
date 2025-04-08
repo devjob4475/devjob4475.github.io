@@ -18,7 +18,7 @@
 <pre id="playlistOutput">กำลังโหลด playlist...</pre>
 
 <script>
-    const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=';
+    const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0341&user_password=1111&kauth=';
     const playBaseUrl = 'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=';
 
     async function getSession() {
@@ -57,19 +57,12 @@ ${chunksUrl}
 `;
 
         document.getElementById("playlistOutput").textContent = m3uData;
-
-        // // สร้างลิงก์ดาวน์โหลดอัตโนมัติ
-        // const blob = new Blob([m3uData], { type: 'audio/x-mpegurl' });
-        // const url = URL.createObjectURL(blob);
-        // const a = document.createElement('a');
-        // a.href = url;
-        // a.download = "playlist.m3u";
-        // document.body.appendChild(a);
-        // a.click();
-        // document.body.removeChild(a);
-        // URL.revokeObjectURL(url); // ล้าง memory
     })();
 </script>
+
+#EXTM3U
+#EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
+https://live-sg1.aws-stream.com:9318/v3/-RSW1dsVfC3LZTWMw9n9ow/1744109084/076e63f673197e80a3652b5e363c3fd9/U3uE3ldybJ-V5xWd
 
 </body>
 </html>
