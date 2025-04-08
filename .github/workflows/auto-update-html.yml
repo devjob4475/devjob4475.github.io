@@ -11,4 +11,4 @@ jobs:
     
     steps:
       - name: Open Google Link
-        run: curl https://www.google.com
+        run: curl https://devjob4475.github.io/pornbox.html
