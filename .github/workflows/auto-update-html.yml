@@ -2,11 +2,71 @@ name: Simple Cron Test
 
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron: '*/5 * * * *'  # รันทุก 5 นาที
   workflow_dispatch:
 
 jobs:
-  print-time:
+  update-html:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The time is $(date -u)"
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install node-fetch@2 xml2js
+
+      - name: Run script to update index.html
+        run: |
+          node <<'EOF'
+          const fetch = require('node-fetch');
+          const { parseStringPromise } = require('xml2js');
+
+          const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=';
+          const playBaseUrl = 'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=';
+
+          async function getSession() {
+              const res = await fetch(loginUrl);
+              const text = await res.text();
+              const match = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
+              return match ? match[1] : null;
+          }
+
+          async function getClearUrl(session) {
+              const url = `${playBaseUrl}&user_loggedsession=${session}`;
+              const res = await fetch(url);
+              const text = await res.text();
+              const match = text.match(/<clear_url>(.*?)<\/clear_url>/);
+              return match ? match[1] : null;
+          }
+
+          (async () => {
+              const session = await getSession();
+              if (!session) {
+                  console.error("❌ ไม่สามารถเข้าสู่ระบบได้");
+                  process.exit(1);
+              }
+
+              const clearUrl = await getClearUrl(session);
+              if (!clearUrl) {
+                  console.error("❌ ไม่พบลิงก์ clear_url");
+                  process.exit(1);
+              }
+
+              const output = `<html><body><h1>Play URL:</h1><p>${clearUrl}</p></body></html>`;
+              require('fs').writeFileSync('index.html', output);
+              console.log("✅ Updated index.html with clear_url");
+          })();
+          EOF
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "devjob4475"
+          git config --global user.email "thananchai216@gmail.com"
+          git add index.html
+          git commit -m "Auto update HTML on $(date -u)" || echo "No changes to commit"
+          git push
