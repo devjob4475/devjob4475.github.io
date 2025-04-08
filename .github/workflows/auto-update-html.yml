@@ -2,7 +2,7 @@ name: Simple Cron Test
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # รันทุก 5 นาที
+    - cron: '*/30 * * * *'  # รันทุก 5 นาที
   workflow_dispatch:
 
 jobs:
