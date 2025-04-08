@@ -15,64 +15,59 @@
 </head>
 <body bgcolor="FFFFFF">
 
-<pre id="playlistOutput"></pre> <!-- สำหรับแสดงผล playlist -->
+<pre id="playlistOutput">กำลังโหลด playlist...</pre>
 
 <script>
     const loginUrl = 'https://cloud.ufxtv.com/api/user/login/?user_email=BE0268&user_password=1111&kauth=';
     const playBaseUrl = 'https://cloud.ufxtv.com/api/tv/channels/play/?c=uflix-epl1&kauth=';
 
-    // ฟังก์ชันดึง playlist URL
-    async function getPlaylist(user_loggedsession) {
-        const playUrl = `${playBaseUrl}&user_loggedsession=${user_loggedsession}`;
-        const response = await fetch(playUrl);
-        const text = await response.text();
-        return text.includes('<clear_url>') ? text : null;
-    }
-
-    // ดึง session ใหม่
-    async function login() {
-        const response = await fetch(loginUrl);
-        const text = await response.text();
-        const sessionMatch = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
-        return sessionMatch ? sessionMatch[1] : null;
-    }
-
-    // ดึง clear_url จาก response XML
-    function extractClearUrl(xml) {
-        const match = xml.match(/<clear_url>(.*?)<\/clear_url>/);
+    async function getSession() {
+        const res = await fetch(loginUrl);
+        const text = await res.text();
+        const match = text.match(/<user_loggedsession>(.*?)<\/user_loggedsession>/);
         return match ? match[1] : null;
     }
 
-    // แสดงผลลัพธ์แบบ playlist
-    function renderPlaylist(clearUrl) {
-        const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
-        const output = `
-#EXTM3U
-
-########################################
-### Uflix ### 
-########################################
-
-#EXTINF:-1 group-title="กีฬา" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",EPL-1
-${fixedUrl}
-        `;
-        document.getElementById('playlistOutput').textContent = output.trim();
+    async function getClearUrl(session) {
+        const url = `${playBaseUrl}&user_loggedsession=${session}`;
+        const res = await fetch(url);
+        const text = await res.text();
+        const match = text.match(/<clear_url>(.*?)<\/clear_url>/);
+        return match ? match[1] : null;
     }
 
-    // เริ่มต้นกระบวนการ
-    (async function() {
-        const session = await login();
-        if (session) {
-            const xmlData = await getPlaylist(session);
-            const clearUrl = extractClearUrl(xmlData);
-            if (clearUrl) {
-                renderPlaylist(clearUrl);
-            } else {
-                console.error("ไม่พบ clear_url ในข้อมูลที่ได้รับ");
-            }
-        } else {
-            console.error("ไม่สามารถเข้าสู่ระบบได้");
+    (async () => {
+        const session = await getSession();
+        if (!session) {
+            document.getElementById("playlistOutput").textContent = "❌ ไม่สามารถเข้าสู่ระบบได้";
+            return;
         }
+
+        const clearUrl = await getClearUrl(session);
+        if (!clearUrl) {
+            document.getElementById("playlistOutput").textContent = "❌ ไม่พบลิงก์ clear_url";
+            return;
+        }
+
+        const chunksUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+
+        const m3uData = `#EXTM3U
+#EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
+${chunksUrl}
+`;
+
+        document.getElementById("playlistOutput").textContent = m3uData;
+
+        // // สร้างลิงก์ดาวน์โหลดอัตโนมัติ
+        // const blob = new Blob([m3uData], { type: 'audio/x-mpegurl' });
+        // const url = URL.createObjectURL(blob);
+        // const a = document.createElement('a');
+        // a.href = url;
+        // a.download = "playlist.m3u";
+        // document.body.appendChild(a);
+        // a.click();
+        // document.body.removeChild(a);
+        // URL.revokeObjectURL(url); // ล้าง memory
     })();
 </script>
 
