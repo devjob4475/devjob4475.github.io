@@ -1,38 +1,14 @@
-name: Run Index2 Script
+name: Open Google Link
 
 on:
   schedule:
     - cron: '*/30 * * * *'  # Runs every 30 minutes
-  workflow_dispatch:  # Allows you to manually trigger the workflow
+  workflow_dispatch:
 
 jobs:
-  run-script:
+  open-link:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Checkout the repository to the action runner
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'  # Use the Node.js version that you prefer
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install axios fs
-
-      # Step 4: Run the script
-      - name: Run index2.js script
-        run: node index2.js
-
-      # Step 5: Commit and push changes if index.html is updated
-      - name: Commit and Push updated index.html
-        run: |
-          git config --global user.name "devjob4475"
-          git config --global user.email "thananchai216@gmail.com"
-          git add index2.html
-          git commit -m "Auto update HTML"
-          git push
+      - name: Open Google Link
+        run: curl https://www.google.com
