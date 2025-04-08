@@ -1,14 +1,16 @@
-name: Open Google Link
+name: Open and Show Website Output
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Runs every 30 minutes
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
   open-link:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Open Google Link
-        run: curl https://devjob4475.github.io/pornbox.html
+      - name: Fetch and Display Website Output
+        run: |
+          echo "Fetching https://devjob4475.github.io/pornbox.html ..."
+          curl -L https://devjob4475.github.io/pornbox.html
