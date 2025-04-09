@@ -33,7 +33,7 @@ jobs:
             });
 
             const page = await browser.newPage();
-            await page.goto('https://devjob4475.github.io/pornbox.html', { waitUntil: 'networkidle0' });
+            await page.goto('https://testflix2.vercel.app', { waitUntil: 'networkidle0' });
 
             const content = await page.$eval('#playlistOutput', el => el.textContent.trim());
             console.log("🎉 Playlist Output:");
