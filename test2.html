@@ -69,6 +69,7 @@
 <body>
 
     <video id="video" controls autoplay></video>
+  
     
     <div id="categories" class="channels"></div>
   <div class="channels" id="channels"></div>
@@ -135,6 +136,14 @@
   {
     name: '3BB TV',
     channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109],
+  },
+  {
+    name: 'ดูหนังออนไลน์',
+    channels: [110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125],
+  },
+  {
+    name: 'ดูอนิเมะ',
+    channels: [110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125],
   },
 
 ];
@@ -238,7 +247,7 @@
       '4K Avengers: Infinity War',
       'Spider-Man: No Way Home',
       'Postman ไปรษณีย์ 4 โลก',
-      'Logan - โลแกน เดอะ วูล์ฟเวอรีน',
+      'Logan - โลแกน เดอะ วูล์ฟเวอรีน'
     ];
 
     const channelLogos = [
@@ -521,6 +530,14 @@ function showChannelsInCategory(catIndex) {
 
   if (category.name === '3BB TV') {
     window.open('https://xtream-fast.serv00.net/3bb.php?token=12c9f2345629682526c389205bff5a3e', '_self');
+    return;
+  }
+  if (category.name === 'ดูหนังออนไลน์') {
+    window.open('http://guflix.streaming-fast.com/movies_page_sv1_web/movie-thai/1/12c9f2345629682526c389205bff5a3e.php', '_self');
+    return;
+  }
+  if (category.name === 'ดูอนิเมะ') {
+    window.open('http://guflix.streaming-fast.com/vip_wiseplay/WEB/anime/sv1_indexanime_cat.php?token=12c9f2345629682526c389205bff5a3e', '_self');
     return;
   }
 
