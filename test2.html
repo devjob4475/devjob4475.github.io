@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>เล่น M3U8 ทันที</title>
+  <title>MY TV</title>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -123,7 +123,15 @@
   {
     name: 'Digital Tv',
     channels: [28,29,30,31,32,33,34,35,36,37,38,38,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63],
-  }
+  },
+  {
+    name: 'บันเทิง',
+    channels: [64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93],
+  },
+  {
+    name: 'ภาพยนตร์',
+    channels: [94,95,96],
+  },
 ];
 
 
@@ -180,6 +188,39 @@
       'ช่อง Thai PBS TV HD Backup',
       'ช่อง NBT TV HD',
       'ช่อง NBT TV HD Backup',
+      'ช่อง ASIAN MORE',
+      'ช่อง Warner TV',
+      'ช่อง Waner TV Backup',
+      'ช่อง HBO TV',
+      'ช่อง HBO Family TV',
+      'ช่อง HBO HIT TV',
+      'ช่อง HBO Signature TV',
+      'ช่อง MAX HD TV',
+      'ช่อง MAX HD TV Backup',
+      'ช่อง AXN TV',
+      'ช่อง AXN TV Backup',
+      'ช่อง BLUE ANT TV',
+      'ช่อง BLUE Extreme TV',
+      'ช่อง FILM HD',
+      'ช่อง FILM 2 HD',
+      'ช่อง SERIES',
+      'ช่อง MOVIE HIT TV',
+      'ช่อง Xzyte TV',
+      'ช่อง TRUE THAI FILM TV',
+      'ช่อง Celestial TV',
+      'ช่อง TVN TV',
+      'ช่อง MIX MAJOR TV',
+      'ช่อง มังกร TV',
+      'ช่อง MONO PLUS TV',
+      'ช่อง FILM ASIA TV',
+      'ช่อง FW MOVIE',
+      'ช่อง FW SOV',
+      'ช่อง FW TOON',
+      'ช่อง FW DOC',
+      'ช่อง FW SPORT',
+      '4K Red One - เรด วัน (พากย์ไทย)',
+      '4K Gladiator II - แกลดดิเอเตอร์ นักรบผู้กล้า ผ่าแผ่นดินทรราช 2',
+      '4K Kraven the Hunter - เครเว่น เดอะ ฮันเตอร์',
     ];
 
     const channelLogos = [
@@ -239,6 +280,39 @@
       'https://static.uflixtv.com/images/tv/channels_icons/th-tpbs.png',
       'https://static.uflixtv.com/images/tv/channels_icons/sd-nbt.png',
       'https://static.uflixtv.com/images/tv/channels_icons/sd-nbtbkp.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-asianmore.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-warnertv.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-warnertvbkp.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-hbo.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-hbofamily.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-hbohits.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-hbosignature.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-cinemax.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-cinemaxbkp.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-axn.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-axnbkp.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-blueant.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-blueantex.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-tfilm.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-tfilm2.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/sd-series.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/sd-moviehits.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-xzyte.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/sd-thaifilm.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/sd-celestial.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-tvn.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/sd-mixmajor.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/sd-mangkorn.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/th-monoplus.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/sd-filmasia.png',
+      'https://www.fileinw.com/postor/20240429213309FWMOV.jpg',
+      'https://www.fileinw.com/postor/20240429213326FWSOV.jpg',
+      'https://www.fileinw.com/postor/20240429213651FWTOON.jpg',
+      'https://www.fileinw.com/postor/20240617204638FWDoc.jpg',
+      'https://www.fileinw.com/postor/20240429213640FWsport.jpg',
+      'https://cloud.ufxtv.com/images/vod/thumbs/ozii9hzha6cy1h5l0o2zarov90fopfqkqljm59vmjczqvxy21tz4jjmv83ui0z46.jpg',
+      'https://cloud.ufxtv.com/images/vod/thumbs/lxqes0s091zqz7zkzg8gawocr9hjaxeqtxou8x5tibr091zfmf79ihy6mvot5mj3.jpg',
+      'https://cloud.ufxtv.com/images/vod/thumbs/f4abk16eos1yt01qzdbyfk1098j1nx0r98fe0gj9h5anjrfltebtuvgu2e87qjw2.jpg',
     ];
 
     // กำหนด playBaseUrls เอง
@@ -307,6 +381,39 @@
       'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-tpbs&kauth=',
       'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-nbt&kauth=',
       'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-nbtbkp&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-asianmore&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-warnertv&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-warnertvbkp&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-hbo&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-hbofamily&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-hbohits&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-hbosignature&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-cinemax&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-cinemax&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-axn&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-axnbkp&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-blueant&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-blueantex&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-tfilm&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-tfilm2&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-series&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-moviehits&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=hd-xzyte&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-thaifilm&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-celestial&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-tvn&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-mixmajor&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-mangkorn&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=th-monoplus&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-filmasia&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-filmasia&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-filmasia&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-filmasia&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-filmasia&kauth=',
+      'https://cloud.ufxtv.com/api/tv/channels/play/?c=sd-filmasia&kauth=',
+      'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=ozii9hzha6cy1h5l0o2zarov90fopfqkqljm59vmjczqvxy21tz4jjmv83ui0z46&res=720&vod_sound=auto&kauth=',
+      'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=lxqes0s091zqz7zkzg8gawocr9hjaxeqtxou8x5tibr091zfmf79ihy6mvot5mj3&res=720&vod_sound=auto&kauth=',
+      'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=f4abk16eos1yt01qzdbyfk1098j1nx0r98fe0gj9h5anjrfltebtuvgu2e87qjw2&res=720&vod_sound=auto&kauth=',
     ];
 
     // ฟังก์ชันดึง playlist URL
@@ -315,21 +422,21 @@
   let response = await fetch(playUrl);
   let text = await response.text();
 
-  // เช็คว่า session failed หรือไม่
+  // ถ้า session หมดอายุ
   if (text.includes('session failed')) {
-    // ถ้า session failed ให้ login ใหม่เพื่อเอา session ใหม่
     user_loggedsession = await login();
-    
-    // สร้าง playUrl ใหม่ด้วย session ที่ได้จาก login
     playUrl = `${playBaseUrl}&user_loggedsession=${user_loggedsession}`;
-    
-    // ทำการร้องขออีกครั้ง
     response = await fetch(playUrl);
     text = await response.text();
   }
 
-  return text.includes('<clear_url>') ? text : null;
+  // เช็คว่ามีข้อมูลที่ใช้ได้
+  const hasClearUrl = text.includes('<clear_url>');
+  const hasMovieUrl = text.includes('<url>');
+
+  return (hasClearUrl || hasMovieUrl) ? text : null;
 }
+
 
 // ดึง session ใหม่
 async function login() {
@@ -439,13 +546,57 @@ let session = null;
     }
   }
 
-  const xml = await getPlaylist(session, playBaseUrls[index]);
-  const clearUrl = extractClearUrl(xml);
-  if (clearUrl) {
-    const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+  if (channelNames[index] === 'ช่อง FW MOVIE') {
+    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwmov_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940132&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
     loadChannel(fixedUrl);
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW SOV') {
+    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwsov_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940506&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
+    loadChannel(fixedUrl);
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW TOON') {
+    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwtoon_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940615&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
+    loadChannel(fixedUrl);
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW DOC') {
+    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwdoc_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940720&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
+    loadChannel(fixedUrl);
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW SPORT') {
+    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwsport_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940802&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
+    loadChannel(fixedUrl);
+    return;
+  }
+
+  const xml = await getPlaylist(session, playBaseUrls[index]);
+  console.log("🚀 ~ loadChannelByIndex ~ xml:", xml)
+
+  const isMovieCategory = categories.find(cat => cat.name === 'ภาพยนตร์')?.channels.includes(index);
+
+  if (isMovieCategory) {
+    // ดึงและ decode url ที่อยู่ใน <url> แทน
+    const match = xml.match(/<url>(.*?)<\/url>/);
+    if (match) {
+      const encodedUrl = match[1];
+      const decodedUrl = decodeURIComponent(encodedUrl);
+      const fixedUrl = decodedUrl.replace('playlist.m3u8', 'chunk.m3u8');
+      loadChannel(fixedUrl);
+    } else {
+      alert('ไม่พบลิงก์ภาพยนตร์ ❌');
+    }
   } else {
-    alert('ไม่พบลิงก์ playlist ❌');
+    // หมวดอื่น ใช้วิธีเดิม
+    const clearUrl = extractClearUrl(xml);
+    if (clearUrl) {
+      const fixedUrl = clearUrl.replace('playlist.m3u8', 'chunks.m3u8');
+      loadChannel(fixedUrl);
+    } else {
+      alert('ไม่พบลิงก์ playlist ❌');
+    }
   }
 }
 
