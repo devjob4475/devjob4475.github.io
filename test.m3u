@@ -1,16 +1,220 @@
+#EXTM3U
+#EXTINF:0 tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",TRUE-1 
+#EXTVLCOPT:network-caching=1000
+https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier1_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU0OA==
+#EXTINF:56 tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-2.png",TRUE-2
+#EXTVLCOPT:network-caching=1000
+https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier2_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU0OA==
+#EXTINF:56 tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-3.png",TRUE-3
+#EXTVLCOPT:network-caching=1000
+https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier3_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU0OA==
+#EXTINF:58 tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-4.png",TRUE-4
+#EXTVLCOPT:network-caching=1000
+https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier4_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU0OA==
+#EXTINF:67 tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-5.png",TRUE-5
+#EXTVLCOPT:network-caching=1000
+https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier5_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU0OA==
 
-    #EXTM3U 
+#EXTINF:67 tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/epl-1.png",EPL 01
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://fw4free.com/
+https://fw4free.inwstream.com/fw4free/ch1.stream/playlist.m3u8
 
-    ########################################
-    ช่องกีฬาทั่วไป
-    ########################################
+#EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
+#EXTVLCOPT:http-referrer=https://fw4free.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://fw4free.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://fw4free.inwstream.com/fw4free/ch1.stream/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/dd09ebd0-5a16-11ef-ae6e-398d852551da_webp_original.webp",TRUE BALL THAI 1
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai1/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/dd07c8f0-5a16-11ef-8615-cb02228d28e7_webp_original.webp",TRUE BALL THAI 2
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai2/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/dd8fe4b0-5a16-11ef-a30f-0d36085b5b8b_webp_original.webp",TRUE BALL THAI 3
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai3/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/de19d530-5a16-11ef-b4ec-3bd23b99cc20_webp_original.webp",TRUE BALL THAI 4
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai4/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/df6a7110-5a16-11ef-ae6e-398d852551da_webp_original.webp",TRUE BALL THAI 5
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai5/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/e0a6c1a0-5a16-11ef-8743-87a41cdc0568_webp_original.webp",TRUE BALL THAI 6
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai6/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/e1334a30-5a16-11ef-9c43-a93aeb33b0e5_webp_original.webp",TRUE BALL THAI 7
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai7/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/e1c15960-5a16-11ef-9de9-af1b25c2ed4f_webp_original.webp",TRUE BALL THAI 8
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai8/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/e2346680-5a16-11ef-8c60-b76aa0302695_webp_original.webp",TRUE BALL THAI 9
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai9/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://cms.dmpcdn.com/livetv/2024/08/14/e249c340-5a16-11ef-a30f-0d36085b5b8b_webp_original.webp",TRUE BALL THAI 10
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://soccertv4k.com/
+https://cdn1.googlecdn.live/4k/trueballthai10/playlist.m3u8
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240429213651FWTOON.jpg",FW TOON
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=92941
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240429213309FWMOV.jpg",FW MOV
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=95262
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240429213326FWSOV.jpg",FW SOV
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=94898
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240617204638FWDoc.jpg",FW DOC
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=91303
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240429213640FWsport.jpg",FW SPORT
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=89782
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240429213343just_for_laughs_gags.jpg",GAGS
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=89781
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421224528CNN.jpg",CNN
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=40922
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225150NHK.jpg",NHK JAPAN
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=40910
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240528173456FARMTV.jpg",FARM TV
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27315
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225446nbthd.jpg",NBT
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27189
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225507tpbshd.jpg",THAI PBS
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27188
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225520tsports7.jpg",T SPORT
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27186
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225533tptv.jpg",TP TV
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27184
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225609TNN16.jpg",TNN
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27179
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225631JKN18.jpg",JKN
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27165
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225712True4u.jpg",TRUE 4U
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27156
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225727gmmchannel.jpg",GMM25
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27153
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225748ch8.jpg",CH8
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27147
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225827mono29.jpg",MONO
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27144
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225856mcothd.jpg",MCOT
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27141
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225844onehd.jpg",ONE
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27140
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225909thairahttvhd.jpg",THAIRAT
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27138
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225700Workpoint.jpg",WORKPOINT
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27159
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225924ch3hd.jpg",CH3
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27137
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225938amarintvhd.jpg",AMARIN
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27135
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421225954ch7hd.jpg",CH7
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27132
+
+#EXTINF:67 tvg-logo="https://www.fileinw.com/postor/20240421230006pptvhd.jpg",PPTV
+#EXTVLCOPT:network-caching=1000
+#EXTVLCOPT:http-referrer=https://inwiptv.com/
+https://inwiptv.com/player_demo.php?channel=27129
 
 
-    #EXTINF:-1 group-title="ช่องกีฬาทั่วไป" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",EPL 01
-    #EXTVLCOPT:http-referrer=https://fw4free.com/
-    #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
-    #EXTVLCOPT:http-origin=https://fw4free.com
-    #EXTVLCOPT:http-accept=*/*
-    #EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
-    #EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
-    https://fw4free.inwstream.com/fw4free/ch1.stream/playlist.m3u8
+
+
+
