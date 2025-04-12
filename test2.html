@@ -151,7 +151,7 @@
   },
   {
     name: 'ภาพยนตร์',
-    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110],
+    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111],
   },
     {
     name: 'ดูหนังออนไลน์',
@@ -259,7 +259,8 @@
       'Spider-Man: No Way Home',
       'Postman ไปรษณีย์ 4 โลก',
       'Logan - โลแกน เดอะ วูล์ฟเวอรีน',
-      'ผู้เช่า'
+      'ผู้เช่า',
+      'ผาดำคำไอ่',
     ];
 
     const channelLogos = [
@@ -366,6 +367,7 @@
       'https://cloud.ufxtv.com/images/vod/thumbs/yxncxoxpj3agjs5x65vk127t00zui8rr94rb9m5c8v0mz7okmt4s7bh53ha676yt.jpg',
       'https://cloud.ufxtv.com/images/vod/thumbs/ngu9kivd8sonyik71w7vfo388cxxh2j4jde3v9h425r0oc8q8flo4pwd1uajxtog.jpg',
       'https://img.inwiptv.net/postor/20250227112222wBrbYlOVXRfeefvfgeJI5btS1Ow.jpg',
+      'https://img.inwiptv.net/postor/202503201153391pIrritKjpz6itW6GYLAItCbxqC.jpg',
     ];
 
     // กำหนด playBaseUrls เอง
@@ -481,6 +483,7 @@
       'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=yxncxoxpj3agjs5x65vk127t00zui8rr94rb9m5c8v0mz7okmt4s7bh53ha676yt&res=720&vod_sound=auto&kauth=',
       'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=ngu9kivd8sonyik71w7vfo388cxxh2j4jde3v9h425r0oc8q8flo4pwd1uajxtog&res=720&vod_sound=auto&kauth=',
       'https://fw4free.com/player2.php?channel=1655580&id=53',
+      'https://fw4free.com/player2.php?channel=1637922&id=53',
     ];
 
     // ฟังก์ชันดึง playlist URL
@@ -663,6 +666,11 @@ let session = null;
   }
   if (channelNames[index] === 'ผู้เช่า') {
     const iframeUrl = 'https://fw4free.com/player2.php?channel=1622792&id=53';
+    loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'ผาดำคำไอ่') {
+    const iframeUrl = 'https://fw4free.com/player2.php?channel=1637922&id=53';
     loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
     return;
   }
