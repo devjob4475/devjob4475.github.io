@@ -641,31 +641,7 @@ let session = null;
     }
   }
 
-  if (channelNames[index] === 'ช่อง FW MOVIE') {
-    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwmov_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940132&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
-    loadChannel(fixedUrl);
-    return;
-  }
-  if (channelNames[index] === 'ช่อง FW SOV') {
-    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwsov_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940506&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
-    loadChannel(fixedUrl);
-    return;
-  }
-  if (channelNames[index] === 'ช่อง FW TOON') {
-    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwtoon_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940615&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
-    loadChannel(fixedUrl);
-    return;
-  }
-  if (channelNames[index] === 'ช่อง FW DOC') {
-    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwdoc_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940720&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
-    loadChannel(fixedUrl);
-    return;
-  }
-  if (channelNames[index] === 'ช่อง FW SPORT') {
-    const fixedUrl = 'https://freelive2.inwstream.com:1936/freelive-edge/fwsport_fw-iptv.stream/chunks.m3u8?nimblesessionid=32940802&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI1IDQ6MTg6NTIgUE0maGFzaF92YWx1ZT15NFlEQWJMaXZneHhvWnBFRGFsbVNnPT0mdmFsaWRtaW51dGVzPTI1ODc1NDU4NTQy';
-    loadChannel(fixedUrl);
-    return;
-  }
+
   if (channelNames[index] === 'ผู้เช่า') {
     const iframeUrl = 'https://fw4free.com/player2.php?channel=1622792&id=53';
     loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
@@ -678,6 +654,31 @@ let session = null;
   }
   if (channelNames[index] === '404 สุขีนิรันดร์..') {
     const iframeUrl = 'https://fw4free.com/player2.php?channel=1648586&id=53';
+    loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW MOVIE') {
+    const iframeUrl = 'https://www.inwiptv.org/player_demo.php?channel=95262';
+    loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW SOV') {
+    const iframeUrl = 'https://www.inwiptv.org/player_demo.php?channel=94898';
+    loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW TOON') {
+    const iframeUrl = 'https://www.inwiptv.org/player_demo.php?channel=92941';
+    loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW DOC') {
+    const iframeUrl = 'https://www.inwiptv.org/player_demo.php?channel=91303';
+    loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'ช่อง FW SPORT') {
+    const iframeUrl = 'https://www.inwiptv.org/player_demo.php?channel=89782';
     loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
     return;
   }
