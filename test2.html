@@ -151,7 +151,7 @@
   },
   {
     name: 'ภาพยนตร์',
-    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111],
+    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112],
   },
     {
     name: 'ดูหนังออนไลน์',
@@ -261,6 +261,7 @@
       'Logan - โลแกน เดอะ วูล์ฟเวอรีน',
       'ผู้เช่า',
       'ผาดำคำไอ่',
+      '404 สุขีนิรันดร์..',
     ];
 
     const channelLogos = [
@@ -367,7 +368,7 @@
       'https://cloud.ufxtv.com/images/vod/thumbs/yxncxoxpj3agjs5x65vk127t00zui8rr94rb9m5c8v0mz7okmt4s7bh53ha676yt.jpg',
       'https://cloud.ufxtv.com/images/vod/thumbs/ngu9kivd8sonyik71w7vfo388cxxh2j4jde3v9h425r0oc8q8flo4pwd1uajxtog.jpg',
       'https://img.inwiptv.net/postor/20250227112222wBrbYlOVXRfeefvfgeJI5btS1Ow.jpg',
-      'https://img.inwiptv.net/postor/202503201153391pIrritKjpz6itW6GYLAItCbxqC.jpg',
+      'https://img.inwiptv.net/postor/20250404060436z2TWhTRFzriygLygsjTbIHFYcQW.jpg',
     ];
 
     // กำหนด playBaseUrls เอง
@@ -671,6 +672,11 @@ let session = null;
   }
   if (channelNames[index] === 'ผาดำคำไอ่') {
     const iframeUrl = 'https://fw4free.com/player2.php?channel=1637922&id=53';
+    loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === '404 สุขีนิรันดร์..') {
+    const iframeUrl = 'https://fw4free.com/player2.php?channel=1648586&id=53';
     loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
     return;
   }
