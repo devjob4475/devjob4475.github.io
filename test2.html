@@ -6,6 +6,24 @@
   <title>MY TV</title>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+
+    .container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
     body {
       background-color: #000;
       padding: 20px;
@@ -69,7 +87,10 @@
 <body>
 
     <video id="video" controls autoplay></video>
-  
+<!-- <iframe width="100%" height="900px" src="https://fw4free.com/player2.php?channel=1655580&id=53" allowfullscreen></iframe> -->
+<div class="container"> 
+  <iframe class="responsive-iframe" src="https://fw4free.com/player2.php?channel=1655580&id=53"></iframe>
+</div>
     
     <div id="categories" class="channels"></div>
   <div class="channels" id="channels"></div>
@@ -131,11 +152,11 @@
   },
   {
     name: 'ภาพยนตร์',
-    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109],
+    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110],
   },
     {
     name: 'ดูหนังออนไลน์',
-    channels: [110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125],
+    channels: [200],
   },
 ];
 
@@ -238,7 +259,8 @@
       '4K Avengers: Infinity War',
       'Spider-Man: No Way Home',
       'Postman ไปรษณีย์ 4 โลก',
-      'Logan - โลแกน เดอะ วูล์ฟเวอรีน'
+      'Logan - โลแกน เดอะ วูล์ฟเวอรีน',
+      'ทดสอบ'
     ];
 
     const channelLogos = [
@@ -343,6 +365,7 @@
       'https://cloud.ufxtv.com/images/vod/thumbs/0syh0lilhtp4fg6y0nouetyijcl3iuojmn0n8i9qcyurf0qfofa288lsl7v41kno.jpg?r=34',
       'https://cloud.ufxtv.com/images/vod/thumbs/mhrso1ghcmdggnv0m1gvuwqrimi2mkb8230q5g7h2lyj9ukwv0rqwihf50hrlt0n.jpg',
       'https://cloud.ufxtv.com/images/vod/thumbs/yxncxoxpj3agjs5x65vk127t00zui8rr94rb9m5c8v0mz7okmt4s7bh53ha676yt.jpg',
+      'https://cloud.ufxtv.com/images/vod/thumbs/ngu9kivd8sonyik71w7vfo388cxxh2j4jde3v9h425r0oc8q8flo4pwd1uajxtog.jpg',
       'https://cloud.ufxtv.com/images/vod/thumbs/ngu9kivd8sonyik71w7vfo388cxxh2j4jde3v9h425r0oc8q8flo4pwd1uajxtog.jpg',
     ];
 
@@ -458,6 +481,7 @@
       'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=mhrso1ghcmdggnv0m1gvuwqrimi2mkb8230q5g7h2lyj9ukwv0rqwihf50hrlt0n&res=720&vod_sound=auto&kauth=',
       'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=yxncxoxpj3agjs5x65vk127t00zui8rr94rb9m5c8v0mz7okmt4s7bh53ha676yt&res=720&vod_sound=auto&kauth=',
       'https://cloud.ufxtv.com/api/vod/play2/?vod_type=movie&vod_content_id=ngu9kivd8sonyik71w7vfo388cxxh2j4jde3v9h425r0oc8q8flo4pwd1uajxtog&res=720&vod_sound=auto&kauth=',
+      'https://fw4free.com/player2.php?channel=1655580&id=53',
     ];
 
     // ฟังก์ชันดึง playlist URL
@@ -480,6 +504,53 @@
 
   return (hasClearUrl || hasMovieUrl) ? text : null;
 }
+
+    async function getPlaylistMovieOnline(playBaseUrl) {
+const myHeaders = new Headers();
+myHeaders.append("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
+myHeaders.append("accept-language", "th,en;q=0.9,th-TH;q=0.8");
+myHeaders.append("priority", "u=0, i");
+myHeaders.append("referer", "https://guflix.streaming-fast.com/");
+myHeaders.append("sec-ch-ua", "\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"");
+myHeaders.append("sec-ch-ua-mobile", "?0");
+myHeaders.append("sec-ch-ua-platform", "\"Windows\"");
+myHeaders.append("sec-fetch-dest", "iframe");
+myHeaders.append("sec-fetch-mode", "navigate");
+myHeaders.append("sec-fetch-site", "cross-site");
+myHeaders.append("sec-fetch-storage-access", "active");
+myHeaders.append("upgrade-insecure-requests", "1");
+myHeaders.append("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36");
+myHeaders.append("Cookie", "PHPSESSID=4dpo87disd0i4egrpd141etp5j");
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+
+  try {
+    const response = await fetch(playBaseUrl, requestOptions);
+    const html = await response.text();
+
+    // ดึงค่าไฟล์ .m3u8 จากสคริปต์ jwplayer
+    const match = html.match(/file:\s*'(https?:\/\/[^']+\.m3u8[^']*)'/);
+
+    if (match && match[1]) {
+      const m3u8Url = match[1];
+      console.log('✅ Extracted M3U8 URL:', m3u8Url);
+      return m3u8Url;
+    } else {
+      console.warn('⚠️ ไม่พบ URL .m3u8 ใน HTML');
+      return null;
+    }
+  } catch (error) {
+    console.error('❌ Error fetching playlist HTML:', error);
+    return null;
+  }
+}
+
+
+
 
 
 // ดึง session ใหม่
@@ -624,6 +695,19 @@ let session = null;
     loadChannel(fixedUrl);
     return;
   }
+  if (channelNames[index] === 'ทดสอบ') {
+  getPlaylistMovieOnline('https://fw4free.com/player2.php?channel=1655580&id=53')
+    .then(m3u8Url => {
+      if (m3u8Url) {
+        loadChannel(m3u8Url); // หรือจะ config jwplayer ตรงนี้ก็ได้
+      } else {
+        alert('ไม่สามารถดึงลิงก์หนังได้');
+      }
+    });
+
+  return;
+}
+
 
   const xml = await getPlaylist(session, playBaseUrls[index]);
   console.log("🚀 ~ loadChannelByIndex ~ xml:", xml)
