@@ -141,11 +141,6 @@
     name: 'ดูหนังออนไลน์',
     channels: [110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125],
   },
-  {
-    name: 'ดูอนิเมะ',
-    channels: [110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125],
-  },
-
 ];
 
 
@@ -533,11 +528,7 @@ function showChannelsInCategory(catIndex) {
     return;
   }
   if (category.name === 'ดูหนังออนไลน์') {
-    window.open('http://guflix.streaming-fast.com/vip_wiseplay/WEB/movies/sv1_indexmovies_cat.php?token=e04baa85f809e89d2158f28b39396e7c', '_self');
-    return;
-  }
-  if (category.name === 'ดูอนิเมะ') {
-    window.open('http://guflix.streaming-fast.com/vip_wiseplay/WEB/anime/sv1_indexanime_cat.php?token=12c9f2345629682526c389205bff5a3e', '_self');
+    window.open('http://guflix.streaming-fast.com/WEB/index.html', '_self');
     return;
   }
 
