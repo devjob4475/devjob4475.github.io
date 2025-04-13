@@ -1,0 +1,513 @@
+#EXTM3U
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1.png",ช่อง EPL 1
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9317/v3/-0VpqGUVTf3UpGgagWYF8w/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/lH290nu79y0RBeW7M_s6tQ/1744568042/live/vx-origin/uflix-epl1_720/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-1bkp.png",ช่อง EPL 1 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9318/v3/m_VmrDwKTqWwEdg_3HS9NQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/CoQoffNzIDCWZNZjRcUziA/1744568042/live/vx-origin/uflix-epl1bkp_720/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-2.png",ช่อง EPL 2
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9318/v3/2O4_1Nnso51H5ErYoOZI2w/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/eBV5XxqjmS6y7Hbb7cM6vg/1744568042/live/vx-origin/uflix-epl2_720/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-2bkp.png",ช่อง EPL 2 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/system/ca4.mp4/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-3.png",ช่อง EPL 3
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9317/v3/qE13lyOLLphKTWwtSFfyCA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/aICXogM4sXC1fSECnA2Vjw/1744568042/live/vx-origin/uflix-epl3_720/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-3bkp.png",ช่อง EPL 3 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9318/v3/ptqaw6zPaIQmHrnb5VjlJw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/N-4oNeZ96HEeoDCuho6eIw/1744568042/live/vx-origin/uflix-epl3bkp_720/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-4.png",ช่อง EPL 4
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9318/v3/tQoCQY_2SEloplXWiGr5sw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/Zt0HnIwLTPp6MfFdpvo7eg/1744568042/live/vx-origin/uflix-epl4_720/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-4bkp.png",ช่อง EPL 4 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9317/system/ca4.mp4/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-5.png",ช่อง EPL 5
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9317/system/ca4.mp4/chunks.m3u8
+#EXTINF:-1 group-title="พรีเมียร์ลีก" tvg-logo="https://rentapi.blackboxsys.net/images/png/epl-5bkp.png",ช่อง EPL 5 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9317/system/ca4.mp4/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/png/epl-bein1.png",ช่อง Bein 1
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9317/v3/EKnvUohDrl9T8r-H1ME4Eg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/uyMzJyDp1Zl0-vIrWPBxvw/1744568042/live/vx-origin/uflix-bein1_720/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/png/epl-bein1bkp.png",ช่อง Bein 1 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9318/v3/PM8p2DMLbyuZgETIoAzlVg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/o4OmfXPj1RIlcV3vWU6CYA/1744568042/live/vx-origin/epl-bein1_720/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/png/epl-bein2.png",ช่อง Bein 2
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/-gQxTU1ZhOGShobT9bjjNQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/BOJYsAIPfSVhPL2VgPaZ-w/1744568042/live/vx-origin/uflix-bein2_720/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/png/epl-bein2bkp.png",ช่อง Bein 2 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/hF02lfU1PBrOrmLmzrmSPQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/Cr4RufIziOKKhUt8iGdppQ/1744568042/live/vx-origin/epl-bein2_720/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/png/epl-bein3.png",ช่อง Bein 3
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9317/v3/2oEJL-AJgxEI84dquITLag/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/JXhIXMnMCl_P1xSMvd6YNA/1744568042/live/vx-origin/uflix-bein3_720/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/png/epl-bein3bkp.png",ช่อง Bein 3 Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9318/v3/qqe1pIKlNVbAU7jQDeE_oQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/DtRDacUNhc8A7WrTiap1nA/1744568042/live/vx-origin/epl-bein3_720/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein1.png",ช่อง Bein HD 1
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9317/v3/MwBpN3uk9wIhmQb6zwtaDw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/Lso5825RJVcLN8wlJ5kFgA/1744568042/live/dx-origin/hd-bein1_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein2.png",ช่อง Bein HD 2
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/v3/mO7GVHMaz_CldeJWiGkFGA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/viZtsJPBVKe-Oixyqb1hUQ/1744568042/live/dx-origin/hd-bein2_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein3.png",ช่อง Bein HD 3
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/aeLt3czo0PgFYPYb88-HqQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/vnk66dTjydMhWZgryq5kig/1744568042/live/dx-origin/hd-bein3_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein4.png",ช่อง Bein HD 4
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/v3/iNBtIaUft8nPJdV6K0KQqA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/f1jBnAP8-a3qdR3gjw87Fw/1744568042/live/dx-origin/hd-bein4_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein5.png",ช่อง Bein HD 5
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9317/v3/wJBOJE7-lTyyhGIfgBRPjg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/kCuJ2EPRQQK3RS-g88_0mQ/1744568042/live/dx-origin/hd-bein5_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein6.png",ช่อง Bein HD 6
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/v3/1h6WsupiStxalxpCh-M4qw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/9W6yg-CseiAunHuoNSprzg/1744568042/live/dx-origin/hd-bein6_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein7.png",ช่อง Bein HD 7
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9318/v3/bP0pnWRqERMfKKXz_qTRkg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/8vJDIIpGHy-pOhyoWKH6KA/1744568042/live/dx-origin/hd-bein7_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein8.png",ช่อง Bein HD 8
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9318/v3/zkmwC3K9BjD7UEL_DYloZA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/1vG2ns9HcsoiaZc4KK9hCA/1744568042/live/dx-origin/hd-bein8_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein9.png",ช่อง Bein HD 9
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9318/v3/jzaRJ96Bb8Az5zS4pOaUjw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/yozdSuuvHkRm6GxxvW-eIQ/1744568042/live/dx-origin/hd-bein9_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein10.png",ช่อง Bein HD 10
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9318/system/ca4.mp4/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein11.png",ช่อง Bein HD 11
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9317/v3/fBHtueHHg8c2XyvD1kbx-A/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/mZgJx0DNQoGCEvyGjt9AOA/1744568042/live/dx-origin/hd-bein11_480/chunks.m3u8
+#EXTINF:-1 group-title="Bein Sport" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-bein12.png",ช่อง Bein HD 12
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/v3/HncKLB6in69y-Sle56Ml-g/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/aQOJ4CECFcdrIpSV1Ba0Sw/1744568042/live/dx-origin/hd-bein12_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch3.png",ช่อง CH3 HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/v3/7E4SZEO4pWD0Mr7-_vIcqA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/UQUNNTPAXQocmzyu_jzSAw/1744568042/live/vx-origin/hd-ch3_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch3bkp.png",ช่อง CH3 HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/dAvj4aYevDwvttMnE0iBsg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/aoXv5PmT10IZQzolcHytEA/1744568042/live/dx-origin/hd-ch3bkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch5.png",ช่อง CH5 HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/-_zu2cywtqfFTrOS-aOdiw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/hhzdtzlib5Yp5X_7FvnYuw/1744568042/live/vx-origin/hd-ch5_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch5bkp.png",ช่อง CH5 HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9318/v3/JYkSQ30IAB9ChkJ7ySNtUg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/6YhZkVchi5e4Zfreg8HuQQ/1744568042/live/dx-origin/hd-ch5bkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch7.png",ช่อง CH7 HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9318/v3/iEH4ndxuYTpE17LhjgW8tw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/4OXceaOsZWbdmrZlh7m8xQ/1744568042/live/vx-origin/hd-ch7_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch7bkp.png",ช่อง CH7 HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/v3/S0VFM6hqnO5-tOJbJUmMcQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/MQNOxEDStrOclObFPomv8w/1744568042/live/dx-origin/hd-ch7bkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-mcot.png",ช่อง CH9 HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/X4DXIbrgCaWTT2mZHuCKiA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/Xy71URL6mXACKKlhC8EHKA/1744568042/live/dx-origin/hd-mcot_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-mcotbkp.png",ช่อง CH9 HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/v3/dHOnl19JexHGA85KxllbDQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/BzmeTWiXOH4bj2mo8S_4xQ/1744568042/live/dx-origin/hd-mcotbkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-workpoint.png",ช่อง WorkPoint HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/v3/8utP_VrQv0myD6LJ8q4stQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/k6l_2t7FlZivrr0G7MzPuA/1744568042/live/dx-origin/hd-workpoint_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-workpointbkp.png",ช่อง WorkPoint HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9318/v3/W9JwVfZU_wcMmGkq9_91vA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/X4j5UFO3FDKY0yX9D6-NDg/1744568042/live/dx-origin/hd-workpointbkp_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-gmmchannel.png",ช่อง GMM HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9318/v3/w71rXqXuYe2eWdHBH2SqMQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/88zLtiMowTl8PBdEoSESJQ/1744568042/live/dx-origin/sd-gmmchannel_480/chunks.m3u8
+#EXTINF:-1 group-title="ทั่วไป" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-gmmchannelbkp.png",ช่อง GMM HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/v3/NLIoNfF0q-PLbdYpJzNSUQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/q7snRbkB6fo7CU8VX3rxtQ/1744568042/live/dx-origin/sd-gmmchannelbkp_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-mono.png",ช่อง MONO HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/pSCkXAY-qHOVrVeYDkOIxg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/-x3-QLrB6T69gNm4iEuzVA/1744568042/live/dx-origin/hd-mono_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-monobkp.png",ช่อง MOMO HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/system/ca4.mp4/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch8.png",ช่อง CH8 HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/v3/jjSmsNGrGJlY9Tl8zMp0pA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/UEelcaqzGXQhBBaYRmM11Q/1744568042/live/dx-origin/hd-ch8_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-ch8bkp.png",ช่อง CH8 HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9317/v3/G9TVtmV72hibOj2eRj4P9Q/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/8TZApnjLIyX_pTDg_RxKew/1744568042/live/dx-origin/hd-ch8bkp_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-gmmone.png",ช่อง ONE HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9317/v3/A_jHphrRHhtBIzAS7tk45g/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/C5DdUgb-I-1QyFcFDh1h0Q/1744568042/live/vx-origin/hd-gmmone_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-gmmonebkp.png",ช่อง ONE HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9317/v3/8n9Z0DvrXxjO7gmeQ5L8dQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/vFkZyWCq1nSoGPTdgzhTHg/1744568042/live/dx-origin/hd-gmmonebkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-amarin.png",ช่อง Amarin TV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9318/v3/mVdT_sm2BXPojhhBP2C8pQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/ebFOyFmhap81YKwg0sWh9w/1744568042/live/vx-origin/hd-amarin_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-amarinbkp.png",ช่อง Amarin TV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/v3/YQkkXpRi93DL80ofFyeHMg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/xfCPnDmUA_okSY7a0VK2tg/1744568042/live/vx-origin/hd-amarinbkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-thairath.png",ช่อง Thairath TV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9317/v3/skC1fo5SKYkrZaQhQ5V_iw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/aKF7S71RwK_ZWlJvWf3yDA/1744568042/live/dx-origin/hd-thairath_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-thairathbkp.png",ช่อง Thairath TV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9318/v3/OAUyaYJhauLwgq8Y30LBoA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/QBdtge3oTNpenCkoWxgKxg/1744568042/live/dx-origin/hd-thairathbkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-pptv.png",ช่อง PPTV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9318/v3/qmGblQzkDUgsXhcyy2hphQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/1kERZB9y54YizurSMelvXQ/1744568042/live/dx-origin/hd-pptv_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-pptvbkp.png",ช่อง PPTV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg1.aws-stream.com:9318/v3/jC16DdClbM2gKgDl_c7HUQ/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/04-nFbIAlmmnd97_KGfhAw/1744568042/live/dx-origin/hd-pptvbkp_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-24u.png",ช่อง TRUE 4 U HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9318/v3/3Z5bRJRSwED82JKZJkrQkA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/4gfhEoafGSeVAH8nc0l_gg/1744568042/live/dx-origin/sd-24u_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/th-24u.png",ช่อง TRUE 4 U HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9318/v3/Ym0HfxpP9WcfjUnAZ_g2wg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/uWqPpFiLJ81VY_TqpNGk0w/1744568042/live/dx-origin/th-24u_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-nation.png",ช่อง Nation TV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9318/v3/Ppm13n7rAqNDbx1CgXYwBg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/WBLJROAR0aaa4_KxhPWEWQ/1744568042/live/dx-origin/sd-nation_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-nationbkp.png",ช่อง Nation TV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9317/v3/HCosxSIrxTlysuYB8hMetA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/7KU9937ucpeC8_v0Ylmo7Q/1744568042/live/dx-origin/sd-nationbkp_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-new.png",ช่อง JKN TV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9317/v3/hG4Q-8li94RiGUmK8pkEqg/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/pu5pWLswI_tnTbrJqWkmqw/1744568042/live/dx-origin/sd-new_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-newbkp.png",ช่อง JKN TV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/v3/Es_8fjHywS2oRQVaw4OeKA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/JTFn6G1-iq06tZRFWSeFyg/1744568042/live/dx-origin/sd-newbkp_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-tnn24.png",ช่อง TNN TV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-sg2.aws-stream.com:9317/v3/g5N5MikIE6uuBD2FRfxDVw/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/lVY-sfqtCHhBVmSwEAVYJg/1744568042/live/dx-origin/sd-tnn24_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-tnn24bkp.png",ช่อง TNN TV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la4.aws-stream.com:9317/v3/NyR3fdkpAZYwy-xUxEXY4g/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/rdXiPIo12OZPflfGErsOiA/1744568042/live/dx-origin/sd-tnn24bkp_480/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/hd-tpbs.png",ช่อง Thai PBS TV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la3.aws-stream.com:9318/v3/euLnfa1_gEwsVWnpEd9Z_A/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/3d9rV-qMs4eqG7z34d9w5Q/1744568042/live/dx-origin/hd-tpbs_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/th-tpbs.png",ช่อง Thai PBS TV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9318/v3/Kyn4SrcPmkwxeG98snnkew/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/7toptXIv2K4B6MOVmAhnbg/1744568042/live/vx-origin/th-tpbs_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-nbt.png",ช่อง NBT TV HD
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la2.aws-stream.com:9317/v3/_UVGyz1qSKTgZkENHR1p7g/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/RDxt1loaHOA20DhSHueZNw/1744568042/live/dx-origin/sd-nbt_720/chunks.m3u8
+#EXTINF:-1 group-title="Digital Tv" tvg-logo="https://static.uflixtv.com/images/tv/channels_icons/sd-nbtbkp.png",ช่อง NBT TV HD Backup
+#EXTVLCOPT:http-referrer=https://cloud.ufxtv.com/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 14; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36
+#EXTVLCOPT:http-origin=https://cloud.ufxtv.com
+#EXTVLCOPT:http-accept=*/*
+#EXTVLCOPT:http-accept-encoding=gzip, deflate, br, zstd
+#EXTVLCOPT:http-accept-language=en-US,en;q=0.9,th;q=0.8
+https://live-la5.aws-stream.com:9317/v3/gkQaq0njEd3KugSXL3xNmA/1744546462/0d5ee905a6522f7d7f5b7d44963b77f9/JVGUY_ukM0RZ2DcwIgRKNg/1744568042/live/vx-origin/sd-nbtbkp_720/chunks.m3u8
