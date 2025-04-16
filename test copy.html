@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>uFlix</title>
+
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2.3.0/dist/flickity.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowplayer/7.2.7/skin/skin.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<link href="skin/solo_lite/shared/style.css?r=20250409d" rel="stylesheet">
+
+	<link href="skin/solo_lite/www/css/solo_lite.css?r=20220427" rel="stylesheet">
+
+	<link rel="stylesheet" href="js/jquery-ui.css">
+	
+	<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="196x196"  href="/favicon/favicon-196x196.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+	<meta name="msapplication-TileColor" content="#000">
+	<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#731010">
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.11/jquery.lazy.min.js" integrity="sha512-eviLb3jW7+OaVLz5N3B5F0hpluwkLb8wTXHOTy0CyNaZM5IlShxX1nEbODak/C0k9UdsrWjqIBKOFY0ELCCArw==" crossorigin="anonymous"></script>
+	<script src="js/solo.js?v=20220621"></script>
+
+
+	<script src="//stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+	<script src="js/base64.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+	<script src="js/jquery.bootpag.min.js"></script>
+</head>
+
+
+<script>
+	var api_auth_server ='https://cloud.ufxtv.com/auth';
+	var api_server ='https://cloud.ufxtv.com/api';
+	var kimages_server ='https://cloud.ufxtv.com/images';
+	var nodejs_server ='';
+	var loaded = true;
+	var filter;
+
+	function changeLang( lang ){
+		soloCreateCookie( 'lang', lang, 30 );
+		location.reload();
+	}
+	
+	$( document ).ready(function() {
+		$("#solo-lang-en").prop("href", "javascript:changeLang('en')");
+		$("#solo-lang-th").prop("href", "javascript:changeLang('th')");
+	});
+	
+	</script>
+
+<script>
+
+function keepAlive(){
+    $('#links').load('test.php',function () {
+         $(this).unwrap();
+    });
+
+	$(function() {
+		$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+		function(json) {
+		
+				$.ajax({
+					url: "ajax_keepalive.php?ip=" + json.ip,
+					success: function(data) {
+						if(data == 0){
+							//alert('user logged out!');
+							location.reload();
+						}
+							
+					}
+				}).done(function() {
+					console.log( "keepAlive" );
+				});
+
+			}
+		);
+	});
+	
+}
+
+keepAlive();
+
+setInterval(function(){
+    keepAlive()
+}, 120000);	//	1 minutes
+</script>
+
+<script>
+var isoCountries = {
+	'ABK'	:	'Abkhazian'	,
+	'AAR'	:	'Afar'	,
+	'AFR'	:	'Afrikaans'	,
+	'ALB'	:	'Albanian'	,
+	'AMH'	:	'Amharic'	,
+	'ARA'	:	'Arabic'	,
+	'ARG'	:	'Aragonese'	,
+	'ARM'	:	'Armenian'	,
+	'ASM'	:	'Assamese'	,
+	'AVE'	:	'Avestan'	,
+	'AYM'	:	'Aymara'	,
+	'AZE'	:	'Azerbaijani'	,
+	'BAK'	:	'Bashkir'	,
+	'BAQ'	:	'Basque'	,
+	'BEL'	:	'Belarusian'	,
+	'BEN'	:	'Bengali'	,
+	'BIH'	:	'Bihari'	,
+	'BIS'	:	'Bislama'	,
+	'BOS'	:	'Bosnian'	,
+	'BRE'	:	'Breton'	,
+	'BUL'	:	'Bulgarian'	,
+	'MYA'	:	'Burmese'	,
+	'CAT'	:	'Catalan'	,
+	'CHA'	:	'Chamorro'	,
+	'CHE'	:	'Chechen'	,
+	'CHI'	:	'Chinese'	,
+	'CHU'	:	'Slavonic'	,
+	'CHV'	:	'Chuvash'	,
+	'COR'	:	'Cornish'	,
+	'COS'	:	'Corsican'	,
+	'HRV'	:	'Croatian'	,
+	'CZE'	:	'Czech'	,
+	'DAN'	:	'Danish'	,
+	'DIV'	:	'Maldivian'	,
+	'DUT'	:	'Dutch'	,
+	'DZO'	:	'Dzongkha'	,
+	'ENG'	:	'English'	,
+	'EPO'	:	'Esperanto'	,
+	'EST'	:	'Estonian'	,
+	'FAO'	:	'Faroese'	,
+	'FIJ'	:	'Fijian'	,
+	'FIN'	:	'Finnish'	,
+	'FRE'	:	'French'	,
+	'GLA'	:	'Gaelic'	,
+	'GLG'	:	'Galician'	,
+	'GEO'	:	'Georgian'	,
+	'GER'	:	'German'	,
+	'GRE'	:	'Greek'	,
+	'GRN'	:	'Guarani'	,
+	'GUJ'	:	'Gujarati'	,
+	'HAT'	:	'Haitian'	,
+	'HAU'	:	'Hausa'	,
+	'HEB'	:	'Hebrew'	,
+	'HER'	:	'Herero'	,
+	'HIN'	:	'Hindi'	,
+	'HMO'	:	'Hiri Motu'	,
+	'HUN'	:	'Hungarian'	,
+	'ICE'	:	'Icelandic'	,
+	'IDO'	:	'Ido'	,
+	'IND'	:	'Indonesian'	,
+	'INA'	:	'Interlingua'	,
+	'ILE'	:	'Interlingue'	,
+	'IKU'	:	'Inuktitut'	,
+	'IPK'	:	'Inupiaq'	,
+	'GLE'	:	'Irish'	,
+	'ITA'	:	'Italian'	,
+	'JPN'	:	'Japanese'	,
+	'JAV'	:	'Javanese'	,
+	'KAL'	:	'Kalaallisut'	,
+	'KAN'	:	'Kannada'	,
+	'KAS'	:	'Kashmiri'	,
+	'KAZ'	:	'Kazakh'	,
+	'KHM'	:	'Khmer'	,
+	'KIK'	:	'Kikuyu'	,
+	'KIN'	:	'Kinyarwanda'	,
+	'KIR'	:	'Kirghiz'	,
+	'KOM'	:	'Komi'	,
+	'KOR'	:	'Korean'	,
+	'KUA'	:	'Kuanyama'	,
+	'KUR'	:	'Kurdish'	,
+	'LAO'	:	'Lao'	,
+	'LAT'	:	'Latin'	,
+	'LAV'	:	'Latvian'	,
+	'LIM'	:	'Limburgan'	,
+	'LIN'	:	'Lingala'	,
+	'LIT'	:	'Lithuanian'	,
+	'LTZ'	:	'Luxembourgish'	,
+	'MAC'	:	'Macedonian'	,
+	'MLG'	:	'Malagasy'	,
+	'MAY'	:	'Malay'	,
+	'MAL'	:	'Malayalam'	,
+	'MLT'	:	'Maltese'	,
+	'GLV'	:	'Manx'	,
+	'MAO'	:	'Maori'	,
+	'MAR'	:	'Marathi'	,
+	'MAH'	:	'Marshallese'	,
+	'MOL'	:	'Moldavian'	,
+	'MON'	:	'Mongolian'	,
+	'NAU'	:	'Nauru'	,
+	'NAV'	:	'Navaho, Navajo'	,
+	'NDE'	:	'Ndebele, North'	,
+	'NBL'	:	'Ndebele, South'	,
+	'NDO'	:	'Ndonga'	,
+	'NEP'	:	'Nepali'	,
+	'SME'	:	'Northern Sami'	,
+	'NOR'	:	'Norwegian'	,
+	'NOB'	:	'Norwegian Bokmal'	,
+	'NNO'	:	'Norwegian Nynorsk'	,
+	'NYA'	:	'Nyanja'	,
+	'OCI'	:	'Occitan'	,
+	'ORI'	:	'Oriya'	,
+	'ORM'	:	'Oromo'	,
+	'OSS'	:	'Ossetian'	,
+	'PLI'	:	'Pali'	,
+	'PAN'	:	'Panjabi'	,
+	'PER'	:	'Persian'	,
+	'POL'	:	'Polish'	,
+	'POR'	:	'Portuguese'	,
+	'PUS'	:	'Pushto'	,
+	'QUE'	:	'Quechua'	,
+	'ROH'	:	'Raeto-Romance'	,
+	'RUM'	:	'Romanian'	,
+	'RUN'	:	'Rundi'	,
+	'RUS'	:	'Russian'	,
+	'SMO'	:	'Samoan'	,
+	'SAG'	:	'Sango'	,
+	'SAN'	:	'Sanskrit'	,
+	'SRD'	:	'Sardinian'	,
+	'SCC'	:	'Serbian'	,
+	'SNA'	:	'Shona'	,
+	'III'	:	'Sichuan Yi'	,
+	'SND'	:	'Sindhi'	,
+	'SIN'	:	'Sinhala'	,
+	'SLO'	:	'Slovak'	,
+	'SLV'	:	'Slovenian'	,
+	'SOM'	:	'Somali'	,
+	'SOT'	:	'Sotho, Southern'	,
+	'SPA'	:	'Spanish'	,
+	'SUN'	:	'Sundanese'	,
+	'SWA'	:	'Swahili'	,
+	'SSW'	:	'Swati'	,
+	'SWE'	:	'Swedish'	,
+	'TGL'	:	'Tagalog'	,
+	'TAH'	:	'Tahitian'	,
+	'TGK'	:	'Tajik'	,
+	'TAM'	:	'Tamil'	,
+	'TAT'	:	'Tatar'	,
+	'TEL'	:	'Telugu'	,
+	'THA'	:	'Thai'	,
+	'TIB'	:	'Tibetan'	,
+	'TIR'	:	'Tigrinya'	,
+	'TON'	:	'Tonga (Tonga Islands)'	,
+	'TSO'	:	'Tsonga'	,
+	'TSN'	:	'Tswana'	,
+	'TUR'	:	'Turkish'	,
+	'TUK'	:	'Turkmen'	,
+	'TWI'	:	'Twi'	,
+	'UIG'	:	'Uighur'	,
+	'UKR'	:	'Ukrainian'	,
+	'URD'	:	'Urdu'	,
+	'UZB'	:	'Uzbek'	,
+	'VIE'	:	'Vietnamese'	,
+	'VOL'	:	'Volapuk'	,
+	'WLN'	:	'Walloon'	,
+	'WEL'	:	'Welsh'	,
+	'FRY'	:	'Western Frisian'	,
+	'WOL'	:	'Wolof'	,
+	'XHO'	:	'Xhosa'	,
+	'YID'	:	'Yiddish'	,
+	'YOR'	:	'Yoruba'	,
+	'ZHA'	:	'Zhuang'	,
+	'ZHO'	:	'Chinese'	,
+	'ZUL'	:	'Zulu'	,
+	'UND'	:	'Unknown'
+
+};
+
+function getCountryName (countryCode) {
+    if (isoCountries.hasOwnProperty(countryCode)) {
+        return isoCountries[countryCode];
+    } else {
+        return countryCode;
+    }
+}
+</script>	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="index.php">
+					<img alt="Uflix" class = "img-responsive logoheader" src="skin/solo_lite/shared/images/logo.png">
+				</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+
+				<ul class="nav navbar-nav">
+					<!-- <li><a href="index.php?a=home">หน้าแรก</a></li> -->
+					<li><a class="link_TV" href="?a=tv">ทีวี</a></li>
+					<li><a class="link_VOD" href="?a=vod">หนัง</a></li>
+					<li><a class="link_SERIES" href="?a=series">ซีรีย์</a></li>
+					<li><a class="link_RERUNS" href="?a=reruns">ย้อนหลัง</a></li>
+					<li id = 'private_header'><a class="link_XXX" href="?a=xxx">วีไอพี</a></li>
+					<li><a href="account/index.php?a=settings">ตั้งค่า</a></li>
+					<li><a href="account/index.php?a=payment">แพ็กเกจ</a></li>
+					<li><a class="link_LOGOUT" href="?a=logout">ออกจากระบบ</a></li>
+				</ul>
+
+				<form action = "index.php" method = GET class="navbar-form navbar-left">
+					<div class="form-group">
+						<input type = "hidden" name = "a" value = "search">
+						<input type="text" id = "solo-searchinput" name = "term" class="form-control" placeholder="ค้นหา" autocomplete="off">
+					</div>
+				</form>
+
+				<p class="navbar-text navbar-right" style="text-align:right"><span id="solo-info-summary"></p>
+				<!-- <p class="navbar-right" style="text-align:right"><a class = "btn btn-warning btn-lg navbar-btn" style = "margin-top: 13px; margin-bottom: 0px;" href="https://uflixtv.com/web">SMART TV</a></p> -->
+				
+			</div><!--/.nav-collapse -->
+
+		</div>
+	</nav><script>
+	var bread;
+	var newmsg = 0;
+	var kauth = "";
+</script>
+
+<script>
+$( document ).ready(function() {
+
+	breadCrumbs();
+	//loadNotificationsMini();
+	loadUserSummary();
+
+
+	$('#solo-searchinput').keyup(function (e) {
+		if (e.keyCode == 13) {
+			console.log( 'seach for ' + $('#solo-searchinput').val() );
+			window.location = "index.php?a=search&term=" + $('#solo-searchinput').val();
+		}
+	});
+
+	$('#solo-searchinput').autocomplete({
+		source:'ajax_autocomplete.php',
+		minLength:3,
+		position: { 
+			my: "left top", 
+			at: "left bottom+20",
+			of: "#solo-searchinput"
+		},
+		select: function(event, ui) {
+			$("#solo-searchinput").val(ui.item.value);
+		}
+	}).data("ui-autocomplete")._renderItem = function( ul, item ) {
+		return $( "<li class='ui-autocomplete-row'></li>" )
+		.data( "item.autocomplete", item )
+		.append( item.label )
+		.appendTo( ul );
+	};
+
+});
+
+function breadCrumbs(){
+	$("#solo-breadcrumbs").empty();
+	$("#solo-breadcrumbs").append( bread );
+}
+
+
+function loadUserSummary(){
+	//$.when( soloGetKai() ).done(function(){
+		//$.when( soloGetKauth( kai ) ).done(function(){
+			soloGetUserSummary( soloGetCookie('user_loggedsession') );
+		//});
+	//});
+}
+
+// function loadNotificationsMini(){
+// 	//$.when( soloGetKai() ).done(function(){
+// 		//$.when( soloGetKauth( kai ) ).done(function(){
+// 			soloGetNotificationsLatest( soloGetCookie('user_loggedsession') );
+// 		//});
+// 	//});
+// }
+
+// function getMovDetails( mcode ){
+// 	//$.when( soloGetKai() ).done(function(){
+// 		//$.when( soloGetKauth( kai ) ).done(function(){
+// 			soloGetVodSingle( soloGetCookie('user_loggedsession'), mcode );
+// 		//});
+// 	//});
+// }
+
+// function getSerieDetails( scode ){
+// 	//$.when( soloGetKai() ).done(function(){
+// 		//$.when( soloGetKauth( kai ) ).done(function(){
+// 			soloGetSerieSingle( soloGetCookie('user_loggedsession'), scode );
+// 		//});
+// 	//});
+// }
+
+</script><div id = "backdrop"></div>
+<div class = "container offset-container">
+	<div class="row">
+		<div class="col-xs-12">
+			<span id="solo-breadcrumbs"></span>
+		</div>
+	</div>
+
+	<div class="row" id = "player_settings">
+		<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 text-center">
+	
+			<div class = "btn-group">
+				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Player <span id="select_player"></span><span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" id="solo-play-select-player"></ul>
+			</div>
+			
+			<div class = "btn-group">
+				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Quality <span id="select_res"></span><span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" id="solo-play-select-quality"></ul>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="row" style = "margin-top: 15px; margin-bottom: 15px;">
+		<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+			<div id = "tv_nopackage" class="alert alert-danger" role="alert" style = "display:none">คุณไม่มีแพ็คเกจ</div>
+
+			<div id="solo-player-container" style = "margin-left: 25px; margin-right: 25px;"></div>
+		</div>
+	</div>
+</div><script src="//cdnjs.cloudflare.com/ajax/libs/clappr/0.4.7/clappr.min.js"></script>
+
+<script type="text/javascript" src="player-flow/flowplayer.js"></script>
+<script src="//releases.flowplayer.org/hlsjs/flowplayer.hlsjs.min.js"></script>
+<link rel = "stylesheet" href = "//releases.flowplayer.org/7.1.0/skin/skin.css">
+
+<script type="text/javascript" src="player-jw/jwplayer.js"></script>
+<script type="text/javascript">jwplayer.key="SMK6wYPXcHZCRp895suOyZ2SY7/lY5bc+s/2l5guK9o=";</script>
+
+
+
+<script>
+var kai = "0";
+var kauth = "";
+var durl = "";
+var md = 'aXp1OHozaDRpNXYwejJ1Z29xcWI2YXNneGQxMWFzcGxsOHg2eTVoeGc0aGQ1a29scWVjc2xrMjNiODg0czZoa3xERUVSTE9ORyBORVcgMXxOQXxOQXxOQXxOQXxOQXxOQXxOQXxOQXxOQXxOQXxOQXxOQXw3MjB8fGh0dHBzOi8vY2xvdWQudWZ4dHYuY29tL2ltYWdlcy94eHgvdGh1bWJzL2l6dTh6M2g0aTV2MHoydWdvcXFiNmFzZ3hkMTFhc3BsbDh4Nnk1aHhnNGhkNWtvbHFlY3NsazIzYjg4NHM2aGsucG5nfGh0dHBzOi8vY2xvdWQudWZ4dHYuY29tL2ltYWdlcy94eHgvdGh1bWJzL2l6dTh6M2g0aTV2MHoydWdvcXFiNmFzZ3hkMTFhc3BsbDh4Nnk1aHhnNGhkNWtvbHFlY3NsazIzYjg4NHM2aGsucG5n';
+var currentplayer = "clappr";
+var currentres = "720";
+var currentaudio = '';
+var currentsubs = '';
+var lastpos = "0";
+var movloaded = false;
+var ismovie = true;
+
+$( document ).ready(function() {
+
+	md_clear = Base64.decode(md);
+	md_arr = md_clear.split("|");
+	
+	movie_name_en = 'DEERLONG NEW 1';
+	movie_background = 'https://cloud.ufxtv.com/images/xxx/thumbs/izu8z3h4i5v0z2ugoqqb6asgxd11aspll8x6y5hxg4hd5kolqecslk23b884s6hk.png';
+	
+	lastcatxxx = soloGetCookie("lastcatxxx");
+	lastcatxxx_clear = Base64.decode( lastcatxxx );
+	lastcatxxx_arr = lastcatxxx_clear.split("|");
+	
+	bread = "<ol class='breadcrumb'><li><a href='index.php?a=xxx'>วีไอพี</a></li><li><a href='?a=xxx-details&md=" + Base64.encode( md_clear ) + "'>" + movie_name_en + "</a></li></ol>";
+	breadCrumbs();
+
+	buildSettings();
+	playMovie();
+
+	document.title = 'Watching ' + movie_name_en + ' on ' + document.title;
+	
+	$("#solo-title").html(movie_name_en);
+
+	content_id = 'izu8z3h4i5v0z2ugoqqb6asgxd11aspll8x6y5hxg4hd5kolqecslk23b884s6hk';
+	content_name = movie_name_en;
+
+	bgurl = movie_background;
+	
+	$("#backdrop").css('background', 'linear-gradient(rgba(31, 31, 31, 0.9), rgba(31, 31, 31, 0.1)), url(' + bgurl + ') center center no-repeat fixed');
+	$("#backdrop").css('background-size', 'cover');
+	$("#backdrop").css('background-color', 'black');
+	
+});
+
+function playMovie(){
+
+	soloPlayXxxWeb( soloGetCookie('user_loggedsession'), 'izu8z3h4i5v0z2ugoqqb6asgxd11aspll8x6y5hxg4hd5kolqecslk23b884s6hk', currentres, currentplayer, "0" );
+
+}
+
+
+
+function buildSettings(){
+
+	$("#solo-play-select-player").append( '<li><a href="javascript:changePlayer(' + "'clappr'" + ')">HTML5 (Clappr)</a></li>' );
+	$("#solo-play-select-player").append( '<li><a href="javascript:changePlayer(' + "'flow'" + ')">HTML5 (Flow)</a></li>' );
+	$("#solo-play-select-player").append( '<li><a href="javascript:changePlayer(' + "'jw'" + ')">FLASH (JW5)</a></li>' );
+	$("#solo-play-select-player").append( '<li><a href="javascript:changePlayer(' + "'HTML5'" + ')">HTML5 (Native)</a></li>' );
+
+	$("#select_player").html(" (" + currentplayer + ") ");
+	
+}
+
+function changePlayer( pl ){
+	
+	newplayer = pl;
+
+	soloCreateCookie( "playervod", newplayer , 30 );
+
+	$("#select_player").html(" (" + newplayer + ") ");
+
+	soloPlayXxxWeb( soloGetCookie('user_loggedsession'), 'izu8z3h4i5v0z2ugoqqb6asgxd11aspll8x6y5hxg4hd5kolqecslk23b884s6hk', currentres, newplayer, "0" );
+
+	currentplayer = newplayer;
+	
+}
+
+function changeRes( rs ){
+	
+	newres = rs;
+
+	soloPlayXxxWeb( soloGetCookie('user_loggedsession'), 'izu8z3h4i5v0z2ugoqqb6asgxd11aspll8x6y5hxg4hd5kolqecslk23b884s6hk', newres, currentplayer, "0" );
+
+	currentres = newres;
+}
+
+
+
+</script>
+</div><!-- /.container-fluid -->
+
+<!-- <script src="skin/solo_lite/www/js/jquery.cookie.js"></script> -->
+<script src="skin/solo_lite/www/js/skin.js?r=20220427"></script>
+
+</html>
+</html>

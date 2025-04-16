@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MOOSEVEN TV</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #121212;
+      color: white;
+    }
+
+    header {
+      background-color: #0a1a38;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .video-section {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 220px;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 640px;
+      height: 100%;
+      border: none;
+    }
+
+    .search-bar {
+      padding: 10px;
+      background-color: #1e1e1e;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .tabs, footer {
+      display: flex;
+      justify-content: space-around;
+      background-color: #1e1e1e;
+      padding: 10px 0;
+    }
+
+    .tabs div, footer div {
+      color: gray;
+      cursor: pointer;
+    }
+
+    .tabs .active, footer .active {
+      color: gold;
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .channel {
+      background-color: #222;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .channel:hover {
+      background-color: #333;
+    }
+
+    .channel img {
+      width: 45%;
+      border-radius: 3px;
+    }
+
+    .channel button {
+      margin-top: 5px;
+      background: #444;
+      color: white;
+      border: none;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #loginScreen {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #loginScreen input {
+      font-size: 20px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    #loginScreen button {
+      margin-top: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Login Screen -->
+  <!-- <div id="loginScreen">
+    <h9>กรุณาใส่รหัสผ่าน (6 หลัก)</h9>
+    <input type="password" id="passwordInput" maxlength="6" />
+    <button onclick="checkPassword()">เข้าสู่ระบบ</button>
+    <div id="loginError" style="color:red; margin-top:10px;"></div>
+  </div> -->
+
+  <header>MY IPTV</header>
+
+  <div class="video-section">
+    <iframe id="embedPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="ค้นหาช่อง..." oninput="searchChannel(this.value)">
+  </div>
+
+  <div class="tabs">
+    <div data-tab="all" onclick="setTab('all')">ทั้งหมด</div>
+        <div data-tab="DIGITAL TV" onclick="setTab('DIGITAL TV')">DIGITAL TV</div>
+    <div data-tab="SPORTS" onclick="setTab('SPORTS')">SPORTS</div>
+    <div data-tab="บันเทิง" onclick="setTab('บันเทิง')">บันเทิง</div>
+    <div data-tab="ข่าว" onclick="setTab('ข่าว')">ข่าว</div>
+    <div data-tab="เด็ก" onclick="setTab('เด็ก')">เด็ก</div>
+  </div>
+
+  <!-- แสดงช่อง -->
+  <div id="home" class="footer-tab">
+    <div id="channelGrid" class="grid"></div>
+  </div>
+
+  <!-- รายการโปรด -->
+  <div id="favorites" class="footer-tab hidden">
+    <div id="favoritesGrid" class="grid"></div>
+  </div>
+
+  <!-- ประวัติการรับชม -->
+  <div id="history" class="footer-tab hidden">
+    <div id="historyGrid" class="grid"></div>
+  </div>
+
+  <footer>
+    <div id="f_home" onclick="showFooterTab('home')">ช่อง</div>
+    <div id="f_favorites" onclick="showFooterTab('favorites')">รายการโปรด</div>
+    <div id="f_history" onclick="showFooterTab('history')">ประวัติ</div>
+
+  </footer>
+
+  <script>
+    const PASSWORD = "449284";
+    let currentTab = 'all';
+
+    const allChannels = [
+      { name: 'NBT', url: 'http://45.154.24.21:9091/Digital_tv_nbt/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/nbt.png' },
+      { name: 'THAIPBS', url: 'http://45.154.24.21:9091/Digital_tv_thaipbs/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/thaipbs.png' },
+      { name: 'ALTV', url: 'http://45.154.24.21:9091/Digital_tv_altv/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/altv.png' },
+      { name: 'CH5', url: 'http://45.154.24.21:9091/Digital_tv_ch5/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/ch5.png' },
+      { name: 'TSPORT', url: 'http://45.154.24.21:9091/Digital_tv_tsport/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/tsport.png' },
+      { name: 'TPTV', url: 'http://45.154.24.21:9091/Digital_tv_tptv/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/tptv.png' },
+      { name: 'TNN', url: 'http://45.154.24.21:9091/Digital_tv_tnn/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/tnn.png' },
+      { name: 'JKN', url: 'http://45.154.24.21:9091/Digital_tv_jkn/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/jkn.png' },
+      { name: 'NATION', url: 'http://45.154.24.21:9091/Digital_tv_nation/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/nation.png' },
+      { name: 'WORKPOINT', url: 'http://45.154.24.21:9091/Digital_tv_workpoint/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/workpoint.png' },
+      { name: 'TRUE4U', url: 'http://45.154.24.21:9091/Digital_tv_true4u/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/true4u.png' },
+      { name: 'GMM', url: 'http://45.154.24.21:9091/Digital_tv_gmm/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/gmm.png' },
+      { name: 'CH8', url: 'http://45.154.24.21:9091/Digital_tv_ch8/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/ch8.png' },
+      { name: 'MONO', url: 'http://45.154.24.21:9091/Digital_tv_mono/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/mono.png' },
+      { name: 'MCOT', url: 'http://45.154.24.21:9091/Digital_tv_mcot/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/mcot.png' },
+      { name: 'ONE', url: 'http://45.154.24.21:9091/Digital_tv_one/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/one.png' },
+      { name: 'THAIRATH', url: 'http://45.154.24.21:9091/Digital_tv_thairath/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/thairath.png' },
+      { name: 'CH3', url: 'http://45.154.24.21:9091/Digital_tv_ch3/embed.html', category: 'DIGITA TV', logo: 'http://45.144.165.223/logo/ch3.png' },
+      { name: 'AMARIN', url: 'http://45.154.24.21:9091/Digital_tv_amarin/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/amarin.png' },
+      { name: 'CH7', url: 'http://45.154.24.21:9091/Digital_tv_ch7/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/ch7.png' },
+      { name: 'PPTV', url: 'http://45.154.24.21:9091/Digital_tv_pptv/embed.html', category: 'DIGITAL TV', logo: 'http://45.144.165.223/logo/pptv.png' },
+      
+      
+
+
+      { name: 'BEIN1', url: 'http://45.154.24.21:9091/Sport_tv_bein1/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/bein1.png' },
+      { name: 'BEIN2', url: 'http://45.154.24.21:9091/Sport_tv_bein2/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/bein2.png' },
+      { name: 'BEIN3', url: 'http://45.154.24.21:9091/Sport_tv_bein3/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/bein3.png' },
+      { name: 'EPL1', url: 'http://45.154.24.21:9091/Sport_tv_epl1/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/epl1.png' },
+      { name: 'EPL2', url: 'http://45.154.24.21:9091/Sport_tv_epl2/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/epl2.png' },
+      { name: 'EPL3', url: 'http://45.154.24.21:9091/Sport_tv_epl3/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/epl3.png' },
+      { name: 'EPL4', url: 'http://45.154.24.21:9091/Sport_tv_epl4/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/epl4.png' },
+      { name: 'EPL5', url: 'http://45.154.24.21:9091/Sport_tv_epl5/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/epl5.png' },
+      { name: 'TRUE SPORT 1', url: 'http://45.154.24.21:9091/Sport_tv_ts1/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/ts1.png' },
+      { name: 'TRUE SPORT 2', url: 'http://45.154.24.21:9091/Sport_tv_ts2/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/ts2.png' },
+      { name: 'TRUE SPORT 3', url: 'http://45.154.24.21:9091/Sport_tv_ts3/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/ts3.png' },
+      { name: 'TRUE SPORT 4', url: 'http://45.154.24.21:9091/Sport_tv_ts4/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/ts4.png' },
+      { name: 'TRUE SPORT 5', url: 'http://45.154.24.21:9091/Sport_tv_ts5/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/ts5.png' },
+      { name: 'TRUE SPORT 7', url: 'http://45.154.24.21:9091/Sport_tv_ts7/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/ts7.png' },
+      { name: 'SPOTV1', url: 'http://45.154.24.21:9091/Sport_tv_spotv1/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/spotv1.png' },
+      { name: 'SPOTV2', url: 'http://45.154.24.21:9091/Sport_tv_spotv2/embed.html', category: 'SPORTS', logo: 'http://45.144.165.223/logo/truesport/spotv2.png' },
+      
+    ];
+
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let history = JSON.parse(localStorage.getItem('history')) || [];
+
+    function checkLogin() {
+      document.getElementById("loginScreen").style.display = "flex";
+    }
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === PASSWORD) {
+        document.getElementById("loginScreen").style.display = "none";
+      } else {
+        document.getElementById("loginError").innerText = "รหัสผ่านไม่ถูกต้อง";
+      }
+    }
+
+    function changeChannel(embedUrl, channelName) {
+      document.getElementById('embedPlayer').src = embedUrl;
+      history.unshift({ name: channelName, url: embedUrl });
+      history = history.slice(0, 10);
+      localStorage.setItem('history', JSON.stringify(history));
+      renderGrid();
+    }
+
+    function toggleFavorite(name, url) {
+      const index = favorites.findIndex(c => c.name === name);
+      if (index > -1) {
+        favorites.splice(index, 1);
+      } else {
+        favorites.push({ name, url });
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderGrid();
+    }
+
+    function setTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tabs div').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll(`.tabs div[data-tab="${tab}"]`).forEach(t => t.classList.add('active'));
+      renderGrid();
+    }
+
+    function showFooterTab(tab) {
+      document.querySelectorAll('.footer-tab').forEach(f => f.classList.add('hidden'));
+      document.getElementById(tab).classList.remove('hidden');
+      document.querySelectorAll('footer div').forEach(d => d.classList.remove('active'));
+      document.getElementById('f_' + tab).classList.add('active');
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('channelGrid');
+      grid.innerHTML = '';
+
+      const filtered = currentTab === 'all'
+        ? allChannels
+        : allChannels.filter(c => c.category === currentTab);
+
+      filtered.forEach(channel => {
+        const isFav = favorites.find(f => f.name === channel.name);
+        grid.innerHTML += `
+          <div class="channel" onclick="changeChannel('${channel.url}', '${channel.name}')">
+            <img src="${channel.logo}" alt="${channel.name}" />
+            <div>${channel.name}</div>
+            <button onclick="event.stopPropagation(); toggleFavorite('${channel.name}', '${channel.url}')">
+              ${isFav ? '⛔' : '⭐'}
+            </button>
+          </div>
+        `;
+      });
+
+      const favGrid = document.getElementById('favoritesGrid');
+      favGrid.innerHTML = favorites.map(f => `
+        <div class="channel" onclick="changeChannel('${f.url}', '${f.name}')">
+          <div>${f.name}</div>
+        </div>
+      `).join('');
+
+      const histGrid = document.getElementById('historyGrid');
+      histGrid.innerHTML = history.map(h => `
+        <div class="channel" onclick="changeChannel('${h.url}', '${h.name}')">
+          <div>${h.name}</div>
+        </div>
+      `).join('');
+    }
+
+    function searchChannel(keyword) {
+      keyword = keyword.toLowerCase();
+      const channels = document.querySelectorAll("#channelGrid .channel");
+      channels.forEach(c => {
+        const name = c.innerText.toLowerCase();
+        c.style.display = name.includes(keyword) ? "block" : "none";
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderGrid();
+      setTab('all');
+      showFooterTab('home');
+    });
+
+    // ป้องกันคลิกขวา + F1
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i")) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
