@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ดูหนังใหม่</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Prompt', sans-serif;
+      color: white;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      overflow: hidden;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      margin-top: 20px;
+    }
+
+    .responsive-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .input-group {
+      margin-top: 30px;
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      flex-grow: 1;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #1e90ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #187bcd;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>พิมพ์ Channel ID แล้วกด Enter หรือปุ่ม Play</h2>
+  <div class="input-group">
+    <input type="text" id="channelIdInput" placeholder="ใส่ Channel ID เช่น 1658003">
+    <button onclick="playChannel()">▶ Play</button>
+  </div>
+
+  <div class="container" id="iframe-container">
+<iframe class="responsive-iframe" id="channel-frame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const input = document.getElementById("channelIdInput");
+    const iframe = document.getElementById("channel-frame");
+
+function playChannel() {
+  const channelId = input.value.trim();
+  if (channelId) {
+    iframe.src = `https://fw4free.com/player2.php?channel=${channelId}&id=53`;
+
+    // รอให้ iframe โหลดก่อน แล้วค่อยขอ fullscreen
+    setTimeout(() => {
+      requestFullscreen(iframe);
+    }, 1000); // รอ iframe โหลดประมาณ 1 วิ
+  }
+}
+
+function requestFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.webkitRequestFullscreen) { // Safari
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) { // IE11
+    element.msRequestFullscreen();
+  }
+}
+
+
+    // โฟกัส input เสมอเมื่อหน้าโหลด และเมื่อคลิก/พิมพ์
+    window.onload = () => {
+      input.focus();
+    };
+
+    // กด Enter เพื่อเล่น
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        playChannel();
+      }
+    });
+
+    // คอยฟัง focus หลุดแล้วดึงกลับ
+    setInterval(() => {
+      if (document.activeElement !== input) {
+        input.focus();
+      }
+    }, 300);
+  </script>
+</body>
+
+</html>

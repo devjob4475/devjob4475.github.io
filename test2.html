@@ -267,6 +267,7 @@
       '4K Harry Potter and the Half-Blood Prince',
       '4K Harry Potter and the Deathly Hallows: Part 1',
       '4K Harry Potter and the Deathly Hallows: Part 2',
+      'The Red Envelope (2025) ซองแดงแต่งผี',
       'ผู้เช่า',
       'ผาดำคำไอ่',
       '404 สุขีนิรันดร์..',
@@ -383,6 +384,7 @@
       'https://cloud.ufxtv.com/images/vod/thumbs/m07yhpr5iqvgqjpbm5pevcco85ds7dtud0svpk08avo0feb1j1gfds3mxhe4u7y7.jpg?r=48',
       'https://cloud.ufxtv.com/images/vod/thumbs/4jxykkshlcyybpnjo0ixnn3u39tal7xqqvobghs1tr05goo4o72cu56yfz9176ry.jpg?r=48',
       'https://cloud.ufxtv.com/images/vod/thumbs/2f9iw1kqtkw98kexsg9mmgl1gu2n1ul39ul6w6xpqtzzeew6u6thmej38mq9gcdq.jpg?r=48',
+      'https://www.24-hd.com/wp-content/uploads/2025/04/The-Red-Envelope-2025-%E0%B8%8B%E0%B8%AD%E0%B8%87%E0%B9%81%E0%B8%94%E0%B8%87%E0%B9%81%E0%B8%95%E0%B9%88%E0%B8%87%E0%B8%9C%E0%B8%B5-187x269.png',
       'https://img.inwiptv.net/postor/20250227112222wBrbYlOVXRfeefvfgeJI5btS1Ow.jpg',
       'https://img.inwiptv.net/postor/202503201153391pIrritKjpz6itW6GYLAItCbxqC.jpg',
       'https://img.inwiptv.net/postor/20250404060436z2TWhTRFzriygLygsjTbIHFYcQW.jpg',
@@ -679,6 +681,11 @@ let session = null;
   if (channelNames[index] === '404 สุขีนิรันดร์..') {
     const iframeUrl = 'https://fw4free.com/player2.php?channel=1648586&id=53';
     loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'The Red Envelope (2025) ซองแดงแต่งผี') {
+    const iframeUrl = 'https://main.24playerhd.com/newplaylist/6be9ca7114ef03c9c244114a/6be9ca7114ef03c9c244114a.m3u8';
+    loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
     return;
   }
   if (channelNames[index] === 'ช่อง FW MOVIE') {
