@@ -1,40 +1,40 @@
-name: Render Page with JavaScript
+# name: Render Page with JavaScript
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 */4 * * *' # รันทุก 4 ชั่วโมง
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: '0 */4 * * *' # รันทุก 4 ชั่วโมง
 
-jobs:
-  run-js:
-    runs-on: ubuntu-latest
+# jobs:
+#   run-js:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout Repo
+#         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
 
-      - name: Install Puppeteer
-        run: npm install puppeteer
+#       - name: Install Puppeteer
+#         run: npm install puppeteer
 
-      - name: Run puppeteer script
-        run: |
-          node <<'EOF'
-          const puppeteer = require('puppeteer');
+#       - name: Run puppeteer script
+#         run: |
+#           node <<'EOF'
+#           const puppeteer = require('puppeteer');
 
-          (async () => {
-            const browser = await puppeteer.launch({
-              headless: true,
-              args: ['--no-sandbox', '--disable-setuid-sandbox']
-            });
+#           (async () => {
+#             const browser = await puppeteer.launch({
+#               headless: true,
+#               args: ['--no-sandbox', '--disable-setuid-sandbox']
+#             });
 
-            const page = await browser.newPage();
-            await page.goto('https://testflix2.vercel.app', { waitUntil: 'networkidle0' });
+#             const page = await browser.newPage();
+#             await page.goto('https://testflix2.vercel.app', { waitUntil: 'networkidle0' });
 
-            await browser.close();
-          })();
-          EOF
+#             await browser.close();
+#           })();
+#           EOF
