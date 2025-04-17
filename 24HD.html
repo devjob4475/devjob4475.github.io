@@ -84,29 +84,17 @@
     const input = document.getElementById("channelIdInput");
     const iframe = document.getElementById("channel-frame");
 
-function playChannel(fallback = false) {
+function playChannel() {
   const channelId = input.value.trim();
-  if (!channelId) return;
+  if (channelId) {
+    iframe.src = `https://main.24playerhd.com/index_th.php?id=be6388617c059d5ea6431dac&b=2200`;
 
-  const id = fallback ? 18 : 53;
-  iframe.src = `https://fw4free.com/player2.php?channel=${channelId}&id=${id}`;
-
-  // ตรวจสอบว่า iframe โหลดสำเร็จหรือไม่
-  let loaded = false;
-
-  const checkLoad = setTimeout(() => {
-    if (!loaded && !fallback) {
-      // ถ้ายังไม่โหลดสำเร็จ ลองใช้ id=18
-      playChannel(true);
-    }
-  }, 3000); // รอ 3 วินาที
-
-  iframe.onload = () => {
-    loaded = true;
-    requestFullscreen(iframe);
-  };
+    // รอให้ iframe โหลดก่อน แล้วค่อยขอ fullscreen
+    setTimeout(() => {
+      requestFullscreen(iframe);
+    }, 1000); // รอ iframe โหลดประมาณ 1 วิ
+  }
 }
-
 
 function requestFullscreen(element) {
   if (element.requestFullscreen) {
