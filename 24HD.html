@@ -1,131 +1,53 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>ดูหนังใหม่</title>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #000;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: 'Prompt', sans-serif;
-      color: white;
-    }
+    <title>Live Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript"></script>
 
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      overflow: hidden;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
-      margin-top: 20px;
-    }
+    <style type="text/css" media="screen" charset="utf-8">
+        #live-player {
+            position: fixed !important;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: black;
+        }
 
-    .responsive-iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .input-group {
-      margin-top: 30px;
-      display: flex;
-      gap: 10px;
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      font-size: 18px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      flex-grow: 1;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      background-color: #1e90ff;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #187bcd;
-    }
-  </style>
+        .dvr-player-wrapper {
+            background-color: black;
+        }
+    </style>
+    <link href="/flu/player/main.f27edc9605d5b35dc746.css" rel="stylesheet">
+    <script type="text/javascript" src="/flu/player/core-js.f27edc9605d5b35dc746.js"></script>
+    <script type="text/javascript" src="/flu/player/sentry.f27edc9605d5b35dc746.js"></script>
+    <script type="text/javascript" src="/flu/player/panzoom.f27edc9605d5b35dc746.js"></script>
+    <script type="text/javascript" src="/flu/player/clappr.f27edc9605d5b35dc746.js"></script>
+    <script type="text/javascript" src="/flu/player/flussonic.f27edc9605d5b35dc746.js"></script>
+    <script type="text/javascript" src="/flu/player/shaka-player.f27edc9605d5b35dc746.js"></script>
+    <script type="text/javascript" src="/flu/player/main.f27edc9605d5b35dc746.js"></script>
 </head>
 
 <body>
-  <h2>พิมพ์ Channel ID แล้วกด Enter หรือปุ่ม Play</h2>
-  <div class="input-group">
-    <input type="text" id="channelIdInput" placeholder="ใส่ Channel ID เช่น 1658003">
-    <button onclick="playChannel()">▶ Play</button>
-  </div>
+    <div id="live-player"></div>
 
-  <div class="container" id="iframe-container">
-<iframe class="responsive-iframe" id="channel-frame" allow="autoplay; fullscreen" allowfullscreen></iframe>
-  </div>
-
-  <script>
-    const input = document.getElementById("channelIdInput");
-    const iframe = document.getElementById("channel-frame");
-
-function playChannel() {
-  const channelId = input.value.trim();
-  if (channelId) {
-    iframe.src = `https://main.24playerhd.com/index_th.php?id=be6388617c059d5ea6431dac&b=2200`;
-
-    // รอให้ iframe โหลดก่อน แล้วค่อยขอ fullscreen
-    setTimeout(() => {
-      requestFullscreen(iframe);
-    }, 1000); // รอ iframe โหลดประมาณ 1 วิ
-  }
-}
-
-function requestFullscreen(element) {
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if (element.webkitRequestFullscreen) { // Safari
-    element.webkitRequestFullscreen();
-  } else if (element.msRequestFullscreen) { // IE11
-    element.msRequestFullscreen();
-  }
-}
-
-
-    // โฟกัส input เสมอเมื่อหน้าโหลด และเมื่อคลิก/พิมพ์
-    window.onload = () => {
-      input.focus();
-    };
-
-    // กด Enter เพื่อเล่น
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        playChannel();
+    <script type="text/javascript">
+        window.onload = function() {
+        var options = {
+          parentId: '#live-player',
+          width: '100%',
+          height: '100%',
+        }
+        var config = {"streamName":"Sport_tv_epl3","hasPreview":false,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}};
+        var params = LivePlayer.parseUrl(window.location.href, options, {"streamName":"Sport_tv_epl3","hasPreview":false,"authTokenName":"token","thumbnails_enabled":false,"type":"live","dvr_info":null,"protocols":{"hls":true,"dash":true,"webrtc":true,"mse":true,"mss":true}});
+        window.LivePlayer = new LivePlayer(params);
+        document.getElementsByTagName('title')[0].innerHTML = config.streamName;
       }
-    });
-
-    // คอยฟัง focus หลุดแล้วดึงกลับ
-    setInterval(() => {
-      if (document.activeElement !== input) {
-        input.focus();
-      }
-    }, 300);
-  </script>
+    </script>
 </body>
 
 </html>
