@@ -152,6 +152,10 @@
     name: 'ภาพยนตร์',
     channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129],
   },
+  {
+    name: 'Tv Blue',
+    channels: [130,131,132,133],
+  },
     {
     name: 'ดูหนังออนไลน์',
     channels: [200],
@@ -270,6 +274,7 @@
       'ผู้เช่า',
       'ผาดำคำไอ่',
       '404 สุขีนิรันดร์..',
+      'EPL 1 BLUE'
     ];
 
     const channelLogos = [
@@ -386,6 +391,7 @@
       'https://www.24-hd.com/wp-content/uploads/2025/04/The-Red-Envelope-2025-%E0%B8%8B%E0%B8%AD%E0%B8%87%E0%B9%81%E0%B8%94%E0%B8%87%E0%B9%81%E0%B8%95%E0%B9%88%E0%B8%87%E0%B8%9C%E0%B8%B5-187x269.png',
       'https://img.inwiptv.net/postor/20250227112222wBrbYlOVXRfeefvfgeJI5btS1Ow.jpg',
       'https://img.inwiptv.net/postor/202503201153391pIrritKjpz6itW6GYLAItCbxqC.jpg',
+      'https://img.inwiptv.net/postor/20250404060436z2TWhTRFzriygLygsjTbIHFYcQW.jpg',
       'https://img.inwiptv.net/postor/20250404060436z2TWhTRFzriygLygsjTbIHFYcQW.jpg',
     ];
 
@@ -642,9 +648,13 @@ function loadChannel(url, useIframe = false) {
     video.style.display = 'block';
 
     if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(video);
+     const hls = new Hls({
+  liveSyncDurationCount: 3,
+  liveMaxLatencyDurationCount: 10
+});
+hls.loadSource(url);
+hls.attachMedia(video);
+
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = url;
     } else {
@@ -710,6 +720,11 @@ let session = null;
   if (channelNames[index] === 'ช่อง FW SPORT') {
     const iframeUrl = 'https://www.inwiptv.org/player_demo.php?channel=89782';
     loadChannel(iframeUrl, true); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'EPL 1 BLUE') {
+    const iframeUrl = 'http://tbtv.me:2095/play/live.php?mac=00:1a:79:80:09:03&stream=186561&extension=m3u8';
+    loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
     return;
   }
 

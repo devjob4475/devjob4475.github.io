@@ -1,0 +1,413 @@
+<html>
+<head>
+<title>MY TV</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no">
+<link rel="stylesheet" type="text/css" href="/clap.css">
+<script src="//cdn.jsdelivr.net/npm/@clappr/player@0.4.0/dist/clappr.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/mux.js@5.6.7/dist/mux.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/level-selector@latest/dist/level-selector.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clappr-chromecast-plugin@latest/dist/clappr-chromecast-plugin.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clappr-playback-rate-plugin@latest/dist/clappr-playback-rate-plugin.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/shaka-player@2.5.10/dist/shaka-player.compiled.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.external.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/cdnbye-shaka@latest"></script>
+
+<style> 
+body {
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+#player {
+    width: 100%;
+    height: 80vh;
+}
+#channel-buttons {
+    display: flex;
+    flex-wrap: wrap; /* เพิ่มให้ช่องตัดลงมาด้านล่างเมื่อจำเป็น */
+    white-space: nowrap;
+    justify-content: center;
+    background: #111;
+    padding: 10px;
+}
+
+.channel-button {
+    display: flex;
+    flex-direction: column; /* วางองค์ประกอบ (ชื่อช่องและโลโก้) ในแนวตั้ง */
+    justify-content: center;
+    align-items: center; /* จัดให้อยู่ตรงกลาง */
+    background: #222;
+    min-width: 150px;
+    min-height: 150px;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px; /* เพิ่ม margin-bottom เพื่อให้ปุ่มมีระยะห่างเมื่อมันตัดลงมาด้านล่าง */
+}
+
+.channel-button:hover {
+    background: #444;
+}
+.channel-button.selected {
+    background: #0066cc; /* สีที่เปลี่ยนเมื่อปุ่มถูกเลือก */
+    border: 1px solid #005bb5; /* ขอบที่เปลี่ยนเมื่อปุ่มถูกเลือก */
+}
+.channel-logo {
+    max-width: 40px;  /* ขนาดของโลโก้ */
+    max-height: 40px; /* ขนาดของโลโก้ */
+    margin-bottom: 5px;
+}
+</style>
+</head>
+
+<body>
+<div id="player"></div>
+
+<div id="channel-buttons">
+  <!-- ช่องต่างๆจะมาแทรกตรงนี้ -->
+</div>
+
+<script>
+// รายการช่องทั้งหมดพร้อมโลโก้
+var channels = [
+  {
+    name: "CH3 HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/LOGO3HD.PNG",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/33/33.mpd",
+    license_type: "clearkey",
+    license_key: "9d76aea451d441a4913d4d70c4e586ab:051027a6ff54494b949ba792928e9008"
+  },
+  {
+    name: "CH5 HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/ch5new.logo.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/5/5.mpd",
+    license_type: "clearkey",
+    license_key: "87db4361f7894655a4656e9c8b935a02:b025a4b950df41158a87cfc8d6f2ac34"
+  },
+  {
+    name: "CH7 HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0018.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/35/35.mpd",
+    license_type: "clearkey",
+    license_key: "4d4426a505f64382a9841155d721cee6:0f4770219ccb4be5836a7517057e51c3"
+  },
+  {
+    name: "MCOT HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/MCOT_new.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/30/30.mpd",
+    license_type: "clearkey",
+    license_key: "edef8ba979d64acea3c827dcd51d21ed:1c9f0222e49da66fc785376c0645d86d"
+  },
+  {
+    name: "ThaiPBS HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0014.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/3/3.mpd",
+    license_type: "clearkey",
+    license_key: "4d4426a505f64382a9841155d721cee6:0f4770219ccb4be5836a7517057e51c3"
+  },
+  {
+    name: "TPTV",
+    logo: "https://gigatv.3bbtv.co.th/wp-content/themes/changwattana/assets/channel/10.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/10/10.mpd",
+    license_type: "clearkey",
+    license_key: "5da46688fd1e4ed5b085a12519b9dc4e:fd07bcf33823447180f53f6540f74ccb"
+  },
+  {
+    name: "NBT HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0001.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/2/2.mpd",
+    license_type: "clearkey",
+    license_key: "ca20a93cf8e3421dafbd5bdb1990081b:86ae86a7391c481ea93eecdb740f0a14"
+  },
+  {
+    name: "ONE31",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0012.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/31/31.mpd",
+    license_type: "clearkey",
+    license_key: "6529c8cd99db4489bd237f616f37124b:b9d299ba9ea94fd2ac4a77e8966dd91e"
+  },
+  {
+    name: "ThairathTV HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0013_R.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/32/32.mpd",
+    license_type: "clearkey",
+    license_key: "4b2bff3e598043cfaf949305e3d153fa:545df84ff4c54af6b5385516e0f65956"
+  },
+  {
+    name: "AmarinTV HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/AmarinTV_NEW512.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/34/34.mpd",
+    license_type: "clearkey",
+    license_key: "0b898bb9530b4b0a97e444d1e1f8960e:dab1a7c035d94287ac64417ef809ed3b"
+  },
+  {
+    name: "PPTV HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/PPTV_2024e.jpg",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/36/36.mpd",
+    license_type: "clearkey",
+    license_key: "0aeffa7753674e77b99443fac7757b8a:b8c8a462008a40aa91823e0b02e8dd31"
+  },
+  {
+    name: "TopNews HD",
+    logo: "https://i.postimg.cc/Rh45fmKD/1000013212-removebg-preview.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "http://live.topnews.co.th/hls/topnews_a_FHD1080.m3u8",
+    license_type: "none",
+    license_key: ""
+  },
+  {
+    name: "JKN18",
+    logo: "https://gigatv.3bbtv.co.th/wp-content/themes/changwattana/assets/channel/18.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/18/18.mpd",
+    license_type: "clearkey",
+    license_key: "333de6034a1d45fe91c829539caf1149:2710efc048ca44bba4c2b57397989a26"
+  },
+  {
+    name: "NationTV",
+    logo: "https://i.postimg.cc/D0ypnwqn/1000013213-removebg-preview.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/22/22.mpd",
+    license_type: "clearkey",
+    license_key: "88b44b9be186449ca5322053d975aa4c:b95b471541994278a1960fd4f85a7ee2"
+  },
+  {
+    name: "WorkpointTV",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0015_R.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/23/23.mpd",
+    license_type: "clearkey",
+    license_key: "8e66726c1191403588f95c0757613ff1:67c26ba7f9b84024944808e01bbe6f47"
+  },
+  {
+    name: "True4U",
+    logo: "https://gigatv.3bbtv.co.th/wp-content/themes/changwattana/assets/channel/24.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/24/24.mpd",
+    license_type: "clearkey",
+    license_key: "4eabd5db684248a98c5124fbb0687bde:d2f7a6f45b3c48678ca69c91d7823c25"
+  },
+  {
+    name: "TNN16",
+    logo: "https://i.postimg.cc/vmtJWBtw/1000013220-removebg-preview.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/16/16.mpd",
+    license_type: "clearkey",
+    license_key: "9ebedc957e934d2b9023e4e60b97af73:7bcb4363df74457bbafedec1a864e6b6"
+  },
+  {
+    name: "MONO29 HD",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0016.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/29/29.mpd",
+    license_type: "clearkey",
+    license_key: "96a14b36335645b391bbbb48c424fec7:e6971b27837a4822832d8215156bb516"
+  },
+  {
+    name: "MonoPlus HD",
+    logo: "https://i.postimg.cc/RZryyfPz/1000013217-removebg-preview.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/109/109.mpd",
+    license_type: "clearkey",
+    license_key: "072eeb02f6744f838fcc8f0ef36b312e:b797c12f2dd64728aae23fd3c8ef275c"
+  },
+  {
+    name: "CH8",
+    logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0006.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/27/27.mpd",
+    license_type: "clearkey",
+    license_key: "4a0a9dd380b4409c8dad910691283a0d:1447c104caa244d9a367549534e0b807"
+  },
+  {
+    name: "GMM25",
+    logo: "https://i.postimg.cc/9F3j5vMS/1000013222-removebg-preview.png",
+    group: "ช่องทีวีดิจิตอล",
+    source: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/25/25.mpd",
+    license_type: "clearkey",
+    license_key: "f711e4d367ab4f0a8f8233e0fa3c18d9:8cbeefb2decc4abfbb0f2de5d95e8397"
+  },
+    {
+    name: "EPL1",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-1.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "http://moo7-restream2025.ddns.net:9091/Sport_tv_epl1/index.fmp4.m3u8",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL2",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-2.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "http://moo7-restream2025.ddns.net:9091/Sport_tv_epl2/index.fmp4.m3u8",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL3",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-3.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "http://moo7-restream2025.ddns.net:9091/Sport_tv_epl3/index.fmp4.m3u8",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL4",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-4.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "http://moo7-restream2025.ddns.net:9091/Sport_tv_epl4/index.fmp4.m3u8",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL5",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-5.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "http://moo7-restream2025.ddns.net:9091/Sport_tv_epl5/index.fmp4.m3u8",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL1 สำรอง",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-1.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier1_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL2 สำรอง",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-2.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier2_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL3 สำรอง",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-3.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier3_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL4 สำรอง",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-4.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier4_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU",
+    license_type: "none",
+    license_key: ""
+  },
+    {
+    name: "EPL5 สำรอง",
+    logo: "https://static.uflixtv.com/images/tv/channels_icons/epl-5.png", // เปลี่ยนเป็นโลโก้ของช่อง
+    group: "ช่องกีฬา",
+    source: "https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier5_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU",
+    license_type: "none",
+    license_key: ""
+  },
+];
+
+// สร้างปุ่มทุกช่องพร้อมโลโก้
+var buttonsDiv = document.getElementById('channel-buttons');
+channels.forEach(function(channel, index) {
+  var btn = document.createElement('button');
+  btn.className = 'channel-button';
+
+  // สร้างรูปโลโก้
+  var logo = document.createElement('img');
+  logo.src = channel.logo;
+  logo.className = 'channel-logo';
+
+  // เพิ่มโลโก้และชื่อช่องลงในปุ่ม
+  btn.appendChild(logo);
+  btn.innerHTML += channel.name;  // เพิ่มชื่อช่องลงไปในปุ่ม
+
+  btn.onclick = function() {
+    loadChannel(channel);
+    selectButton(btn); // ทำการเลือกปุ่มที่กด
+  };
+
+  buttonsDiv.appendChild(btn);
+});
+
+// ฟังก์ชันเลือกปุ่ม
+function selectButton(btn) {
+  // ลบคลาส 'selected' จากทุกปุ่ม
+  var buttons = document.querySelectorAll('.channel-button');
+  buttons.forEach(function(button) {
+    button.classList.remove('selected');
+  });
+  // เพิ่มคลาส 'selected' ให้กับปุ่มที่กด
+  btn.classList.add('selected');
+}
+
+// โหลดช่องเข้า player
+var player = null;
+function loadChannel(channel) {
+  if (player) {
+    player.destroy();
+  }
+   var options = {
+    source: channel.source,
+    height: '100%',
+    width: '100%',
+    autoPlay: true,
+    mimeType: channel.source.includes('.m3u8') ? 'application/x-mpegURL' : 'application/dash+xml', // รองรับทั้ง .m3u8 และ .mpd
+    plugins: [LevelSelector, DashShakaPlayback, Clappr.MediaControl],
+    events: {
+      onReady: function() {
+        var plugin = this.getPlugin('click_to_pause');
+        plugin && plugin.disable(); // Disable 'click to pause' plugin on player ready
+      }
+    },
+    chromecast: {
+      preload: 'metadata',
+      contentType: 'video/mpd', // Set content type for Chromecast
+    },
+    parentId: '#player' // Attach player to DOM element with id 'player'
+  };
+
+  // Check for DRM keys and apply configuration if provided
+  if (channel.license_type && channel.license_key) {
+    options.shakaConfiguration = {
+      drm: {
+        clearKeys: {
+          [channel.license_key.split(':')[0]]: channel.license_key.split(':')[1]
+        }
+      }
+    };
+  }
+
+  // Create a new Clappr player instance with the options
+  player = new Clappr.Player(options);
+}
+
+// เริ่มต้นโหลดช่องแรก
+loadChannel(channels[0]);
+
+</script>
+
+<span style='position:absolute;bottom:10px;right:20px;font-size: 15px; font-weight: bold;color: #ff0;'><em>MY TV</em></span>
+<center><p><ins>MY TV</ins></p></center>
+</body>
+</html>
