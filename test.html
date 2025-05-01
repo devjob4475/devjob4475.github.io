@@ -1,172 +1,95 @@
-<h2>PLAYIDTV LIVETV</h2>
+<!DOCTYPE html>
 <html>
 <head>
-<title>STREAM</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="description" content="LIVE IPTV M3U8">
+<title>STREAM MPD</title>
+    <meta charset="utf-8">
+
+<meta name="description" content="LIVE">
 <meta name="keywords" content="ชมถ่ายทอดสดกีฬาออนไลน์.">
 <meta name="author" content="PlayIDTV">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" type="image/x-icon" href="https://ais-s.ais-vidnt.com/ais/play/origin/VOD/images/LoyKatong_IconTV.png">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.2/dist/plyr.css" />
-<script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<style>
-        html {
-            font-family: Poppins;
-            background: #000;
-            margin: 0;
-            padding: 0
-        }
-
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #111;
-            z-index: 9999;
-        }
-
-        .loading-text {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            text-align: center;
-            width: 100%;
-            height: 100px;
-            line-height: 100px;
-        }
-
-        .loading-text span {
-            display: inline-block;
-            margin: 0 5px;
-            color: #7DFF9F;
-            font-family: 'Quattrocento Sans', sans-serif;
-        }
-
-        .loading-text span:nth-child(1) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 0s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(2) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 0.2s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(3) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 0.4s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(4) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 0.6s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(5) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 0.8s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(6) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 1s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(7) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 1.2s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(8) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 1.4s infinite linear alternate;
-        }
-
-        .loading-text span:nth-child(9) {
-            filter: blur(0px);
-            animation: blur-text 1.5s 1.6s infinite linear alternate;
-        }
-        @keyframes blur-text {
-            0% {
-                filter: blur(0px);
-            }
-
-            100% {
-                filter: blur(4px);
-            }
-        }
-
-        .plyr__video-wrapper::after {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 10;
-            content: '';
-            height: 35px;
-            width: 35px;
-            background: no-repeat;
-            background-size: 40px, auto, auto;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- for non-UI builds: -->
+<script src="https://ajax.googleapis.com/ajax/libs/shaka-player/3.2.0/shaka-player.compiled.js"></script>
+<!-- or, for UI builds: -->
+<script src="https://ajax.googleapis.com/ajax/libs/shaka-player/3.2.0/shaka-player.ui.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/shaka-player/3.2.0/controls.css">
+</head>
 <body>
-<div id="loading" class="loading">
-<div class="loading-text">
-<span class="loading-text-words">P</span>
-<span class="loading-text-words">L</span>
-<span class="loading-text-words">A</span>
-<span class="loading-text-words">Y</span>
-<span class="loading-text-words">I</span>
-<span class="loading-text-words">D</span>
-<span class="loading-text-words">T</span>
-<span class="loading-text-words">V</span>
-</div>
-</div>
-<video autoplay controls crossorigin playsinline>
-<source type="application/vnd.apple.mpegurl" src="https://iptv-th.com/play/cgi3Vu4KHTlfKImhvoBfMGA2ArIQwX6e4KbXKX96eVo/.m3u8"> </video>
- </video>
-</body>
-<script>
-    setTimeout(videovisible, 3000)
+<center>   <div data-shaka-player-container style="max-width:100%"
+         data-shaka-player-cast-receiver-id="111">
+       <!-- The data-shaka-player tag will make the UI library use this video element.
+            If no video is provided, the UI will automatically make one inside the container div. -->
+         <video autoplay data-shaka-player id="video"
+      poster="https://i.postimg.cc/dtjCX2S6/Polish-20231104-031215569.jpg" style="width:100%;height:100%"></video>
 
-    function videovisible() {
-        document.getElementById('loading').style.display = 'none'
+    </div></center>
+<script>
+
+const manifestUri =
+    'https://49-231-37-37-rewriter.ais-vidnt.com/ais/play/origin/live/eds/S0004/DASH/S0004.mpd';
+
+async function init() {
+  // When using the UI, the player is made automatically by the UI object.
+  const video = document.getElementById('video');
+  const ui = video['ui'];
+  const controls = ui.getControls();
+  const player = controls.getPlayer();
+
+player.configure({
+  drm: {
+    clearKeys: {
+      // 'key-id-in-hex': 'key-in-hex',
+      'cb419fa5f5498e2c6cbc39363248ddd7': 'b5853b51f2060025a822e62973154556'
     }
-    document.addEventListener("DOMContentLoaded", () => {
-        const e = document.querySelector("video"),
-            n = e.getElementsByTagName("source")[0].src,
-            o = {};
-        if (Hls.isSupported()) {
-            var config = {
-                maxMaxBufferLength: 100,
-            };
-            const t = new Hls(config);
-            t.loadSource(n), t.on(Hls.Events.MANIFEST_PARSED, function(n, l) {
-                const s = t.levels.map(e => e.height);
-                o.quality = {
-                    default: s[0],
-                    options: s,
-                    forced: !0,
-                    onChange: e => (function(e) {
-                        window.hls.levels.forEach((n, o) => {
-                            n.height === e && (window.hls.currentLevel = o)
-                        })
-                    })(e)
-                };
-                new Plyr(e, o)
-            }), t.attachMedia(e), window.hls = t
-        } else {
-            new Plyr(e, o)
-        }
-    });
-</script>
+  }
+});
+
+  // Attach player and ui to the window to make it easy to access in the JS console.
+  window.player = player;
+  window.ui = ui;
+
+  // Listen for error events.
+  player.addEventListener('error', onPlayerErrorEvent);
+  controls.addEventListener('error', onUIErrorEvent);
+
+  // Try to load a manifest.
+  // This is an asynchronous process.
+  try {
+    await player.load(manifestUri);
+    // This runs if the asynchronous load is successful.
+    console.log('The video has now been loaded!');
+  } catch (error) {
+    onPlayerError(error);
+  }
+}
+
+function onPlayerErrorEvent(errorEvent) {
+  // Extract the shaka.util.Error object from the event.
+  onPlayerError(event.detail);
+}
+
+function onPlayerError(error) {
+  // Handle player error
+  console.error('Error code', error.code, 'object', error);
+}
+
+function onUIErrorEvent(errorEvent) {
+  // Extract the shaka.util.Error object from the event.
+  onPlayerError(event.detail);
+}
+
+function initFailed(errorEvent) {
+  // Handle the failure to load; errorEvent.detail.reasonCode has a
+  // shaka.ui.FailReasonCode describing why.
+  console.error('Unable to load the UI library!');
+}
+
+// Listen to the custom shaka-ui-loaded event, to wait until the UI is loaded.
+document.addEventListener('shaka-ui-loaded', init);
+// Listen to the custom shaka-ui-load-failed event, in case Shaka Player fails
+// to load (e.g. due to lack of browser support).
+document.addEventListener('shaka-ui-load-failed', initFailed);
+   </script>
 </body>
 </html>
+ 
