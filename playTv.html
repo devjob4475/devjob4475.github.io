@@ -42,6 +42,7 @@
       margin-top: 30px;
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     input[type="text"] {
@@ -51,6 +52,7 @@
       border: none;
       outline: none;
       flex-grow: 1;
+      min-width: 200px;
     }
 
     button {
@@ -70,71 +72,63 @@
 </head>
 
 <body>
-  <h2>พิมพ์ Channel ID แล้วกด Enter หรือปุ่ม Play</h2>
+  <h2>พิมพ์ Channel ID และ ID แล้วกด Enter หรือปุ่ม Play</h2>
   <div class="input-group">
     <input type="text" id="channelIdInput" placeholder="ใส่ Channel ID เช่น 1658003">
+    <input type="text" id="idInput" placeholder="ใส่ ID เช่น 53">
     <button onclick="playChannel()">▶ Play</button>
   </div>
 
   <div class="container" id="iframe-container">
-<iframe class="responsive-iframe" id="channel-frame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <iframe class="responsive-iframe" id="channel-frame" allow="autoplay; fullscreen" allowfullscreen></iframe>
   </div>
 
   <script>
-    const input = document.getElementById("channelIdInput");
+    const inputChannel = document.getElementById("channelIdInput");
+    const inputId = document.getElementById("idInput");
     const iframe = document.getElementById("channel-frame");
 
-function playChannel(fallback = false) {
-  const channelId = input.value.trim();
-  if (!channelId) return;
+    function playChannel() {
+      const channelId = inputChannel.value.trim();
+      const id = inputId.value.trim();
 
-  const id = fallback ? 18 : 53;
-  iframe.src = `https://fw4free.com/player2.php?channel=${channelId}&id=${id}`;
+      if (!channelId || !id) {
+        alert("กรุณากรอก Channel ID และ ID");
+        return;
+      }
 
-  // ตรวจสอบว่า iframe โหลดสำเร็จหรือไม่
-  let loaded = false;
+      iframe.src = `https://fw4free.com/player2.php?channel=${channelId}&id=${id}`;
 
-  const checkLoad = setTimeout(() => {
-    if (!loaded && !fallback) {
-      // ถ้ายังไม่โหลดสำเร็จ ลองใช้ id=18
-      playChannel(true);
+      requestFullscreen(iframe);
     }
-  }, 3000); // รอ 3 วินาที
 
-  iframe.onload = () => {
-    loaded = true;
-    requestFullscreen(iframe);
-  };
-}
+    function requestFullscreen(element) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) { // Safari
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) { // IE11
+        element.msRequestFullscreen();
+      }
+    }
 
-
-function requestFullscreen(element) {
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if (element.webkitRequestFullscreen) { // Safari
-    element.webkitRequestFullscreen();
-  } else if (element.msRequestFullscreen) { // IE11
-    element.msRequestFullscreen();
-  }
-}
-
-
-    // โฟกัส input เสมอเมื่อหน้าโหลด และเมื่อคลิก/พิมพ์
     window.onload = () => {
-      input.focus();
+      inputChannel.focus();
     };
 
-    // กด Enter เพื่อเล่น
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        playChannel();
-      }
+    // กด Enter ในช่อง channelId หรือ idInput เพื่อเล่น
+    [inputChannel, inputId].forEach(input => {
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          playChannel();
+        }
+      });
     });
 
-    // คอยฟัง focus หลุดแล้วดึงกลับ
+    // auto focus กลับไปที่ inputChannel
     setInterval(() => {
-      if (document.activeElement !== input) {
-        input.focus();
+      if (document.activeElement !== inputChannel && document.activeElement !== inputId) {
+        inputChannel.focus();
       }
     }, 300);
   </script>
