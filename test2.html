@@ -150,7 +150,7 @@
   },
   {
     name: 'ภาพยนตร์',
-    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129],
+    channels: [94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140],
   },
   // {
   //   name: 'Tv Blue',
@@ -282,6 +282,7 @@
       'EPL 3 BLUE',
       'EPL 4 BLUE',
       'EPL 5 BLUE',
+      'BEIN 5 ONLINE',
     ];
 
     const channelLogos = [
@@ -407,6 +408,7 @@
       'https://rentapi.blackboxsys.net/images/png/epl-3.png',
       'https://rentapi.blackboxsys.net/images/png/epl-4.png',
       'https://rentapi.blackboxsys.net/images/png/epl-5.png',
+      'https://static.uflixtv.com/images/tv/channels_icons/hd-bein5.png',
       'https://cloud.ufxtv.com/images/vod/thumbs/4u079e4mndjevduzsmkeufxzlyam8t9cn9jxnoka24pyhky96in1xk1jjb5r4e4s.jpg?r=48',
     ];
 
@@ -765,6 +767,11 @@ let session = null;
   }
   if (channelNames[index] === 'EPL 5 BLUE') {
     const iframeUrl = 'https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier5_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU';
+    loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'BEIN 5 ONLINE') {
+    const iframeUrl = 'https://365liveball.com/channels-schedules?channel=bein5';
     loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
     return;
   }
