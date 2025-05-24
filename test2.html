@@ -278,6 +278,10 @@
       'ผาดำคำไอ่',
       '404 สุขีนิรันดร์..',
       'EPL 1 BLUE',
+      'EPL 2 BLUE',
+      'EPL 3 BLUE',
+      'EPL 4 BLUE',
+      'EPL 5 BLUE',
     ];
 
     const channelLogos = [
@@ -398,7 +402,11 @@
       'https://img.inwiptv.net/postor/20250227112222wBrbYlOVXRfeefvfgeJI5btS1Ow.jpg',
       'https://img.inwiptv.net/postor/202503201153391pIrritKjpz6itW6GYLAItCbxqC.jpg',
       'https://img.inwiptv.net/postor/20250404060436z2TWhTRFzriygLygsjTbIHFYcQW.jpg',
-      'https://img.inwiptv.net/postor/20250404060436z2TWhTRFzriygLygsjTbIHFYcQW.jpg',
+      'https://rentapi.blackboxsys.net/images/png/epl-1.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-2.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-3.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-4.png',
+      'https://rentapi.blackboxsys.net/images/png/epl-5.png',
       'https://cloud.ufxtv.com/images/vod/thumbs/4u079e4mndjevduzsmkeufxzlyam8t9cn9jxnoka24pyhky96in1xk1jjb5r4e4s.jpg?r=48',
     ];
 
@@ -736,7 +744,27 @@ let session = null;
     return;
   }
   if (channelNames[index] === 'EPL 1 BLUE') {
-    const iframeUrl = 'https://keela2.com/stream/1/index.m3u8?token=mvFWafOIir5JDlQN';
+    const iframeUrl = 'https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier1_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU';
+    loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'EPL 2 BLUE') {
+    const iframeUrl = 'https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier2_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU';
+    loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'EPL 3 BLUE') {
+    const iframeUrl = 'https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier3_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU';
+    loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'EPL 4 BLUE') {
+    const iframeUrl = 'https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier4_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU';
+    loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
+    return;
+  }
+  if (channelNames[index] === 'EPL 5 BLUE') {
+    const iframeUrl = 'https://r3-sn-5fo-c37ed248.googleuservideo.com:8443/Premier5_720/tracks-v1a1/mono.m3u8?token=c2VydmVyX3RpbWU9MTAvMTYvMjA4NCAwNDozNTozMCBQTSZoYXNoX3ZhbHVlPU5tcXNJSlAyVFY3N0IzZzUwUktBQmc9PSZ2YWxpZG1pbnV0ZXM9NSZzdHJtX2xlbj0wJmlkPXdlYi05NzU';
     loadChannel(iframeUrl, false); // ไม่ต้อง await ถ้า loadChannel ไม่เป็น async ก็ได้
     return;
   }
