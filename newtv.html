@@ -1359,8 +1359,9 @@ function renderPopular() {
 
 
 function closeModal() {
-  const modal = document.getElementById('videoModal');
   const iframe = document.getElementById('iframe');
+  const modal = document.getElementById('videoModal');
+  modal.style.display = 'none';
 // ปิด YouTube Player
 resetPlayer()
 
@@ -1622,6 +1623,22 @@ function resetPlayer() {
 function playEpisode(url, episodes = [], currentIndex = 0) {
   console.log('🎬 playEpisode called', { url, currentIndex });
     resetPlayer(); // ✅ ล้าง player เดิมก่อนเริ่มใหม่
+      document.getElementById('videoModal').style.display = 'flex';
+
+
+      const modalContent = document.querySelector('.modal-content');
+  if (modalContent) modalContent.innerHTML = `
+      <h2 id="currentTitle" style="color:white; text-align:center; margin:10px 0;"></h2>
+      <div id="episodeList" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0;"></div>
+      <span class="close-button" onclick="closeModal()">×</span>
+      <div class="nav-controls">
+        <button id="prevChannelBtn" class="nav-button left">❮</button>
+        <button id="nextChannelBtn" class="nav-button right">❯</button>
+      </div>
+      <video id="video" class="video-js vjs-default-skin" controls autoplay playsinline preload="auto" style="display: none; width: 100%; border-radius: 10px;"></video>
+      <iframe id="iframe" style="display: none;" frameborder="0" allowfullscreen></iframe>
+      <div id="youtube-player" style="display: none; width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;"></div>
+  `;
 
       if (isTxt(url)) {
     showChooser(url);
@@ -1669,7 +1686,7 @@ const isM3U8 = /\.m3u8(\?|$)/i.test(url);
   newVideo.style.width = '100%';
   newVideo.style.borderRadius = '10px';
 
-  const modalContent = document.querySelector('.modal-content');
+  // const modalContent = document.querySelector('.modal-content');
   modalContent.appendChild(newVideo);
 
   if (isYouTube) {
