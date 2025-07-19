@@ -1,315 +1,1964 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUCKIDHD++3BBTV</title>
-    <script src="https://ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
-    <script>
-        jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
-    </script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #player {
-            width: 100%;
-            max-width: 100%;
-            aspect-ratio: 16/9; /* ทำให้วิดีโอรักษาสัดส่วน */
-        }
-        #channel-list {
-            margin: 10px auto;
-            max-width: 800px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            justify-content: center;
-        }
-        .channel {
-            cursor: pointer;
-            padding: 5px;
-            background: #222;
-            border: 1px solid #444;
-            border-radius: 5px;
-            text-align: center;
-            width: 50px;
-        }
-        .channel img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 5px;
-        }
-        .channel:hover {
-            background: #000;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>ระบบดูช่องทีวี</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- เปลี่ยนลิงก์ฟอนต์ -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- VIDEO.JS CSS + JS -->
+<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+   <style>
+
+    *{
+        font-family: 'Noto Sans Thai', sans-serif;
+
+    }
+body {
+  margin: 0;
+  font-family: 'Noto Sans Thai', sans-serif;
+  background: #111;
+  color: #fff;
+}
+
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #222;
+      border-radius: 10px;
+      width: 90%;
+    }
+
+    .form-container input,
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .form-container button {
+      background: #0066dd;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .form-container input[type="file"] {
+      background: none;
+      border: 1px dashed #444;
+      color: #aaa;
+    }
+
+    #list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .channel-card-box {
+      background: #1c1c1c;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .channel-card-box:hover {
+      transform: scale(1.03);
+    }
+
+    .channel-thumbnail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #000;
+  border-radius: 10px 10px 0 0; /* ✅ บนโค้ง ล่างเหลี่ยม */
+      overflow: hidden;
+    }
+
+.channel-thumbnail img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain; /* ✅ ไม่ยืดภาพ */
+  object-position: center; /* ✅ จัดกลางแนวตั้ง-แนวนอน */
+  background-color: #000; /* ป้องกันช่องว่างเป็นสีดำ */
+}
+
+
+  .channel-name {
+  background-color: #3a3a3a;
+  color: #fff;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 8px;
+  width: 100%;
+  word-break: break-word;
+  line-height: 1.3;
+  height: 48px; /* 🟡 fix ความสูงให้เท่ากัน */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.3s;
+  overflow: hidden;
+}
+
+.channel-card-box:hover .channel-name {
+  color: #fff;
+}
+
+
+
+    .player-container {
+      max-width: 800px;
+      margin: 20px auto;
+      display: none;
+    }
+
+    .player-container video,
+    .player-container iframe {
+      width: 100%;
+      border-radius: 10px;
+      
+    }
+
+    .video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  margin: auto;
+  /* max-width: 800px; */
+  width: 50%;
+
+}
+
+
+.modal-content video,
+.modal-content iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  text-align: center;
+  display: block;
+  background: #000;
+}
+
+
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.8rem;
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  line-height: 34px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+    #list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+
+  /* #recentList, #popularList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  } */
+#recentList .channel-card-box,
+#popularList .channel-card-box {
+  flex: 0 0 200px;
+  max-width: 200px;
+  min-width: 200px;
+}
+
+
+  .carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  max-width: 800px;
+}
+
+.carousel {
+  display: flex;
+  flex-wrap: nowrap; /* ✅ สำคัญมาก ห้าม wrap */
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  max-width: 660px;
+}
+
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-btn {
+  background: none;
+  color: white;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  padding: 5px 10px;
+}
+
+.carousel-btn.left {
+  margin-right: 5px;
+}
+.carousel-btn.right {
+  margin-left: 5px;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.video-modal.show-nav .nav-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.nav-button.left {
+  left: 20px;
+}
+
+.nav-button.right {
+  right: 20px;
+}
+
+
+
+@media (max-width: 768px) {
+  .nav-button {
+    position: static;
+    transform: none;
+    margin: 10px;
+    font-size: 1.5rem;
+    width: auto;
+    height: auto;
+    background: #444;
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  .nav-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}
+
+
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.favorite-btn.active {
+  transform: scale(1.3);
+}
+
+.channel-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+.action-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #111;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.favorite-btn {
+  background-color: #2d2d2d;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.favorite-btn.active {
+  color: #ff4d4f;
+  transform: scale(1.2);
+}
+
+#scrollButtons {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  gap: 12px;
+}
+
+#scrollButtons button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+#scrollButtons button:hover {
+  background: rgba(0, 102, 221, 0.8);
+}
+#scrollButtons svg {
+  display: block;
+  margin: auto;
+}
+
+.episode-btn {
+  background: #0066dd;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 3px 8px rgba(0, 102, 221, 0.4);
+}
+
+.episode-btn:hover {
+  background: #3388ff;
+  transform: translateY(-2px);
+}
+
+.episode-btn:active {
+  background: #0052b1;
+  transform: scale(0.98);
+}
+
+/* ✅ Fullscreen วิดีโอเต็มจอจริง */
+.video-js.vjs-fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  top: 0;
+  left: 0;
+  position: fixed;
+  border-radius: 0 !important;
+}
+
+.vjs-tech {
+  object-fit: contain; /* หรือ cover ถ้าต้องการตัดขอบ */
+}
+
+
+#searchSuggestions {
+  display: none;
+  background: #222;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.delete-top-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1.2rem;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.delete-top-btn:hover {
+  background: #ff4d4d;
+}
+
+.episode-btn.active {
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+}
+
+.episode-btn.watched {
+  background: #888 !important;
+  color: #fff !important;
+  opacity: 0.7;
+}
+
+
+.episode-btn.now-playing {
+  position: relative;
+  background: #ffe600;
+  color: #000;
+  font-weight: bold;
+}
+
+/* ✅ แก้ให้ลอยอยู่บนปุ่มแบบตรงกลางพอดี */
+.episode-btn.now-playing::after {
+  content: '';
+  position: absolute;
+  top: -20px; /* ยกขึ้นสูงจากปุ่ม */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  background-image: url('https://media.tenor.com/hlKEXPvlX48AAAAi/loading-loader.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 10;
+}
+
+.episode-item {
+  flex: 0 0 calc(50% - 10px); /* แบ่ง 2 ช่อง */
+  min-width: 240px; /* กำหนดขนาดขั้นต่ำ */
+}
+#episodeList {
+  display: flex;
+  flex-direction: column;   /* ให้เรียงตอนในแนวตั้ง */
+  gap: 10px;
+  margin: 12px 0;
+  max-height: 180px;        /* แสดงได้ประมาณ 2 ตอน */
+  overflow-y: auto; 
+  cursor: pointer;        /* เพิ่ม scrollbar */
+}
+
+
+.episode-item:hover {
+  background: #333;
+}
+
+.episode-item img {
+  width: 120px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.episode-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.episode-title {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.episode-desc {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.episode-item.active {
+  background: #444;
+}
+
+.episode-item.watched {
+  opacity: 0.6;
+}
+
+
+.episode-item {
+  position: relative; /* ต้องมี เพื่อให้ badge อยู่มุม */
+    padding: 6px 10px; /* ✅ เพิ่ม padding ให้ไม่ชิดขอบ */
+
+}
+
+.episode-item.watched::after {
+  content: "✔ ดูแล้ว";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #22c55e; /* สีเขียวสด */
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+#episodeList::-webkit-scrollbar {
+  height: 6px;
+}
+#episodeList::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+
+
+
+  </style>
 </head>
 <body>
-    <div id="player"></div>
-    <div id="channel-list"></div>
-    <script>
-        const channels = [
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/ch5new.logo.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/5/5.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/2/2.mpd",
-                keyId: "ca20a93cf8e3421dafbd5bdb1990081b",
-                key: "86ae86a7391c481ea93eecdb740f0a14"
-                },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0014.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/3/3.mpd",
-                keyId: "4d4426a505f64382a9841155d721cee6",
-                key: "0f4770219ccb4be5836a7517057e51c3"
-                },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/ALTV.PNG",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/4/4.mpd",
-                keyId: "1e98456bcbea44b7ad05831387e364ef",
-                key: "3d14fd4f9d3149a79b35a7124fccbd67"
-                },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/T-SPorts_7_Final.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/7/7.mpd",
-                keyId: "6187523f92b9475bb5b192f70cef1342",
-                key: "5119311f482144d58dacabc5bc1fa4ba"
-                },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0048.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/10/10.mpd",
-                keyId: "5da46688fd1e4ed5b085a12519b9dc4e",
-                key: "fd07bcf33823447180f53f6540f74ccb"
-                },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/R2_0053.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/16/16.mpd",
-                keyId: "9ebedc957e934d2b9023e4e60b97af73",
-                key: "7bcb4363df74457bbafedec1a864e6b6"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/JKN18.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/18/18.mpd",
-                keyId: "333de6034a1d45fe91c829539caf1149",
-                key: "2710efc048ca44bba4c2b57397989a26"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0021.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/22/22.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0015_R.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/23/23.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0054.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/24/24.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0019.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/25/25.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0006.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/27/27.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0016.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/29/29.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/MCOT_new.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/30/30.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0012.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/31/31.mpd",
-                keyId: "87db4361f7894655a4656e9c8b935a02",
-                key: "b025a4b950df41158a87cfc8d6f2ac34"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0013_R.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/32/32.mpd",
-                keyId: "9d76aea451d441a4913d4d70c4e586ab",
-                key: "051027a6ff54494b949ba792928e9008"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/LOGO3HD.PNG",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/33/33.mpd",
-                keyId: "9d76aea451d441a4913d4d70c4e586ab",
-                key: "051027a6ff54494b949ba792928e9008"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0018.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/35/35.mpd",
-                keyId: "4d4426a505f64382a9841155d721cee6",
-                key: "0f4770219ccb4be5836a7517057e51c3"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/AmarinTV_NEW512.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/34/34.mpd",
-                keyId: "4d4426a505f64382a9841155d721cee6",
-                key: "0f4770219ccb4be5836a7517057e51c3"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/PPTV_2024e.jpg",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/36/36.mpd",
-                keyId: "4d4426a505f64382a9841155d721cee6",
-                key: "0f4770219ccb4be5836a7517057e51c3"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//Cartoonito.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/302/302.mpd",
-                keyId: "ad2371259d34404cb89d54a4dc88dcd3",
-                key: "1ba155e345c4456ba891cbee9b3e1c4c"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/LOGO_Nickelodeon2.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/303/303.mpd",
-                keyId: "9130a6448a74430794d355b48b56a64c",
-                key: "c2f4d3288cdb43cf81e519ceb414dd6f"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/Nickjr_2024.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/304/304.mpd",
-                keyId: "641c3f0e676d49d18c2082e093380e69",
-                key: "e06f3a2e327643249c3831ab199c4015"
-            },
-            {
-                name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE///channelicon//3BBAsian_new.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/101/101.mpd",
-                keyId: "dac6cbd9d17a451bb76386f52469e0e9",
-                key: "2e2ac52cadf843459915eaa1a9b95e48"
-            },
-            {
-             name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE///channelicon//Mono29Plus_new.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/109/109.mpd",
-                keyId: "072eeb02f6744f838fcc8f0ef36b312e",
-                key: "b797c12f2dd64728aae23fd3c8ef275c"    
-            },
-            {
-             name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/R_0148.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/103/103.mpd",
-                keyId: "9c5735afb4fd402580360aed8364469c",
-                key: "128d55d9ac2b47ad85f86b5d08320179"    
-            },
-            {
-             name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0149.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/104/104.mpd",
-                keyId: "0db89bae851440a5994f5893ad480494",
-                key: "d88ef77eaedf4451a65be2e0bf6eabde"    
-            },
-            {
-             name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon//0151.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/105/105.mpd",
-                keyId: "7c04b8e7aa524afea879b2ed1aef8242",
-                key: "91e72b75fcb94c3bb36cceb741afd621"    
-            },
-            {
-             name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE/channelicon/0150.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/106/106.mpd",
-                keyId: "07b138f30ad3441ca5a2f476e550af25",
-                key: "826ee4deef4b45cfafd5f79a591b15c6"    
-            },
-            {
-             name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0147.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/107/107.mpd",
-                keyId: "f48caba466394e93b50780f21798787a",
-                key: "9a074a10db4342e7937076b3e52f6029"    
-            },
-            {
-             name: "",
-                logo: "https://ais-s.ais-vidnt.com/ais/play/origin/LIVE///channelicon//3BBsports1_new.png",
-                file: "https://cri-streamer3.cdn.3bbtv.com:8443/ais/play/401/401.mpd",
-                keyId: "678bbba596584ad895d2923fb0255e82",
-                key: "c55471086c824112b217743a31abdf8f"    
-            }
-  ];
-        function loadPlayer(channel) {
-            jwplayer("player").setup({
-                file: channel.file,
-                type: "dash",
-                drm: {
-                    clearkey: {
-                        keyId: channel.keyId,
-                        key: channel.key
-                    }
-                },
-                width: "100%",
-                aspectratio: "16:9",
-                autostart: true,
-                mute: false
-            });
+
+  <h1>เพิ่มช่องใหม่</h1>
+
+  <div class="form-container">
+    <select id="typeSelector" onchange="toggleInputType()" style="width:100%;padding:12px;margin-bottom:12px;border-radius:6px;font-size:1rem;">
+  <option value="tv">📺 ช่อง TV</option>
+  <option value="series">🎬 ซีรีส์หลายตอน</option>
+</select>
+
+    <input type="text" id="name" placeholder="ชื่อช่อง" />
+    <input type="text" id="logo" placeholder="URL รูปภาพ" />
+<!-- แทน input เดิมของ URL เดี่ยว -->
+<!-- URL ช่องเดียว -->
+<input type="text" id="url" placeholder="URL ช่อง (m3u8 หรือ iframe)" />
+
+<!-- หลาย EP -->
+<div id="episodeInputs" style="display:none;">
+  <div class="episode-row" style="display:flex; gap:5px; margin-bottom:10px;">
+  <input type="number" placeholder="EP" class="ep-number" style="width:20%;" />
+  <input type="text" placeholder="URL ตอนนี้" class="ep-url" style="flex: 1;" />
+</div>
+
+</div>
+<button id="addEpBtn" onclick="addEpisodeInput()" style="display:none;margin-bottom: 10px;">➕ เพิ่ม EP</button>
+
+<button id="saveBtn" onclick="addChannel()">➕ เพิ่มช่อง</button>
+    <button onclick="exportChannels()">📤 Export ช่อง</button>
+    <input type="file" id="importFile" accept=".json" onchange="importChannels()" />
+  </div>
+
+  <input type="text" id="search" placeholder="🔎 ค้นหาช่อง..." oninput="loadChannels()" style="max-width:400px;width:90%;margin:10px auto;display:block;padding:10px;border-radius:8px;border:none;font-size:1rem;" />
+<div id="searchContainer" style="position: relative; max-width: 400px; margin: 0 auto;">
+  <div id="searchSuggestions" style="
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #222;
+    border-radius: 0 0 8px 8px;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  "></div>
+</div>
+
+
+
+  <!-- รายการที่ชอบ -->
+<h2 style="text-align:center">❤️ รายการที่ชอบ</h2>
+<div class="carousel-wrapper">
+  <button class="carousel-btn left" onclick="scrollCarousel('favoriteList', -1)">❮</button>
+  <div id="favoriteList" class="carousel"></div>
+  <button class="carousel-btn right" onclick="scrollCarousel('favoriteList', 1)">❯</button>
+</div>
+
+  <!-- ดูล่าสุด -->
+<h2 style="text-align:center">📌 ดูล่าสุด</h2>
+<div class="carousel-wrapper">
+  <button class="carousel-btn left" onclick="scrollCarousel('recentList', -1)">❮</button>
+  <div id="recentList" class="carousel"></div>
+  <button class="carousel-btn right" onclick="scrollCarousel('recentList', 1)">❯</button>
+</div>
+
+
+
+<!-- ยอดนิยม -->
+<h2 style="text-align:center">🔥 ยอดนิยม</h2>
+<div class="carousel-wrapper">
+  <button class="carousel-btn left" onclick="scrollCarousel('popularList', -1)">❮</button>
+  <div id="popularList" class="carousel"></div>
+  <button class="carousel-btn right" onclick="scrollCarousel('popularList', 1)">❯</button>
+</div>
+
+
+
+  <h2 style="text-align:center">📺 ช่องทั้งหมด</h2>
+  <div id="list"></div>
+
+  <div id="videoModal" class="video-modal" style="display: none;">
+    <div class="modal-content">
+        <h2 id="currentTitle" style="color:white; text-align:center; margin:10px 0;"></h2>
+        
+
+<div id="episodeList" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0;"></div>
+
+      <span class="close-button" onclick="closeModal()">×</span>
+<div class="nav-controls">
+  <button id="prevChannelBtn" class="nav-button left">❮</button>
+  <button id="nextChannelBtn" class="nav-button right">❯</button>
+</div>
+
+
+      <!-- <video id="video" controls autoplay style="display:none;"></video> -->
+       <video
+  id="video"
+  class="video-js vjs-default-skin"
+  controls
+  autoplay
+  playsinline
+  preload="auto"
+  style="display: none; width: 100%; border-radius: 10px;">
+</video>
+
+      <iframe id="iframe" style="display: none;" frameborder="0" allowfullscreen></iframe>
+      <div id="youtube-player" style="display: none; width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;"></div>
+
+    </div>
+  </div>
+
+  <script>
+    const nameEl = document.getElementById('name');
+    const logoEl = document.getElementById('logo');
+    const urlEl = document.getElementById('url');
+    const listEl = document.getElementById('list');
+    const video = document.getElementById('video');
+    const iframe = document.getElementById('iframe');
+    const recentListEl = document.getElementById('recentList');
+    const popularListEl = document.getElementById('popularList');
+    let isEditing = false;
+let editingIndex = null;
+
+let youtubePlayer = null;
+let youtubeProgressInterval = null;
+
+function isTxt(url) {
+  return url?.trim().toLowerCase().endsWith(".txt");
+}
+
+function showChooser(url) {
+  // url = url.trim().replace(/^(https?:\/\/)+/, 'https://');
+  let safeUrl = url.trim().replace(/^(https?:\/\/)+/, 'https://');
+  const modalContent = document.querySelector('.modal-content');
+  modalContent.innerHTML = `
+<div style="text-align:center;color:#ff0;padding:30px 8px;">
+      <div style="font-size:1.2rem;margin-bottom:18px;">ไม่สามารถเล่นไฟล์นี้ในแอปนี้ได้<br>เลือกเปิดลิงก์นี้ในแอปอื่น:</div>
+      <div style="display:flex;gap:14px;justify-content:center;">
+        <button onclick="openInMXPlayer('${url}')" style="padding:12px 20px;background:#1d4ed8;border:none;color:#fff;border-radius:8px;font-size:1rem;">MX Player</button>
+        <button onclick="openInVLC('${url}')" style="padding:12px 20px;background:#10b981;border:none;color:#fff;border-radius:8px;font-size:1rem;">VLC</button>
+        <button onclick="openInWiseplay('${url}')" style="padding:12px 20px;background:#6366f1;border:none;color:#fff;border-radius:8px;font-size:1rem;">Wiseplay</button>
+        <button onclick="copyToClipboard('${url}')" style="padding:12px 20px;background:#444;border:none;color:#fff;border-radius:8px;font-size:1rem;">คัดลอกลิงก์</button>
+      </div>
+    </div>
+    <span class="close-button" onclick="closeModal()">×</span>
+  `;
+}
+
+// สำหรับเว็บ/Android ให้ลอง intent, iOS ใช้ open URL ธรรมดา (หรือโชว์ copy link)
+function cleanUrl(url) {
+  // ลบ http:// หรือ https:// ข้างหน้า 1 ครั้ง ถ้ามี
+  return url.replace(/^(https?:\/\/)/, '');
+}
+
+function openInMXPlayer(url) {
+  // ต้องแน่ใจว่า intent เรียกได้ถูก
+  let safeUrl = url.trim();
+  if (!/^https?:\/\//.test(safeUrl)) safeUrl = 'https://' + safeUrl;
+  window.open(`intent:${safeUrl}#Intent;package=com.mxtech.videoplayer.ad;end`, '_blank');
+}
+function openInVLC(url) {
+  let safeUrl = url.trim();
+  let scheme = 'https';
+  // ถ้า url เป็น http ให้ใช้ scheme http
+  if (safeUrl.startsWith('http://')) scheme = 'http';
+  // ตัด https:// หรือ http:// ข้างหน้าออก
+  let urlPath = safeUrl.replace(/^https?:\/\//, '');
+  // สร้าง intent
+  let intentUrl = `intent://${urlPath}#Intent;scheme=${scheme};package=org.videolan.vlc;type=video/mp4;end`;
+  window.open(intentUrl, '_blank');
+}
+
+function openInWiseplay(url) {
+  let safeUrl = url.trim();
+  if (!/^https?:\/\//.test(safeUrl)) safeUrl = 'https://' + safeUrl;
+  window.open(`intent:${safeUrl}#Intent;package=com.wiseplay;end`, '_blank');
+}
+
+function copyToClipboard(url) {
+  navigator.clipboard.writeText(url);
+  alert("คัดลอกลิงก์เรียบร้อยแล้ว");
+}
+
+
+function getYoutubeProgressMap() {
+  return JSON.parse(localStorage.getItem('yt-progress') || '{}');
+}
+
+function saveYoutubeProgress(id, time, duration) {
+  const map = getYoutubeProgressMap();
+  map[id] = { time, duration };
+  localStorage.setItem('yt-progress', JSON.stringify(map));
+}
+
+function getYoutubeProgress(id) {
+  const map = getYoutubeProgressMap();
+  return map[id]?.time || 0;
+}
+
+function removeYoutubeProgress(id) {
+  const map = getYoutubeProgressMap();
+  delete map[id];
+  localStorage.setItem('yt-progress', JSON.stringify(map));
+}
+
+function initYouTubePlayer(videoId, startTime = 0) {
+  const ytDiv = document.getElementById('youtube-player');
+  ytDiv.innerHTML = ''; // เคลียร์ของเดิม
+
+  youtubePlayer = new YT.Player('youtube-player', {
+    videoId,
+    playerVars: {
+      autoplay: 1,
+      controls: 1,
+      start: Math.floor(startTime || 0),
+      mute: 0,
+      rel: 0
+    },
+    events: {
+      onReady: (event) => event.target.playVideo(),
+      onStateChange: (event) => {
+        if (event.data === YT.PlayerState.ENDED) removeYoutubeProgress(videoId);
+      }
+    }
+  });
+
+  if (youtubeProgressInterval) clearInterval(youtubeProgressInterval);
+  youtubeProgressInterval = setInterval(() => {
+    if (youtubePlayer && youtubePlayer.getCurrentTime) {
+      const current = youtubePlayer.getCurrentTime();
+      const duration = youtubePlayer.getDuration();
+      if (current && duration) {
+        saveYoutubeProgress(videoId, current, duration);
+      }
+    }
+  }, 5000);
+}
+
+
+
+    function addEpisodeInput() {
+  const row = document.createElement('div');
+  row.className = 'episode-row';
+  row.innerHTML = `
+    <input type="number" placeholder="EP" class="ep-number" style="width:20%;" />
+    <input type="text" placeholder="URL ตอนนี้" class="ep-url" style="width:75%;" />
+  `;
+  document.getElementById('episodeInputs').appendChild(row);
+}
+
+function exportChannels() {
+      const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+      const blob = new Blob([JSON.stringify(channels, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'channels-export.json';
+      a.click();
+    }
+// ฟังก์ชันบันทึกว่าเคยดูจบ
+function markAsWatched(url) {
+  const watched = JSON.parse(localStorage.getItem('watchedFlags') || '{}');
+  watched[url] = true;
+  localStorage.setItem('watchedFlags', JSON.stringify(watched));
+}
+
+// ฟังก์ชันเช็คว่าเคยดูจบ
+function isWatched(url) {
+  const watched = JSON.parse(localStorage.getItem('watchedFlags') || '{}');
+  return !!watched[url];
+}
+
+function renderEpisodeList(episodes, currentIndex = 0, logo) {
+  const container = document.getElementById('episodeList');
+  container.innerHTML = '';
+
+  episodes.forEach((ep, idx) => {
+    const div = document.createElement('div');
+    div.className = 'episode-item';
+    if (idx === currentIndex) div.classList.add('active');
+    if (isWatched(ep.url)) div.classList.add('watched');
+
+    div.onclick = () => {
+      playEpisode(ep.url, episodes, idx);
+renderEpisodeList(episodes, idx, logo);
+    };
+
+    div.innerHTML = `
+      <img src="${logo}" alt="EP ${ep.ep}" onerror="this.src='https://placehold.co/120x68?text=EP+${ep.ep}'">
+      <div class="episode-info">
+        <div class="episode-title">EP ${ep.ep}</div>
+        <div class="episode-desc">ตอนที่ ${ep.ep} - คลิกเพื่อดู</div>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+
+
+
+    function getChannels() {
+      return JSON.parse(localStorage.getItem('channels') || '[]');
+    }
+
+    function getPopularCounts() {
+      return JSON.parse(localStorage.getItem('channelViews') || '{}');
+    }
+
+    function getRecentChannels() {
+      return JSON.parse(localStorage.getItem('recentChannels') || '[]');
+    }
+
+    function getFavorites() {
+  return JSON.parse(localStorage.getItem('favoriteChannels') || '[]');
+
+}
+
+function toggleInputType() {
+  const type = document.getElementById('typeSelector').value;
+  const urlInput = document.getElementById('url');
+  const episodeBlock = document.getElementById('episodeInputs');
+  const addEpBtn = document.getElementById('addEpBtn');
+
+  if (type === 'tv') {
+    urlInput.style.display = 'block';
+    episodeBlock.style.display = 'none';
+    addEpBtn.style.display = 'none';
+  } else {
+    urlInput.style.display = 'none';
+    episodeBlock.style.display = 'block';
+    addEpBtn.style.display = 'inline-block';
+  }
+}
+
+
+function toggleFavorite(i) {
+  let favs = getFavorites();
+  if (favs.includes(i)) {
+    favs = favs.filter(x => x !== i);
+  } else {
+    favs.unshift(i);
+  }
+  localStorage.setItem('favoriteChannels', JSON.stringify(favs));
+
+  // 🔁 Refresh UI ทุกส่วนที่เกี่ยวข้อง
+  renderFavorites();
+  renderPopular();
+  renderRecent();
+  loadChannels(); // สำหรับ All list
+}
+
+
+
+function addChannel() {
+  const name = nameEl.value.trim();
+  const logo = logoEl.value.trim();
+  const type = document.getElementById('typeSelector').value;
+
+  if (!name || !logo) return alert("กรุณากรอกชื่อช่องและโลโก้");
+
+  const channels = getChannels();
+  let channelData = { name, logo };
+
+  if (type === 'tv') {
+    const url = document.getElementById('url').value.trim();
+    if (!url) return alert("กรุณากรอก URL ช่อง");
+    channelData.url = url;
+  } else {
+    const episodeRows = document.querySelectorAll('.episode-row');
+    const episodes = [];
+    for (const row of episodeRows) {
+      const ep = parseInt(row.querySelector('.ep-number').value);
+      const url = row.querySelector('.ep-url').value.trim();
+      if (ep && url) episodes.push({ ep, url });
+    }
+    if (episodes.length === 0) return alert("กรุณาเพิ่มอย่างน้อย 1 ตอน");
+    channelData.episodes = episodes;
+  }
+
+  if (isEditing && editingIndex !== null) {
+    channels[editingIndex] = { ...channels[editingIndex], ...channelData };
+    isEditing = false;
+    editingIndex = null;
+document.getElementById('saveBtn').textContent = "➕ เพิ่มช่อง";
+  } else {
+    channels.push(channelData);
+  }
+
+  localStorage.setItem('channels', JSON.stringify(channels));
+
+  // reset form
+  nameEl.value = '';
+  logoEl.value = '';
+  document.getElementById('url').value = '';
+  document.getElementById('episodeInputs').innerHTML = '';
+  addEpisodeInput();
+  loadChannels();
+}
+
+function removeFromRecent(i) {
+  let recent = getRecentChannels().filter(id => id !== i);
+  localStorage.setItem('recentChannels', JSON.stringify(recent));
+  renderRecent();
+}
+
+
+function getYouTubeTitleFromCache(url) {
+  const cache = JSON.parse(sessionStorage.getItem('ytTitleCache') || '{}');
+  return cache[url] || null;
+}
+
+function setYouTubeTitleToCache(url, title) {
+  const cache = JSON.parse(sessionStorage.getItem('ytTitleCache') || '{}');
+  cache[url] = title;
+  sessionStorage.setItem('ytTitleCache', JSON.stringify(cache));
+}
+
+function fetchAndCacheYouTubeTitle(url, callback) {
+  const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+  fetch(oembedUrl)
+    .then(res => res.json())
+    .then(data => {
+      if (data?.title) {
+        setYouTubeTitleToCache(url, data.title);
+        callback(data.title);
+      } else {
+        callback(null);
+      }
+    })
+    .catch(() => callback(null));
+}
+
+function loadChannels() {
+  const searchValue = document.getElementById('search')?.value?.toLowerCase() || '';
+  const suggestionsEl = document.getElementById('searchSuggestions');
+  const channels = getChannels();
+
+  listEl.innerHTML = '';
+  suggestionsEl.innerHTML = '';
+  let found = 0;
+
+  let hasPendingYouTube = false;
+
+  channels.forEach((ch, i) => {
+    let displayName = ch.name?.toLowerCase() || '';
+
+    // ✅ ถ้าเป็น YouTube → ใช้ title จาก cache (หรือรอ fetch)
+    if (ch.url && (ch.url.includes('youtube.com') || ch.url.includes('youtu.be'))) {
+      const ytTitle = getYouTubeTitleFromCache(ch.url);
+      if (ytTitle) {
+        displayName = ytTitle.toLowerCase();
+      } else {
+        // ยังไม่มี title → ดึงและ reload ใหม่
+        hasPendingYouTube = true;
+        fetchAndCacheYouTubeTitle(ch.url, () => loadChannels());
+      }
+    }
+
+    // ✅ ค้นหาทั้งรายการหลัก
+    if (!searchValue || displayName.includes(searchValue)) {
+      const div = renderChannelCard(ch, i);
+      listEl.appendChild(div);
+      found++;
+    }
+
+    // ✅ สร้าง suggestion (autocomplete)
+    if (searchValue && displayName.includes(searchValue)) {
+      const item = document.createElement('div');
+      item.style.display = 'flex';
+      item.style.alignItems = 'center';
+      item.style.padding = '8px 12px';
+      item.style.cursor = 'pointer';
+      item.style.borderBottom = '1px solid #333';
+      item.style.transition = 'background 0.2s';
+
+      item.onmouseenter = () => item.style.background = '#333';
+      item.onmouseleave = () => item.style.background = 'transparent';
+
+      item.onclick = () => {
+        document.getElementById('search').value = displayName;
+        suggestionsEl.style.display = 'none';
+        watchChannel(i);
+      };
+
+    // ✅ ตรวจว่าเป็น YouTube หรือไม่
+let thumbnail = ch.logo;
+if (ch.url && (ch.url.includes('youtube.com') || ch.url.includes('youtu.be'))) {
+  const videoId = extractYouTubeID(ch.url);
+  if (videoId) {
+    thumbnail = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  }
+}
+
+item.innerHTML = `
+  <img src="${thumbnail}" alt="${displayName}" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 10px; object-fit: cover;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2748/2748558.png'">
+  <span style="color: white; font-size: 0.95rem;">${displayName}</span>
+`;
+
+
+      suggestionsEl.appendChild(item);
+    }
+  });
+
+  suggestionsEl.style.display = (searchValue && suggestionsEl.children.length > 0) ? 'block' : 'none';
+
+  renderPopular();
+  renderRecent();
+  renderFavorites();
+
+  // ❗ ป้องกัน reload loop
+  if (hasPendingYouTube) {
+    console.log('⏳ Fetching YouTube titles...');
+  }
+}
+
+    function renderFavorites() {
+  const channels = getChannels();
+  const favs = getFavorites();
+  const favoriteListEl = document.getElementById('favoriteList');
+  favoriteListEl.innerHTML = '';
+  const seen = new Set();
+
+  favs.forEach((id, idx) => {
+    if (!seen.has(id) && channels[id]) {
+      favoriteListEl.appendChild(renderChannelCard(channels[id], id, idx));
+      seen.add(id);
+    }
+  });
+}
+
+function renderRecent() {
+  const channels = getChannels();
+  const recent = getRecentChannels();
+  recentListEl.innerHTML = '';
+  const seen = new Set();
+
+  for (let j = 0; j < recent.length && seen.size < 5; j++) {
+    const id = recent[j];
+    if (!seen.has(id) && channels[id]) {
+      recentListEl.appendChild(renderChannelCard(channels[id], id, j, true)); // ✅ showDeleteTopBtn = true
+      seen.add(id);
+    }
+  }
+}
+
+
+
+function renderChannelCard(ch, i, indexInList = null, showDeleteTopBtn = false) {
+  const favs = getFavorites();
+  const isFav = favs.includes(i);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'ranked-card-wrapper';
+
+  // wrapper.innerHTML = `
+  //   <div class="channel-card-box">
+  //     <div class="channel-thumbnail" style="position: relative;">
+  //       <img src="${ch.logo}" alt="${ch.name}" 
+  //            onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/2748/2748558.png';"
+  //            onclick="watchChannel(${i})">
+  //       <div class="channel-name" title="${ch.name}">
+  //         ${ch.name.length > 25 ? ch.name.slice(0, 25) + '…' : ch.name}
+  //       </div>
+  //       ${showDeleteTopBtn ? `<button class="delete-top-btn" onclick="removeFromRecent(${i})">×</button>` : ''}
+  //     </div>
+  //     <div class="channel-actions">
+  //       <button class="action-btn edit-btn" onclick="editChannel(${i})">✏️</button>
+  //       <button class="action-btn delete-btn" onclick="deleteChannel(${i})">🗑️</button>
+  //       <button class="action-btn favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${i})">
+  //         ${isFav ? '❤️' : '🤍'}
+  //       </button>
+  //     </div>
+  //   </div>
+  // `;
+
+ let thumbnail = ch.logo;
+
+// ✅ ถ้าเป็น YouTube
+let isYouTube = false;
+if (ch.url && (ch.url.includes('youtube.com') || ch.url.includes('youtu.be'))) {
+  const videoId = extractYouTubeID(ch.url);
+  if (videoId) {
+    thumbnail = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    isYouTube = true;
+  }
+}
+
+wrapper.innerHTML = `
+  <div class="channel-card-box">
+    <div class="channel-thumbnail" style="position: relative;">
+      <img src="${thumbnail}" alt="${ch.name}" 
+           onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/2748/2748558.png';"
+           onclick="watchChannel(${i})">
+      <div class="channel-name" title="${ch.name}" id="channel-name-${i}">
+        ${isYouTube ? '⏳ กำลังโหลดชื่อ...' : (ch.name.length > 25 ? ch.name.slice(0, 25) + '…' : ch.name)}
+      </div>
+      ${showDeleteTopBtn ? `<button class="delete-top-btn" onclick="removeFromRecent(${i})">×</button>` : ''}
+    </div>
+    <div class="channel-actions">
+      <button class="action-btn edit-btn" onclick="editChannel(${i})">✏️</button>
+      <button class="action-btn delete-btn" onclick="deleteChannel(${i})">🗑️</button>
+      <button class="action-btn favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${i})">
+        ${isFav ? '❤️' : '🤍'}
+      </button>
+    </div>
+  </div>
+`;
+
+// ✅ ถ้าเป็น YouTube ให้ fetch ชื่อจริงแล้วอัปเดต DOM
+if (isYouTube) {
+  const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(ch.url)}&format=json`;
+  fetch(oembedUrl)
+    .then(res => res.json())
+    .then(data => {
+      const nameEl = wrapper.querySelector(`#channel-name-${i}`);
+      if (nameEl && data?.title) {
+        nameEl.textContent = data.title.length > 25 ? data.title.slice(0, 25) + '…' : data.title;
+        nameEl.title = data.title;
+      }
+    })
+    .catch(() => {
+      const nameEl = wrapper.querySelector(`#channel-name-${i}`);
+      if (nameEl) nameEl.textContent = 'YouTube Video';
+    });
+}
+
+
+  // 🔴 Progress Bar ด้านล่าง
+// 🔴 Progress Bar ด้านล่าง
+// 🔴 Progress Bar ด้านล่าง
+if (indexInList !== null && ch.url && ch.url.includes('.m3u8')) {
+  const progressTime = getProgress(ch.url);
+  const duration = getProgressDuration(ch.url);
+
+  if (progressTime > 5 && duration > 30) {
+    const percent = Math.min(100, Math.round((progressTime / duration) * 100));
+
+    const bar = document.createElement('div');
+    bar.style.height = '4px';
+    bar.style.width = `${percent}%`;
+    bar.style.background = '#e50914';
+    bar.style.position = 'absolute';
+    bar.style.bottom = '0';
+    bar.style.left = '0';
+    bar.style.transition = 'width 0.3s';
+
+    const box = wrapper.querySelector('.channel-card-box');
+    box.style.position = 'relative';
+    box.appendChild(bar);
+  }
+}
+if (indexInList !== null && ch.url && (ch.url.includes('youtube.com') || ch.url.includes('youtu.be'))) {
+  const videoId = extractYouTubeID(ch.url);
+  const ytProgress = getYoutubeProgressMap()[videoId];
+
+  if (ytProgress && ytProgress.time > 5 && ytProgress.duration > 30) {
+    const percent = Math.min(100, Math.round((ytProgress.time / ytProgress.duration) * 100));
+
+    const bar = document.createElement('div');
+    bar.style.height = '4px';
+    bar.style.width = `${percent}%`;
+    bar.style.background = '#e50914';
+    bar.style.position = 'absolute';
+    bar.style.bottom = '0';
+    bar.style.left = '0';
+    bar.style.transition = 'width 0.3s';
+
+    const box = wrapper.querySelector('.channel-card-box');
+    box.style.position = 'relative';
+    box.appendChild(bar);
+  }
+}
+
+  return wrapper;
+}
+
+    function scrollCarousel(id, direction) {
+  const container = document.getElementById(id);
+  const scrollAmount = 220 * direction; // ขนาดแต่ละการ์ด + margin
+  container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+}
+
+function deleteChannel(index) {
+  if (!confirm("คุณแน่ใจหรือไม่ว่าต้องการลบช่องนี้?")) return;
+
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+  channels.splice(index, 1);
+  localStorage.setItem('channels', JSON.stringify(channels));
+  loadChannels();
+}
+
+function editChannel(index) {
+  const channels = getChannels();
+  const ch = channels[index];
+
+  isEditing = true;
+  editingIndex = index;
+
+  nameEl.value = ch.name;
+  logoEl.value = ch.logo;
+
+  document.getElementById('typeSelector').value = ch.episodes ? 'series' : 'tv';
+  toggleInputType();
+
+  if (ch.episodes) {
+    document.getElementById('episodeInputs').innerHTML = '';
+    ch.episodes.forEach(ep => {
+     const row = document.createElement('div');
+row.className = 'episode-row';
+row.style.display = 'flex'; // <--- ✅ สำคัญมาก
+row.style.gap = '5px';
+row.style.marginBottom = '10px';
+row.innerHTML = `
+  <input type="number" placeholder="EP" class="ep-number" style="width:20%;" value="${ep.ep}" />
+  <input type="text" placeholder="URL ตอนนี้" class="ep-url" style="width:80%;" value="${ep.url}" />
+`;
+
+      document.getElementById('episodeInputs').appendChild(row);
+    });
+  } else {
+    urlEl.value = ch.url || '';
+  }
+
+document.getElementById('saveBtn').textContent = "💾 บันทึกการแก้ไข";
+window.scrollTo({ top: 0, behavior: 'smooth' });
+
+}
+
+
+
+function renderPopular() {
+  const channels = getChannels();
+  const views = getPopularCounts();
+  const sorted = Object.keys(views)
+    .map(Number) // ✅ ทำให้เป็นตัวเลขจริง
+    .sort((a, b) => views[b] - views[a]);
+
+  popularListEl.innerHTML = '';
+  const seen = new Set();
+
+  for (const id of sorted) {
+    if (!seen.has(id) && channels[id]) {
+      popularListEl.appendChild(renderChannelCard(channels[id], id));
+      seen.add(id);
+    }
+    if (seen.size >= 5) break;
+  }
+}
+
+
+
+function closeModal() {
+  const modal = document.getElementById('videoModal');
+  const iframe = document.getElementById('iframe');
+// ปิด YouTube Player
+resetPlayer()
+
+  modal.style.display = 'none';
+
+  // ปิด iframe
+  if (iframe) {
+    iframe.src = '';
+    iframe.style.display = 'none';
+  }
+
+  // ปิด video.js player
+  if (window.videojsPlayer) {
+    window.videojsPlayer.pause();
+    window.videojsPlayer.dispose();
+    window.videojsPlayer = null;
+  }
+
+  // ปิด video tag เฉพาะกรณียังอยู่
+  const videoEl = document.getElementById('video');
+  if (videoEl) {
+    videoEl.style.display = 'none';
+  }
+
+  // หากยังใช้ HLS.js
+  if (window.hls) {
+    window.hls.destroy();
+    window.hls = null;
+  }
+
+  renderRecent();
+  renderPopular();
+}
+
+let currentChannelIndex = null;
+
+function extractYouTubeID(url) {
+  const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regex);
+  return match ? match[1] : '';
+}
+
+
+function watchChannel(index) {
+  const ch = getChannels()[index];
+const currentTitleEl = document.getElementById('currentTitle');
+
+// ตรวจสอบว่าเป็น YouTube หรือไม่
+if (ch.url && (ch.url.includes('youtube.com') || ch.url.includes('youtu.be'))) {
+  currentTitleEl.textContent = '⏳ กำลังโหลดชื่อ...';
+  const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(ch.url)}&format=json`;
+  fetch(oembedUrl)
+    .then(res => res.json())
+    .then(data => {
+      currentTitleEl.textContent = data?.title || 'YouTube Video';
+    })
+    .catch(() => {
+      currentTitleEl.textContent = 'YouTube Video';
+    });
+} else {
+  currentTitleEl.textContent = ch.name || '';
+}
+
+  if (ch.password) {
+    const input = prompt(`🔒 ช่องนี้ต้องใช้รหัสผ่านในการรับชม\nกรุณาใส่รหัสผ่าน:`);
+    if (input !== ch.password) {
+      alert('❌ รหัสผ่านไม่ถูกต้อง');
+      return;
+    }
+  }
+  currentChannelIndex = index;
+
+  const modal = document.getElementById('videoModal');
+  modal.style.display = 'flex';
+  showNavButtons();
+
+  if (Array.isArray(ch.episodes)) {
+    // ✅ หา EP ล่าสุดที่ยังดูไม่จบ
+      document.getElementById('episodeList').style.display = 'flex';
+
+    let lastEpIndex = 0;
+    for (let i = 0; i < ch.episodes.length; i++) {
+      const epUrl = ch.episodes[i].url;
+      const progress = getVideoProgress(epUrl);
+      const duration = parseFloat(localStorage.getItem(`videoDuration:${epUrl}`)) || 0;
+
+      if (duration > 30 && progress < duration - 5) {
+        lastEpIndex = i;
+        break; // เจอ EP ที่ยังดูไม่จบ ก็ดูต่อเลย
+      }
+    }
+
+renderEpisodeList(ch.episodes, lastEpIndex, ch.logo);
+    playEpisode(ch.episodes[lastEpIndex].url, ch.episodes, lastEpIndex);
+
+  } else {
+      document.getElementById('episodeList').style.display = 'none';
+
+    renderEpisodeList([]);
+// ถ้าเป็น Bein Sports 1 ให้ไป Sniff ใหม่
+if (ch.name === 'Bein Sports 1') {
+  console.log('⏳ Sniff Bein Sports 1...');
+  window.electronAPI.sniffDooball('epl-bein1').then((url) => {
+    if (url) {
+      console.log('✅ ได้ลิงก์ M3U8 สด:', url);
+      playEpisode(url);
+    } else {
+      alert('❌ ไม่พบลิงก์ M3U8 สด');
+    }
+  });
+} 
+else if (ch.name === 'Bein Sports 3') {
+  console.log('⏳ Sniff Bein Sports 3...');
+  window.electronAPI.sniffDooball('epl-bein3').then((url) => {
+    if (url) {
+      console.log('✅ ได้ลิงก์ M3U8 สด:', url);
+      playEpisode(url);
+    } else {
+      alert('❌ ไม่พบลิงก์ M3U8 สด');
+    }
+  });
+} 
+else if (ch.name === 'Mono Max 1') {
+  console.log('⏳ Sniff Mono Max 1...');
+  window.electronAPI.sniffDooball('th-monomax01').then((url) => {
+    if (url) {
+      console.log('✅ ได้ลิงก์ M3U8 สด:', url);
+      playEpisode(url);
+    } else {
+      alert('❌ ไม่พบลิงก์ M3U8 สด');
+    }
+  });
+} 
+else if (ch.name === 'Mono Max 2') {
+  console.log('⏳ Sniff Mono Max 2...');
+  window.electronAPI.sniffDooball('th-monomax02').then((url) => {
+    if (url) {
+      console.log('✅ ได้ลิงก์ M3U8 สด:', url);
+      playEpisode(url);
+    } else {
+      alert('❌ ไม่พบลิงก์ M3U8 สด');
+    }
+  });
+} 
+else if (ch.name === 'Mono29 HD') {
+  console.log('⏳ Sniff Mono29 HD...');
+  window.electronAPI.sniffDooball('hd-mono').then((url) => {
+    if (url) {
+      console.log('✅ ได้ลิงก์ M3U8 สด:', url);
+      playEpisode(url);
+    } else {
+      alert('❌ ไม่พบลิงก์ M3U8 สด');
+    }
+  });
+} 
+else {
+  playEpisode(ch.url);
+}
+
+  }
+
+  // ✅ track recent + popular
+  let recent = getRecentChannels().filter(i => i !== index);
+  recent.unshift(index);
+  localStorage.setItem('recentChannels', JSON.stringify(recent.slice(0, 10)));
+
+  const views = getPopularCounts();
+  views[index] = (views[index] || 0) + 1;
+  localStorage.setItem('channelViews', JSON.stringify(views));
+}
+
+function getVideoProgress(url) {
+  const key = `videoProgress:${url}`;
+  const time = parseFloat(localStorage.getItem(key));
+  return !isNaN(time) ? time : 0;
+}
+
+function normalizeUrl(url) {
+  // ตัด query string ออก
+  return url.split('?')[0];
+}
+
+// ✅ Namespace Key
+// ✅ Namespace Key
+const PROGRESS_KEY = 'videoProgressMap';
+
+// ✅ โหลด Progress Map
+function loadProgressMap() {
+  const raw = localStorage.getItem(PROGRESS_KEY);
+  return raw ? JSON.parse(raw) : {};
+}
+
+// ✅ บันทึก Progress Map
+function saveProgressMap(map) {
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify(map));
+}
+
+// ✅ ลบ Progress ของ URL เดียว
+function removeProgress(url) {
+  const map = loadProgressMap();
+  delete map[url];
+  saveProgressMap(map);
+  console.log(`🗑 Removed progress for: ${url}`);
+}
+
+// ✅ เก็บ Progress ของ URL เดียว
+function saveProgress(url, time, duration) {
+  const map = loadProgressMap();
+  map[url] = { time, duration };
+  saveProgressMap(map);
+  console.log(`💾 Saved progress for: ${url} = ${time}/${duration}`);
+}
+
+// ✅ อ่าน Progress ของ URL เดียว
+function getProgress(url) {
+  const map = loadProgressMap();
+  return map[url]?.time || 0;
+}
+
+// ✅ อ่าน Duration ของ URL เดียว
+function getProgressDuration(url) {
+  const map = loadProgressMap();
+  return map[url]?.duration || 0;
+}
+function resetPlayer() {
+  if (youtubeProgressInterval) clearInterval(youtubeProgressInterval);
+  if (youtubePlayer) youtubePlayer.destroy?.();
+  youtubePlayer = null;
+
+  const ytDiv = document.getElementById('youtube-player');
+  if (ytDiv) {
+    ytDiv.innerHTML = '';
+    ytDiv.style.display = 'none';
+  }
+
+  if (window.hls) {
+    window.hls.destroy();
+    window.hls = null;
+  }
+
+  if (window.videojsPlayer) {
+    window.videojsPlayer.dispose();
+    window.videojsPlayer = null;
+  }
+
+  const oldVideo = document.getElementById('video');
+  if (oldVideo) oldVideo.remove();
+
+  const iframe = document.getElementById('iframe');
+  if (iframe) {
+    iframe.src = '';
+    iframe.style.display = 'none';
+  }
+}
+
+
+// ✅ main playEpisode function
+function playEpisode(url, episodes = [], currentIndex = 0) {
+  console.log('🎬 playEpisode called', { url, currentIndex });
+    resetPlayer(); // ✅ ล้าง player เดิมก่อนเริ่มใหม่
+
+      if (isTxt(url)) {
+    showChooser(url);
+    return;
+  }
+
+  const isAvthCdnHls = /https:\/\/av-th\.xyz\/cdn\/hls\/[a-zA-Z0-9]+\/master\.txt/.test(url);
+
+  const isYouTube = url.includes('youtube.com') || url.includes('youtu.be');
+const isM3U8 = /\.m3u8(\?|$)/i.test(url);
+  const isIframe = !isM3U8 && !isAvthCdnHls && (
+    /\.(php)$/i.test(url) || /(player|iframe|\/video\/|\/play\/|embed)/i.test(url)
+  );
+
+  const iframe = document.getElementById('iframe');
+
+  // ✅ ตรวจว่า fullscreen อยู่หรือไม่
+  const wasFullscreen = !!document.fullscreenElement;
+
+  // 🧹 ล้าง player เดิม
+  if (window.hls) {
+    console.log('🧹 Destroying HLS.js');
+    window.hls.destroy();
+    window.hls = null;
+  }
+  if (window.videojsPlayer) {
+    console.log('🧹 Disposing videojs player');
+    window.videojsPlayer.dispose();
+    window.videojsPlayer = null;
+  }
+  const oldVideo = document.getElementById('video');
+  if (oldVideo) {
+    console.log('🧹 Removing old <video>');
+    oldVideo.remove();
+  }
+
+  // ✅ สร้าง <video> ใหม่
+  const newVideo = document.createElement('video');
+  newVideo.id = 'video';
+  newVideo.className = 'video-js vjs-default-skin';
+  newVideo.setAttribute('controls', '');
+  newVideo.setAttribute('autoplay', '');
+  newVideo.setAttribute('playsinline', '');
+  newVideo.setAttribute('webkit-playsinline', '');
+  newVideo.style.width = '100%';
+  newVideo.style.borderRadius = '10px';
+
+  const modalContent = document.querySelector('.modal-content');
+  modalContent.appendChild(newVideo);
+
+  if (isYouTube) {
+    console.log('▶️ Playing YouTube');
+newVideo.style.display = 'none';
+iframe.style.display = 'none';
+
+const ytContainer = document.getElementById('youtube-player');
+ytContainer.style.display = 'block';
+ytContainer.innerHTML = '';
+
+const videoId = extractYouTubeID(url);
+const saved = getYoutubeProgress(videoId);
+initYouTubePlayer(videoId, saved);
+    markAsWatched(url);
+
+
+  } else if (isIframe && !isM3U8 && !isAvthCdnHls) {
+    console.log('▶️ Playing iframe');
+    newVideo.style.display = 'none';
+    iframe.style.display = 'block';
+    iframe.src = url;
+        markAsWatched(url);
+
+  } else if (isM3U8 || isAvthCdnHls) {
+    console.log('▶️ Playing M3U8');
+    iframe.style.display = 'none';
+    newVideo.style.display = 'block';
+
+    // ✅ Video.js
+    window.videojsPlayer = videojs(newVideo, {
+      autoplay: true,
+      controls: true,
+      responsive: true,
+      fluid: true,
+      liveui: false,
+      html5: {
+        hls: {
+          overrideNative: true
         }
-        const channelList = document.getElementById("channel-list");
-        channels.forEach(channel => {
-            const div = document.createElement("div");
-            div.className = "channel";
-            div.innerHTML = `<img src="${channel.logo}" alt="${channel.name}"><br>${channel.name}`;
-            div.onclick = () => loadPlayer(channel);
-            channelList.appendChild(div);
-        });
-        // เริ่มเล่นเมื่อผู้ใช้กดปุ่ม
-        document.getElementById("startPlayback").onclick = () => {
-            loadPlayer(channels[0]); // โหลดช่องแรก
-            document.getElementById("startPlayback").style.display = "none"; // ซ่อนปุ่ม
-        };
-    </script>
+      }
+    });
+
+    window.videojsPlayer.src({
+      src: url,
+      type: 'application/x-mpegURL'
+    });
+
+    window.videojsPlayer.ready(() => {
+      const player = window.videojsPlayer;
+
+      // player.on('loadedmetadata', () => {
+      //   markAsWatched(url);
+      //   const savedTime = getProgress(url);
+      //   console.log(`⏪ Loaded progress for ${url}: ${savedTime}`);
+      //   if (!isNaN(savedTime) && savedTime > 5) {
+      //     if (confirm(`⏪ ดูต่อจากที่ค้างไว้หรือไม่?`)) {
+      //       player.currentTime(savedTime);
+      //     }
+      //   }
+      // });
+
+      player.on('loadedmetadata', () => {
+  markAsWatched(url);
+  const savedTime = getProgress(url);
+  console.log(`⏪ Loaded progress for ${url}: ${savedTime}`);
+
+  if (!player.hasRestoredProgress && !isNaN(savedTime) && savedTime > 5) {
+    if (confirm(`⏪ ดูต่อจากที่ค้างไว้หรือไม่?`)) {
+      player.currentTime(savedTime);
+    }
+    player.hasRestoredProgress = true;
+  }
+});
+
+
+      player.on('timeupdate', () => {
+  const currentTime = player.currentTime();
+  const duration = player.duration();
+
+  // ถ้า duration valid
+  if (duration && duration > 0) {
+    const percent = currentTime / duration;
+
+    // ถ้าดูครบ 90% ถือว่าดูจบ ลบ progress
+    if (percent >= 0.9) {
+      removeProgress(url);
+      markAsWatched(url);
+    }
+    // ถ้าดูเกิน 10% ให้ mark watched
+    else if (percent >= 0.1) {
+      markAsWatched(url);
+    }
+
+    saveProgress(url, currentTime, duration);
+  }
+});
+
+
+      player.on('ended', () => {
+        if (Array.isArray(episodes) && currentIndex + 1 < episodes.length) {
+          playEpisode(episodes[currentIndex + 1].url, episodes, currentIndex + 1);
+          renderEpisodeList(episodes, currentIndex + 1);
+        }
+      });
+    });
+  }
+}
+
+
+
+    document.getElementById('prevChannelBtn').addEventListener('click', () => {
+
+  const channels = getChannels();
+  if (currentChannelIndex !== null) {
+    const prevIndex = (currentChannelIndex - 1 + channels.length) % channels.length;
+    watchChannel(prevIndex);
+  }
+});
+
+document.getElementById('nextChannelBtn').addEventListener('click', () => {
+  const channels = getChannels();
+  if (currentChannelIndex !== null) {
+    const nextIndex = (currentChannelIndex + 1) % channels.length;
+    watchChannel(nextIndex);
+  }
+});
+
+
+    function importChannels() {
+      const fileInput = document.getElementById('importFile');
+      const file = fileInput.files[0];
+      if (!file) return alert("กรุณาเลือกไฟล์");
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (Array.isArray(imported)) {
+            localStorage.setItem('channels', JSON.stringify(imported));
+            loadChannels();
+            alert("นำเข้าช่องสำเร็จแล้ว ✅");
+          } else {
+            throw new Error("รูปแบบไฟล์ไม่ถูกต้อง");
+          }
+        } catch (err) {
+          alert("นำเข้าล้มเหลว ❌: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    
+
+    loadChannels();
+    toggleInputType(); 
+
+    document.getElementById('search').addEventListener('focus', () => {
+  const searchValue = document.getElementById('search').value.toLowerCase().trim();
+  const channels = getChannels();
+  const suggestionsEl = document.getElementById('searchSuggestions');
+
+  suggestionsEl.innerHTML = '';
+  channels.forEach((ch, i) => {
+    if (searchValue && ch.name.toLowerCase().includes(searchValue)) {
+      const item = document.createElement('div');
+      item.style.display = 'flex';
+      item.style.alignItems = 'center';
+      item.style.padding = '8px 12px';
+      item.style.cursor = 'pointer';
+      item.style.borderBottom = '1px solid #333';
+      item.style.transition = 'background 0.2s';
+
+      item.onmouseenter = () => item.style.background = '#333';
+      item.onmouseleave = () => item.style.background = 'transparent';
+
+      item.onclick = () => {
+        document.getElementById('search').value = ch.name;
+        suggestionsEl.style.display = 'none';
+        watchChannel(i);
+      };
+
+      item.innerHTML = `
+        <img src="${ch.logo}" alt="${ch.name}" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 10px; object-fit: cover;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2748/2748558.png'">
+        <span style="color: white; font-size: 0.95rem;">${ch.name}</span>
+      `;
+
+      suggestionsEl.appendChild(item);
+    }
+  });
+
+  // ✅ แสดง dropdown ถ้ามีผลลัพธ์
+  suggestionsEl.style.display = suggestionsEl.children.length > 0 ? 'block' : 'none';
+});
+
+
+    document.addEventListener('click', (e) => {
+  const searchBox = document.getElementById('search');
+  const suggestionsBox = document.getElementById('searchSuggestions');
+  if (!searchBox.contains(e.target) && !suggestionsBox.contains(e.target)) {
+    suggestionsBox.style.display = 'none';
+  }
+});
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+  const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+  const scrollToBottomBtn = document.getElementById('scrollToBottomBtn');
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const fullHeight = document.documentElement.scrollHeight;
+    const clientHeight = window.innerHeight;
+
+    // แสดง/ซ่อนทั้ง 2 ปุ่ม
+    scrollToTopBtn.style.display = scrolled > 300 ? 'block' : 'none';
+    scrollToBottomBtn.style.display = (scrolled + clientHeight) < fullHeight - 300 ? 'block' : 'none';
+  });
+
+  scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  scrollToBottomBtn.addEventListener('click', () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  });
+});
+
+let navTimeout = null;
+
+function showNavButtons() {
+  const modal = document.querySelector('.video-modal');
+  modal.classList.add('show-nav');
+
+  if (navTimeout) clearTimeout(navTimeout);
+
+  navTimeout = setTimeout(() => {
+    modal.classList.remove('show-nav');
+  }, 5000);
+}
+
+document.querySelector('.video-modal').addEventListener('mousemove', showNavButtons);
+
+// ทำงานตอนโหลดหน้า
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('⚡ กำลังลบรายการ channel ที่เป็น googlecdnforstreaming.live');
+
+  let channels = JSON.parse(localStorage.getItem('channels') || '[]');
+
+  channels = channels.filter(c => {
+    return !(c.url && c.url.startsWith('https://cdn1.googlecdnforstreaming.live'));
+  });
+
+  localStorage.setItem('channels', JSON.stringify(channels));
+
+  console.log(`✅ ลบเรียบร้อย คงเหลือ ${channels.length} ช่อง`);
+
+  // โหลดช่องตามปกติ
+  loadChannels();
+});
+
+
+  
+
+window.electronAPI.onNewSniffedUrl((data) => {
+  console.log('📥 รับข้อมูล Sniff:', data);
+
+  const channels = JSON.parse(localStorage.getItem('channels') || '[]');
+
+  const index = channels.findIndex(c => c.name === data.name);
+  if (index !== -1) {
+    channels[index].url = data.url;
+  } else {
+    channels.push({
+      name: data.name,
+      logo: data.logo,
+      url: data.url
+    });
+  }
+
+  localStorage.setItem('channels', JSON.stringify(channels));
+  loadChannels();
+});
+
+  </script>
+<div id="scrollButtons">
+  <button id="scrollToTopBtn" title="กลับไปบนสุด">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 4L6 10H10V20H14V10H18L12 4Z" fill="white"/>
+    </svg>
+  </button>
+
+  <button id="scrollToBottomBtn" title="ไปล่างสุด">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 20L18 14H14V4H10V14H6L12 20Z" fill="white"/>
+    </svg>
+  </button>
+</div>
+
+
+
+
+
 </body>
 </html>
