@@ -750,10 +750,15 @@ function cleanUrl(url) {
 }
 
 function openInMXPlayer(url) {
-  // ต้องแน่ใจว่า intent เรียกได้ถูก
   let safeUrl = url.trim();
-  if (!/^https?:\/\//.test(safeUrl)) safeUrl = 'https://' + safeUrl;
-  window.open(`intent:${safeUrl}#Intent;package=com.mxtech.videoplayer.ad;end`, '_blank');
+  let scheme = 'https';
+  // ถ้า url เป็น http ให้ใช้ scheme http
+  if (safeUrl.startsWith('http://')) scheme = 'http';
+  // ตัด https:// หรือ http:// ข้างหน้าออก
+  let urlPath = safeUrl.replace(/^https?:\/\//, '');
+  // สร้าง intent
+  let intentUrl = `intent://${urlPath}#Intent;scheme=${scheme};package=com.mxtech.videoplayer.ad;type=video/mp4;end`;
+  window.open(intentUrl, '_blank');
 }
 function openInVLC(url) {
   let safeUrl = url.trim();
@@ -768,9 +773,16 @@ function openInVLC(url) {
 }
 
 function openInWiseplay(url) {
-  let safeUrl = url.trim();
-  if (!/^https?:\/\//.test(safeUrl)) safeUrl = 'https://' + safeUrl;
-  window.open(`intent:${safeUrl}#Intent;package=com.wiseplay;end`, '_blank');
+    let safeUrl = url.trim();
+
+    let scheme = 'https';
+  // ถ้า url เป็น http ให้ใช้ scheme http
+  if (safeUrl.startsWith('http://')) scheme = 'http';
+  // ตัด https:// หรือ http:// ข้างหน้าออก
+  let urlPath = safeUrl.replace(/^https?:\/\//, '');
+  // สร้าง intent
+  let intentUrl = `intent://${urlPath}#Intent;scheme=${scheme};package=com.wiseplay;type=video/mp4;end`;
+  window.open(intentUrl, '_blank');
 }
 
 function copyToClipboard(url) {
@@ -1409,8 +1421,9 @@ if (ch.url && (ch.url.includes('youtube.com') || ch.url.includes('youtu.be'))) {
       currentTitleEl.textContent = 'YouTube Video';
     });
 } else {
-  currentTitleEl.textContent = ch.name || '';
-}
+  if (currentTitleEl) {
+    currentTitleEl.textContent = ch.name || '';
+  }}
 
   if (ch.password) {
     const input = prompt(`🔒 ช่องนี้ต้องใช้รหัสผ่านในการรับชม\nกรุณาใส่รหัสผ่าน:`);
