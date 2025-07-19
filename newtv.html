@@ -721,76 +721,6 @@ let editingIndex = null;
 let youtubePlayer = null;
 let youtubeProgressInterval = null;
 
-function isTxt(url) {
-  return url?.trim().toLowerCase().endsWith(".txt");
-}
-
-function showChooser(url) {
-  // url = url.trim().replace(/^(https?:\/\/)+/, 'https://');
-  let safeUrl = url.trim().replace(/^(https?:\/\/)+/, 'https://');
-  const modalContent = document.querySelector('.modal-content');
-  modalContent.innerHTML = `
-<div style="text-align:center;color:#ff0;padding:30px 8px;">
-      <div style="font-size:1.2rem;margin-bottom:18px;">ไม่สามารถเล่นไฟล์นี้ในแอปนี้ได้<br>เลือกเปิดลิงก์นี้ในแอปอื่น:</div>
-      <div style="display:flex;gap:14px;justify-content:center;">
-        <button onclick="openInMXPlayer('${url}')" style="padding:12px 20px;background:#1d4ed8;border:none;color:#fff;border-radius:8px;font-size:1rem;">MX Player</button>
-        <button onclick="openInVLC('${url}')" style="padding:12px 20px;background:#10b981;border:none;color:#fff;border-radius:8px;font-size:1rem;">VLC</button>
-        <button onclick="openInWiseplay('${url}')" style="padding:12px 20px;background:#6366f1;border:none;color:#fff;border-radius:8px;font-size:1rem;">Wiseplay</button>
-        <button onclick="copyToClipboard('${url}')" style="padding:12px 20px;background:#444;border:none;color:#fff;border-radius:8px;font-size:1rem;">คัดลอกลิงก์</button>
-      </div>
-    </div>
-    <span class="close-button" onclick="closeModal()">×</span>
-  `;
-}
-
-// สำหรับเว็บ/Android ให้ลอง intent, iOS ใช้ open URL ธรรมดา (หรือโชว์ copy link)
-function cleanUrl(url) {
-  // ลบ http:// หรือ https:// ข้างหน้า 1 ครั้ง ถ้ามี
-  return url.replace(/^(https?:\/\/)/, '');
-}
-
-function openInMXPlayer(url) {
-  let safeUrl = url.trim();
-  let scheme = 'https';
-  // ถ้า url เป็น http ให้ใช้ scheme http
-  if (safeUrl.startsWith('http://')) scheme = 'http';
-  // ตัด https:// หรือ http:// ข้างหน้าออก
-  let urlPath = safeUrl.replace(/^https?:\/\//, '');
-  // สร้าง intent
-  let intentUrl = `intent://${urlPath}#Intent;scheme=${scheme};package=com.mxtech.videoplayer.ad;type=video/mp4;end`;
-  window.open(intentUrl, '_blank');
-}
-function openInVLC(url) {
-  let safeUrl = url.trim();
-  let scheme = 'https';
-  // ถ้า url เป็น http ให้ใช้ scheme http
-  if (safeUrl.startsWith('http://')) scheme = 'http';
-  // ตัด https:// หรือ http:// ข้างหน้าออก
-  let urlPath = safeUrl.replace(/^https?:\/\//, '');
-  // สร้าง intent
-  let intentUrl = `intent://${urlPath}#Intent;scheme=${scheme};package=org.videolan.vlc;type=video/mp4;end`;
-  window.open(intentUrl, '_blank');
-}
-
-function openInWiseplay(url) {
-    let safeUrl = url.trim();
-
-    let scheme = 'https';
-  // ถ้า url เป็น http ให้ใช้ scheme http
-  if (safeUrl.startsWith('http://')) scheme = 'http';
-  // ตัด https:// หรือ http:// ข้างหน้าออก
-  let urlPath = safeUrl.replace(/^https?:\/\//, '');
-  // สร้าง intent
-  let intentUrl = `intent://${urlPath}#Intent;scheme=${scheme};package=com.wiseplay;type=video/mp4;end`;
-  window.open(intentUrl, '_blank');
-}
-
-function copyToClipboard(url) {
-  navigator.clipboard.writeText(url);
-  alert("คัดลอกลิงก์เรียบร้อยแล้ว");
-}
-
-
 function getYoutubeProgressMap() {
   return JSON.parse(localStorage.getItem('yt-progress') || '{}');
 }
@@ -1359,9 +1289,8 @@ function renderPopular() {
 
 
 function closeModal() {
-  const iframe = document.getElementById('iframe');
   const modal = document.getElementById('videoModal');
-  modal.style.display = 'none';
+  const iframe = document.getElementById('iframe');
 // ปิด YouTube Player
 resetPlayer()
 
@@ -1422,9 +1351,8 @@ if (ch.url && (ch.url.includes('youtube.com') || ch.url.includes('youtu.be'))) {
       currentTitleEl.textContent = 'YouTube Video';
     });
 } else {
-  if (currentTitleEl) {
-    currentTitleEl.textContent = ch.name || '';
-  }}
+  currentTitleEl.textContent = ch.name || '';
+}
 
   if (ch.password) {
     const input = prompt(`🔒 ช่องนี้ต้องใช้รหัสผ่านในการรับชม\nกรุณาใส่รหัสผ่าน:`);
@@ -1623,27 +1551,6 @@ function resetPlayer() {
 function playEpisode(url, episodes = [], currentIndex = 0) {
   console.log('🎬 playEpisode called', { url, currentIndex });
     resetPlayer(); // ✅ ล้าง player เดิมก่อนเริ่มใหม่
-      document.getElementById('videoModal').style.display = 'flex';
-
-
-      const modalContent = document.querySelector('.modal-content');
-  if (modalContent) modalContent.innerHTML = `
-      <h2 id="currentTitle" style="color:white; text-align:center; margin:10px 0;"></h2>
-      <div id="episodeList" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0;"></div>
-      <span class="close-button" onclick="closeModal()">×</span>
-      <div class="nav-controls">
-        <button id="prevChannelBtn" class="nav-button left">❮</button>
-        <button id="nextChannelBtn" class="nav-button right">❯</button>
-      </div>
-      <video id="video" class="video-js vjs-default-skin" controls autoplay playsinline preload="auto" style="display: none; width: 100%; border-radius: 10px;"></video>
-      <iframe id="iframe" style="display: none;" frameborder="0" allowfullscreen></iframe>
-      <div id="youtube-player" style="display: none; width: 100%; aspect-ratio: 16 / 9; border-radius: 10px;"></div>
-  `;
-
-      if (isTxt(url)) {
-    showChooser(url);
-    return;
-  }
 
   const isAvthCdnHls = /https:\/\/av-th\.xyz\/cdn\/hls\/[a-zA-Z0-9]+\/master\.txt/.test(url);
 
@@ -1686,7 +1593,7 @@ const isM3U8 = /\.m3u8(\?|$)/i.test(url);
   newVideo.style.width = '100%';
   newVideo.style.borderRadius = '10px';
 
-  // const modalContent = document.querySelector('.modal-content');
+  const modalContent = document.querySelector('.modal-content');
   modalContent.appendChild(newVideo);
 
   if (isYouTube) {
