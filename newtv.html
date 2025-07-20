@@ -733,25 +733,31 @@ let watchedThis = (epIdx) => {
 }
 
 
-    function onPlayerSelect(type) {
-      closeSelectPlayerModal();
-      const url = selectedPlayUrl;
-      if (!url) return;
-      if (type === 'web') {
-        // Show HTML5 player modal
-        const ch = channels[selectedChannelIdx];
-        showPlayerModal(ch, selectedEpisodeIdx || 0);
-      } else if (type === 'vlc') {
-        window.location.href = 'vlc://' + url;
-      } else if (type === 'mx') {
-        let scheme = url.startsWith('http://') ? 'http' : 'https';
-        let urlPath = url.replace(/^https?:\/\//, '');
-        let intentUrl = `intent://${urlPath}#Intent;scheme=${scheme};package=com.mxtech.videoplayer.ad;type=application/x-mpegURL;end`;
-        window.location.href = intentUrl;
-      } else if (type === 'wiseplay') {
-        window.location.href = 'wiseplay://' + url;
-      }
-    }
+function onPlayerSelect(type) {
+  closeSelectPlayerModal();
+  const url = selectedPlayUrl;
+  if (!url) return;
+
+  // ตัด protocol ออก
+  let scheme = url.startsWith('http://') ? 'http' : 'https';
+  let urlPath = url.replace(/^https?:\/\//, '');
+
+  if (type === 'web') {
+    // Show HTML5 player modal
+    const ch = channels[selectedChannelIdx];
+    showPlayerModal(ch, selectedEpisodeIdx || 0);
+  } else if (type === 'vlc') {
+    let intentUrl = `intent://${urlPath}#Intent;package=org.videolan.vlc;S.title=PLAY%20VLC;scheme=${scheme};type=video/mp4;end`;
+    window.location.href = intentUrl;
+  } else if (type === 'mx') {
+    let intentUrl = `intent://${urlPath}#Intent;package=com.mxtech.videoplayer.ad;S.title=PLAY%20MX%20Player;scheme=${scheme};type=video/mp4;end`;
+    window.location.href = intentUrl;
+  } else if (type === 'wiseplay') {
+    let intentUrl = `intent://${urlPath}#Intent;package=com.wiseplay;S.title=PLAY%20WISEPLAY;scheme=${scheme};type=video/mp4;end`;
+    window.location.href = intentUrl;
+  }
+}
+
 
     // ------ Player Modal Logic ------
     let currentChannelIdx = null;
