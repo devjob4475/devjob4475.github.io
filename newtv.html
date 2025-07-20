@@ -415,6 +415,8 @@ button, .nav button {
         <button class="player-btn" onclick="onPlayerSelect('vlc')">🟠 VLC</button>
         <button class="player-btn" onclick="onPlayerSelect('mx')">🟢 MX Player</button>
         <button class="player-btn" onclick="onPlayerSelect('wiseplay')">🔵 Wiseplay</button>
+              <button class="player-btn" onclick="copyPlayerUrl()">🔗 คัดลอกลิงก์</button>
+
         <button class="player-btn cancel" onclick="closeSelectPlayerModal()">ยกเลิก</button>
       </div>
     </div>
@@ -476,6 +478,17 @@ function markEpisodeWatched(ch, epIdx) {
     watchedEp[key].push(epIdx);
     localStorage.setItem(KEY_WATCHED_EP, JSON.stringify(watchedEp));
   }
+}
+function copyPlayerUrl() {
+  if (!selectedPlayUrl) return;
+  navigator.clipboard.writeText(selectedPlayUrl)
+    .then(() => {
+      // คุณอาจจะแจ้งเตือนหรือเปลี่ยนปุ่มให้เห็นว่าคัดลอกแล้ว
+      alert("คัดลอกลิงก์แล้ว!");
+    })
+    .catch(err => {
+      alert("ไม่สามารถคัดลอกลิงก์ได้");
+    });
 }
 
 
@@ -691,6 +704,8 @@ let watchedThis = (epIdx) => {
       <button class="player-btn" onclick="onPlayerSelect('vlc')">🟠 VLC</button>
       <button class="player-btn" onclick="onPlayerSelect('mx')">🟢 MX Player</button>
       <button class="player-btn" onclick="onPlayerSelect('wiseplay')">🔵 Wiseplay</button>
+          <button class="player-btn" onclick="copyPlayerUrl()">🔗 คัดลอกลิงก์</button>
+
       ${favBtn}
       <button class="player-btn cancel" onclick="closeSelectPlayerModal()">ยกเลิก</button>
     </div>
