@@ -102,7 +102,7 @@
   word-break: break-word;
   text-align: center;
 }
-.player-btns { display:flex; flex-direction:column; gap:12px; margin:16px 0; }
+.player-btns { display:flex; flex-direction:column; gap:12px; margin:14px 0; }
     .player-btn {
       background:#262626; color:#fff; font-size:1.1em; padding:14px; border:none; border-radius:12px;
       box-shadow:0 2px 12px #0003; transition:background .15s;
@@ -579,79 +579,80 @@ function onDomainFilterChange() {
 function renderChannels() {
   renderNav();
   let list = [];
-  if(currentTab=='all') list = channels.map((c,i)=>({...c, _realIdx:i}));
-    // กรองตาม domain ถ้าไม่ใช่ all
-   if (currentDomain !== 'all') {
+
+  if (currentTab == 'all') {
+    list = channels.map((c, i) => ({ ...c, _realIdx: i }));
+  } else if (currentTab == 'favorite') {
+    list = channels
+      .map((c, i) => ({ ...c, _realIdx: i }))
+      .filter(c => favorite.includes(getKey(c, c._realIdx)));
+  } else if (currentTab == 'recent') {
+    list = recent.map(([k, ep]) => {
+      const baseKey = k.split('-ep')[0];
+      const idx = channels.findIndex((c, i) => getKey(c, i) === baseKey);
+      return idx >= 0 ? { ...channels[idx], _realIdx: idx, _ep: ep, _recentKey: k } : null;
+    }).filter(Boolean);
+  } else if (currentTab == 'popular') {
+    const keys = Object.entries(popular)
+      .sort((a, b) => b[1] - a[1])
+      .map(([k]) => k);
+    list = keys.map(k => {
+      const idx = channels.findIndex((c, i) => getKey(c, i) == k);
+      return idx >= 0 ? { ...channels[idx], _realIdx: idx } : null;
+    }).filter(Boolean);
+  }
+
+  // ✅ กรอง domain filter หลังจาก list ถูกจัดแล้ว
+  if (currentDomain !== 'all') {
     const domainList = domainGroups[currentDomain] || [];
     const keys = domainList.map(c => getKey(c, c._realIdx));
     list = list.filter(c => keys.includes(getKey(c, c._realIdx)));
   }
 
-  else if(currentTab=='favorite') list = channels
-      .map((c,i)=>({...c, _realIdx:i}))
-      .filter((c)=>favorite.includes(getKey(c,c._realIdx)));
-else if(currentTab=='recent') list = recent.map(([k,ep])=>{
-  // k อาจเป็น 'สายรักสายเลือด-ep1'
-  let baseKey = k.split('-ep')[0]; // ตัดชื่อเฉยๆ
-  const idx = channels.findIndex((c,i)=>getKey(c,i)===baseKey || getKey(c,i)===k);
-  return idx>=0 ? {...channels[idx], _realIdx:idx, _ep:ep, _recentKey:k} : null;
-}).filter(Boolean);
-
-
-  else if(currentTab=='popular') {
-    const keys = Object.entries(popular).sort((a,b)=>b[1]-a[1]).map(([k])=>k);
-    list = keys.map(k=>{
-      const idx = channels.findIndex((c,i)=>getKey(c,i)==k);
-      return idx>=0 ? {...channels[idx], _realIdx:idx} : null;
-    }).filter(Boolean);
-  }
-
-  // ---- เพิ่มตรงนี้สำหรับค้นหา ----
-  if(searchText && searchText.trim()) {
+  // 🔍 Search filter
+  if (searchText && searchText.trim()) {
     const q = searchText.trim().toLowerCase();
     list = list.filter(ch =>
-      (ch.name||"").toLowerCase().includes(q) ||
-      (ch.episodes && ch.episodes.some(ep=>(ep.title||"").toLowerCase().includes(q)))
+      (ch.name || "").toLowerCase().includes(q) ||
+      (ch.episodes && ch.episodes.some(ep => (ep.title || "").toLowerCase().includes(q)))
     );
   }
-  // ---------------------------------
 
-  // ส่วนแบ่งหน้าเดิม...
-  const start = (currentPage-1)*PAGE_SIZE;
-  const end = start+PAGE_SIZE;
+  // 📦 Paging + render ด้านล่าง (เหมือนเดิม)
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
   const pagedList = list.slice(start, end);
 
   const el = document.getElementById('channelList');
   el.innerHTML = "";
-pagedList.forEach((ch,idx)=>{
-  const realIdx = ch._realIdx;
-  const key = getKey(ch, realIdx);
-  const isFav = favorite.includes(key);
+  pagedList.forEach((ch, idx) => {
+    const realIdx = ch._realIdx;
+    const key = getKey(ch, realIdx);
+    const isFav = favorite.includes(key);
 
-  // แก้ตรงนี้
-  let displayName = ch.name;
-  let percent = 0;
-  if (currentTab === 'recent' && ch._ep != null && ch.episodes) {
-    displayName += ` (EP ${ch.episodes[ch._ep]?.ep || ch._ep+1})`;
-    let epKey = key + '-ep' + (ch._ep+1); // ดึง progress ตาม ep ที่ดู
-    percent = (progress[epKey] && progress[epKey].percent) || 0;
-  } else {
-    percent = (progress[key] && progress[key].percent) || 0;
-  }
+    let displayName = ch.name;
+    let percent = 0;
+    if (currentTab === 'recent' && ch._ep != null && ch.episodes) {
+      displayName += ` (EP ${ch.episodes[ch._ep]?.ep || ch._ep + 1})`;
+      let epKey = key + '-ep' + (ch._ep + 1);
+      percent = (progress[epKey] && progress[epKey].percent) || 0;
+    } else {
+      percent = (progress[key] && progress[key].percent) || 0;
+    }
 
-  el.innerHTML += `
-    <div class="channel-card" onclick="onChannelClick(${realIdx})">
-      <img src="${ch.logo}" />
-      <div style="font-size:14px;min-height:40px">${displayName}</div>
-      ${isFav?'<span class="fav">★</span>':''}
-      ${percent>0?`<div class="progress-bar" style="width:${percent*100}%;"></div>`:""}
-    </div>
-  `;
-});
-
+    el.innerHTML += `
+      <div class="channel-card" onclick="onChannelClick(${realIdx})">
+        <img src="${ch.logo}" />
+        <div style="font-size:14px;min-height:40px">${displayName}</div>
+        ${isFav ? '<span class="fav">★</span>' : ''}
+        ${percent > 0 ? `<div class="progress-bar" style="width:${percent * 100}%;"></div>` : ""}
+      </div>
+    `;
+  });
 
   renderPagination(list.length);
 }
+
 
 
 function onChannelClick(realIdx) {
