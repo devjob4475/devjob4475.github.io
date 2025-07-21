@@ -102,7 +102,7 @@
   word-break: break-word;
   text-align: center;
 }
-.player-btns { display:flex; flex-direction:column; gap:12px; margin:14px 0; }
+.player-btns { display:flex; flex-direction:column; gap:12px; margin:16px 0; }
     .player-btn {
       background:#262626; color:#fff; font-size:1.1em; padding:14px; border:none; border-radius:12px;
       box-shadow:0 2px 12px #0003; transition:background .15s;
@@ -396,15 +396,39 @@ button, .nav button {
 </head>
 <body>
   <h2 style="text-align:center;margin:16px 0 0 0;">📺 IPTV Mobile</h2>
-  <div style="text-align:center;margin:14px 0 0 0;">
-  <input id="searchBox" type="text" placeholder="🔍 ค้นหาช่องหรือซีรีส์..." 
-         style="font-family:Prompt,sans-serif;font-size:1em;border-radius:8px;padding:7px 15px;width:76vw;max-width:320px;background:#292929;color:#fff;border:1.5px solid #333;outline:none;">
+<div style="text-align:center;margin-top:14px;">
+  <div style="display:inline-block;width:100%;max-width:320px;">
+    <!-- ช่องค้นหา -->
+    <input id="searchBox" type="text" placeholder="🔍 ค้นหาช่องหรือซีรีส์..." 
+           style="font-family:Prompt,sans-serif;font-size:1em;
+                  border-radius:8px;padding:7px 15px;
+                  width:100%;
+                  background:#292929;color:#fff;
+                  border:1.5px solid #333;outline:none;
+                  box-sizing:border-box;margin-bottom:10px;">
+    
+    <!-- ช่องเลือกโดเมน -->
+    <select id="domainFilter" onchange="onDomainFilterChange()" 
+            style="font-family:Prompt,sans-serif;font-size:1em;
+                   border-radius:8px;padding:7px 15px;
+                   width:100%;
+                   background:#292929;color:#fff;
+                   border:1.5px solid #333;outline:none;
+                   box-sizing:border-box;">
+      <option value="all">🌐 ทุกโดเมน</option>
+    </select>
+  </div>
 </div>
+
+
 
   <div class="nav">
    
   </div>
   <div class="channel-list" id="channelList"></div>
+  <div id="loadingScreen" style="position:fixed;top:0;left:0;right:0;bottom:0;background:#111c;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:1.2em;color:#fff;font-family:'Prompt',sans-serif;">
+  🔄 กำลังโหลดช่องรายการ...
+</div>
 
   <!-- Modal: เลือก Player -->
   <div class="modal-overlay" id="selectPlayerModal">
@@ -437,6 +461,9 @@ const CHANNELS_URL = "https://tv-two-hazel.vercel.app/tv.json";
 let channels = [];
 let currentPage = 1;
 let searchText = "";
+let currentDomain = "all";
+let domainGroups = {};
+
 
 const PAGE_SIZE = 10;
 
@@ -445,13 +472,18 @@ fetch(CHANNELS_URL)
   .then(res => res.json())
   .then(data => {
     channels = data;
-    renderChannels();
+   domainGroups = groupByDomain(channels);
+updateDomainFilterOptions(Object.keys(domainGroups)); // 👈 เพิ่มบรรทัดนี้
+renderChannels();
+    document.getElementById("loadingScreen").style.display = "none"; // ซ่อนหลังโหลดเสร็จ
   })
   .catch(err => {
     alert("โหลดช่องล้มเหลว กรุณาตรวจสอบลิงก์");
     channels = [];
     renderChannels();
+    document.getElementById("loadingScreen").style.display = "none"; // ซ่อนแม้โหลดล้มเหลว
   });
+
 
     // ------- /จบ JSON -------
 
@@ -498,6 +530,17 @@ function onWatchEpisode(channelIdx, epIdx) {
   showSelectPlayerModal(ch.episodes[epIdx].url, ch.name + ' EP ' + ch.episodes[epIdx].ep, channelIdx, epIdx);
 }
 
+function updateDomainFilterOptions(domains) {
+  const select = document.getElementById("domainFilter");
+  domains.forEach(d => {
+    let opt = document.createElement("option");
+    opt.value = d;
+    opt.textContent = d;
+    select.appendChild(opt);
+  });
+}
+
+
 
 
 function showTab(tab) {
@@ -526,11 +569,24 @@ function showTab(tab) {
   ).join('');
 }
 
+function onDomainFilterChange() {
+  currentDomain = document.getElementById("domainFilter").value;
+  currentPage = 1;
+  renderChannels();
+}
+
 
 function renderChannels() {
   renderNav();
   let list = [];
   if(currentTab=='all') list = channels.map((c,i)=>({...c, _realIdx:i}));
+    // กรองตาม domain ถ้าไม่ใช่ all
+   if (currentDomain !== 'all') {
+    const domainList = domainGroups[currentDomain] || [];
+    const keys = domainList.map(c => getKey(c, c._realIdx));
+    list = list.filter(c => keys.includes(getKey(c, c._realIdx)));
+  }
+
   else if(currentTab=='favorite') list = channels
       .map((c,i)=>({...c, _realIdx:i}))
       .filter((c)=>favorite.includes(getKey(c,c._realIdx)));
@@ -608,6 +664,25 @@ function onChannelClick(realIdx) {
     showSelectPlayerModal(ch.url, ch.name, realIdx, null);
   }
 }
+function extractDomain(url) {
+  try {
+    return new URL(url).hostname;
+  } catch (e) {
+    return "อื่นๆ";
+  }
+}
+
+function groupByDomain(channels) {
+  const grouped = {};
+  channels.forEach((ch, i) => {
+    const url = ch.url || (ch.episodes?.[0]?.url || '');
+    const domain = extractDomain(url);
+    if (!grouped[domain]) grouped[domain] = [];
+    grouped[domain].push({ ...ch, _realIdx: i });
+  });
+  return grouped;
+}
+
 
     function getKey(ch, idx) {
       return ch.name;
